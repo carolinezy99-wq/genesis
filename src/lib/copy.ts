@@ -26,8 +26,10 @@ export const ui = {
     colGauge: "Gauge",
     colMove: "Latest move",
     colDate: "Date",
-    sameFields:
-      "Each card has the same lines: instrument, inflation target, latest inflation, who decides, what they watch, and the latest move. Some banks also publish rates that are not the compared policy rate. Those sit under “Other published rates” and are left off the bar chart. The Bank of England, the Bank of Japan, and the Reserve Bank of Australia publish one policy rate, so that block is absent. Singapore’s extra line is the exchange-rate framework.",
+    overview: "Overview",
+    sameFields: "Open a country tab for that bank’s full list. Anything that is not comparable sits in a short note on that tab.",
+    note: "Note",
+    sources: "Sources",
     otherRates: "Other published rates",
     frameworkTitle: "Exchange-rate framework",
     setBy: "Set by",
@@ -66,8 +68,10 @@ export const ui = {
     colGauge: "指标",
     colMove: "最近决定",
     colDate: "日期",
-    sameFields:
-      "每张卡片都是同一组信息：工具、通胀目标、最新通胀、决策机构、关注指标、最近一次决定。有的央行还会公布不拿来横向比较的利率，写在“其他公布利率”里，不进柱状图。英格兰银行、日本银行、澳大利亚储备银行只公布一个政策利率，所以没有这一栏。新加坡多出来的一句是汇率框架。",
+    overview: "全景对比",
+    sameFields: "点国家栏目可看该行的全部指标。不能直接对照的内容写在该栏的说明里。",
+    note: "说明",
+    sources: "来源",
     otherRates: "其他公布利率",
     frameworkTitle: "汇率框架",
     setBy: "决策",
@@ -84,6 +88,18 @@ export const ui = {
     official: "官网",
   },
 } as const
+
+export const bankTabLabel: Record<string, { en: string; zh: string }> = {
+  fed: { en: "United States (Fed)", zh: "美国" },
+  ecb: { en: "Euro area (ECB)", zh: "欧元区" },
+  boe: { en: "United Kingdom (BoE)", zh: "英国" },
+  boj: { en: "Japan (BoJ)", zh: "日本" },
+  boc: { en: "Canada (BoC)", zh: "加拿大" },
+  pboc: { en: "China (PBoC)", zh: "中国" },
+  rbi: { en: "India (RBI)", zh: "印度" },
+  mas: { en: "Singapore (MAS)", zh: "新加坡" },
+  rba: { en: "Australia (RBA)", zh: "澳大利亚" },
+}
 
 const chartLabel: Record<string, string> = {
   fed: "US",
@@ -467,13 +483,21 @@ const bodyShort = {
 } as const
 
 const bodyNote: Record<string, { en: string; zh: string }> = {
+  fed: {
+    en: "August 2026 PCE is scheduled for 2026-09-30, so the reading shown is still July.",
+    zh: "2026年8月个人消费支出预定9月30日发布，此处仍为7月。",
+  },
   pboc: {
     en: "The Monetary Policy Committee is consultative. The Monetary Policy Department drafts and organises implementation.",
     zh: "货币政策委员会是咨询机构。货币政策司拟订调控方案并组织实施。公开市场业务操作室发布操作公告。",
   },
   mas: {
-    en: "A committee of the Board. The Economic Policy Group prepares the review; the Monetary and Domestic Markets Management Department implements it.",
-    zh: "董事会下的委员会。Economic Policy Group 拟订审议，Monetary and Domestic Markets Management Department 负责实施。",
+    en: "A committee of the Board. The Economic Policy Group prepares the review; the Monetary and Domestic Markets Management Department implements it. The statement does not give a basis-point size.",
+    zh: "董事会下的委员会。Economic Policy Group 拟订审议，Monetary and Domestic Markets Management Department 负责实施。声明没有公布基点。",
+  },
+  rba: {
+    en: "August 2026 CPI is scheduled for 2026-09-30, so the reading shown is still the twelve months to July.",
+    zh: "2026年8月消费者物价指数预定9月30日发布，此处仍为截至7月的12个月。",
   },
 }
 

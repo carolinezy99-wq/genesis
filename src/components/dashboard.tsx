@@ -1,18 +1,29 @@
 "use client"
 
-import { BankCard } from "@/components/bank-card"
+import { useState } from "react"
+import { BankPanel } from "@/components/bank-card"
 import { CompareTable } from "@/components/compare-table"
 import { useLocale } from "@/components/locale"
 import { RateChart } from "@/components/rate-chart"
 import { banks, DATA_AS_OF } from "@/lib/banks"
-import { ui } from "@/lib/copy"
+import { bankTabLabel, ui } from "@/lib/copy"
 
 export function Dashboard() {
   const { locale, setLocale } = useLocale()
   const copy = ui[locale]
+  const [tab, setTab] = useState("overview")
   const hikes = banks.filter((bank) => bank.cycle.kind === "hike").length
   const holds = banks.filter((bank) => bank.cycle.kind === "hold").length
   const tightens = banks.filter((bank) => bank.cycle.kind === "tighten").length
+  const selected = banks.find((bank) => bank.id === tab)
+
+  const tabs = [
+    { id: "overview", label: copy.overview },
+    ...banks.map((bank) => ({
+      id: bank.id,
+      label: bankTabLabel[bank.id][locale],
+    })),
+  ]
 
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
@@ -48,44 +59,72 @@ export function Dashboard() {
         </div>
       </header>
 
-      <section className="mt-5 flex flex-wrap gap-2 text-sm" aria-label={copy.chartTitle}>
-        <span className="rounded-full bg-[#16325c] px-3 py-1 text-white">
-          {copy.hikes} {hikes}
-        </span>
-        <span className="rounded-full bg-[#e7eef6] px-3 py-1 text-[#16325c]">
-          {copy.holds} {holds}
-        </span>
-        <span className="rounded-full bg-[#16325c] px-3 py-1 text-white">
-          {copy.tightens} {tightens}
-        </span>
-        <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">
-          {copy.cuts} 0
-        </span>
-      </section>
-
-      <section className="mt-6 min-w-0 rounded-xl bg-card px-3 py-4 ring-1 ring-foreground/10 sm:px-5">
-        <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-          <h2 className="text-base font-semibold">{copy.chartTitle}</h2>
-          <p className="text-xs text-muted-foreground">{copy.chartAxisHint}</p>
+      <div className="-mx-4 mt-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+        <div role="tablist" className="flex w-max min-w-full gap-1 border-b border-border">
+          {tabs.map((item) => {
+            const active = tab === item.id
+            return (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                id={`tab-${item.id}`}
+                aria-selected={active}
+                aria-controls={`panel-${item.id}`}
+                onClick={() => setTab(item.id)}
+                className={`shrink-0 border-b-2 px-3 py-2 text-sm whitespace-nowrap ${
+                  active
+                    ? "border-[#16325c] font-medium text-[#16325c]"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {item.label}
+              </button>
+            )
+          })}
         </div>
-        <RateChart locale={locale} caption={copy.chartCaption} yAxis={copy.yAxis} />
-        <p className="mt-3 max-w-3xl text-xs leading-relaxed text-muted-foreground">{copy.chartFoot}</p>
-      </section>
+      </div>
 
-      <section className="mt-6 min-w-0 rounded-xl bg-card px-3 py-4 ring-1 ring-foreground/10 sm:px-5">
-        <div className="mb-3">
-          <h2 className="text-base font-semibold">{copy.tableTitle}</h2>
-          <p className="mt-1 text-xs text-muted-foreground">{copy.tableHint}</p>
+      {tab === "overview" ? (
+        <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" className="mt-5">
+          <section className="flex flex-wrap gap-2 text-sm" aria-label={copy.chartTitle}>
+            <span className="rounded-full bg-[#16325c] px-3 py-1 text-white">
+              {copy.hikes} {hikes}
+            </span>
+            <span className="rounded-full bg-[#e7eef6] px-3 py-1 text-[#16325c]">
+              {copy.holds} {holds}
+            </span>
+            <span className="rounded-full bg-[#16325c] px-3 py-1 text-white">
+              {copy.tightens} {tightens}
+            </span>
+            <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">
+              {copy.cuts} 0
+            </span>
+          </section>
+
+          <section className="mt-5 min-w-0 rounded-xl bg-card px-3 py-4 ring-1 ring-foreground/10 sm:px-5">
+            <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+              <h2 className="text-base font-semibold">{copy.chartTitle}</h2>
+              <p className="text-xs text-muted-foreground">{copy.chartAxisHint}</p>
+            </div>
+            <RateChart locale={locale} caption={copy.chartCaption} yAxis={copy.yAxis} />
+            <p className="mt-3 max-w-3xl text-xs leading-relaxed text-muted-foreground">{copy.chartFoot}</p>
+          </section>
+
+          <section className="mt-5 min-w-0 rounded-xl bg-card px-3 py-4 ring-1 ring-foreground/10 sm:px-5">
+            <div className="mb-3">
+              <h2 className="text-base font-semibold">{copy.tableTitle}</h2>
+              <p className="mt-1 text-xs text-muted-foreground">{copy.tableHint}</p>
+            </div>
+            <CompareTable locale={locale} />
+            <p className="mt-3 max-w-3xl text-xs leading-relaxed text-muted-foreground">{copy.sameFields}</p>
+          </section>
         </div>
-        <CompareTable locale={locale} />
-        <p className="mt-3 max-w-3xl text-xs leading-relaxed text-muted-foreground">{copy.sameFields}</p>
-      </section>
-
-      <section className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
-        {banks.map((bank) => (
-          <BankCard key={bank.id} bank={bank} locale={locale} />
-        ))}
-      </section>
+      ) : selected ? (
+        <div role="tabpanel" id={`panel-${selected.id}`} aria-labelledby={`tab-${selected.id}`} className="mt-5">
+          <BankPanel bank={selected} locale={locale} />
+        </div>
+      ) : null}
     </main>
   )
 }

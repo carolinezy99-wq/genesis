@@ -1,6 +1,6 @@
+import type { CSSProperties } from "react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import type { Bank, CycleKind, Source } from "@/lib/banks"
 import { kindLabel, presentBank, sourceTitle, ui, type Locale } from "@/lib/copy"
 
@@ -9,6 +9,19 @@ const cycleClass: Record<CycleKind, string> = {
   tighten: "bg-[#16325c] text-white",
   hold: "bg-[#e7eef6] text-[#16325c]",
   cut: "bg-transparent text-[#16325c] ring-1 ring-[#16325c]",
+}
+
+/** Same frame for every bank. object-position plus scale keeps a head-and-shoulders crop. */
+const portraitStyle: Record<string, CSSProperties> = {
+  fed: { objectPosition: "50% 22%", transform: "scale(1.2)", transformOrigin: "50% 22%" },
+  ecb: { objectPosition: "50% 16%", transform: "scale(1.45)", transformOrigin: "50% 16%" },
+  boe: { objectPosition: "50% 30%", transform: "scale(2.15)", transformOrigin: "50% 30%" },
+  boj: { objectPosition: "50% 28%", transform: "scale(1.45)", transformOrigin: "50% 28%" },
+  boc: { objectPosition: "48% 20%", transform: "scale(2.8)", transformOrigin: "48% 20%" },
+  pboc: { objectPosition: "46% 18%", transform: "scale(1.25)", transformOrigin: "46% 18%" },
+  rbi: { objectPosition: "42% 10%", transform: "scale(1.55)", transformOrigin: "42% 10%" },
+  mas: { objectPosition: "55% 22%", transform: "scale(1.2)", transformOrigin: "55% 22%" },
+  rba: { objectPosition: "40% 16%", transform: "scale(2.4)", transformOrigin: "40% 16%" },
 }
 
 function KindMark({ label }: { label: string }) {
@@ -22,7 +35,7 @@ function KindMark({ label }: { label: string }) {
 function SourceLine({ source, locale }: { source: Source; locale: Locale }) {
   const copy = ui[locale]
   return (
-    <p className="mt-1 break-words">
+    <p className="mt-1.5 break-words">
       <KindMark label={kindLabel(source.kind, locale)} />
       <a
         href={source.url}
@@ -37,122 +50,128 @@ function SourceLine({ source, locale }: { source: Source; locale: Locale }) {
   )
 }
 
-function Fact({ label, value, note }: { label: string; value: string; note?: string }) {
+function Field({ label, value }: { label: string; value: string }) {
   return (
-    <div className="grid grid-cols-[4.5rem_1fr] gap-3 border-b border-border/80 py-2 last:border-0 sm:grid-cols-[5.5rem_1fr]">
+    <div className="grid grid-cols-1 gap-0.5 border-b border-border/80 py-3 sm:grid-cols-[11rem_1fr] sm:gap-4">
       <dt className="text-xs text-muted-foreground">{label}</dt>
-      <dd className="text-sm leading-snug">
-        {value}
-        {note ? <span className="mt-0.5 block text-xs leading-snug text-muted-foreground">{note}</span> : null}
-      </dd>
+      <dd className="text-sm leading-snug">{value}</dd>
     </div>
   )
 }
 
-export function BankCard({ bank, locale }: { bank: Bank; locale: Locale }) {
+export function BankPanel({ bank, locale }: { bank: Bank; locale: Locale }) {
   const copy = ui[locale]
   const view = presentBank(bank, locale)
   const longLevel = !/\d/.test(view.policyDisplay)
+  const hasNote = Boolean(view.bodyNote || view.targetHint || view.framework || view.secondary.length > 0)
 
   return (
-    <Card className="h-full bg-card shadow-none">
-      <CardHeader className="gap-3">
-        <div className="flex items-start gap-3">
-          <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-md bg-muted sm:h-32 sm:w-28">
-            <Image
-              src={bank.head.photo}
-              alt={view.photoAlt}
-              fill
-              sizes="(min-width: 640px) 112px, 80px"
-              className="object-cover object-top"
-            />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-xs text-muted-foreground">{view.institution}</p>
-            <h2 className="mt-0.5 text-lg leading-tight font-semibold">{view.name}</h2>
-            <p className="text-sm text-muted-foreground">{view.title}</p>
-          </div>
-          <Badge className={`shrink-0 border-0 ${cycleClass[bank.cycle.kind]}`}>
-            {view.cycleLabel}
-          </Badge>
+    <section className="rounded-xl bg-card px-4 py-5 ring-1 ring-foreground/10 sm:px-6 sm:py-6">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+        <div className="relative h-60 w-48 shrink-0 overflow-hidden rounded-md bg-[#d9e3f0]">
+          <Image
+            src={bank.head.photo}
+            alt={view.photoAlt}
+            fill
+            sizes="192px"
+            className="object-cover"
+            style={portraitStyle[bank.id]}
+          />
         </div>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        <div className="grid grid-cols-2 gap-2">
-          <div className="min-w-0 rounded-lg bg-[#16325c] px-3 py-3 text-white">
-            <p className="text-[11px] leading-snug text-white/70">{view.policyName}</p>
-            <p
-              className={
-                longLevel
-                  ? "mt-2 text-xl leading-snug font-semibold"
-                  : "mt-2 text-3xl leading-none font-semibold tracking-tight tabular-nums"
-              }
-            >
-              {view.policyDisplay}
-            </p>
-            <p className="mt-2 text-[11px] text-white/60">{view.policyAsOf}</p>
-          </div>
-          <div className="min-w-0 rounded-lg bg-[#e7eef6] px-3 py-3 text-[#16325c]">
-            <p className="text-[11px] text-[#3d5270]">{copy.inflationTarget}</p>
-            <p className="mt-2 text-3xl leading-none font-semibold tracking-tight tabular-nums">
-              {view.targetDisplay}
-            </p>
-            <p className="mt-2 text-[11px] leading-snug text-[#3d5270]">
-              {view.latestGauge} {view.latestValue}
-              <span className="block">{view.latestPeriod}</span>
-              {view.targetHint ? <span className="mt-1 block">{view.targetHint}</span> : null}
-            </p>
-          </div>
+        <div className="min-w-0">
+          <p className="text-sm text-muted-foreground">{view.institution}</p>
+          <h2 className="mt-1 text-2xl font-semibold tracking-tight">{view.name}</h2>
+          <p className="mt-1 text-sm text-muted-foreground">{view.title}</p>
+          <Badge className={`mt-3 border-0 ${cycleClass[bank.cycle.kind]}`}>{view.cycleLabel}</Badge>
         </div>
+      </div>
 
-        <dl>
-          <Fact label={copy.setBy} value={view.bodyName} note={view.bodyNote} />
-          <Fact label={copy.watches} value={view.indicators} />
-          <Fact label={copy.decision} value={view.move} />
-        </dl>
-
-        {view.secondary.length > 0 ? (
-          <div className="rounded-md bg-muted/60 px-3 py-2">
-            <p className="text-xs font-medium">{copy.otherRates}</p>
-            <p className="mt-0.5 text-xs text-muted-foreground">{view.extraReason}</p>
-            <ul className="mt-2 grid gap-1 text-sm">
-              {view.secondary.map((rate) => (
-                <li key={rate.key} className="flex items-baseline justify-between gap-3">
-                  <span className="min-w-0">{rate.name}</span>
-                  <span className="font-medium tabular-nums">{rate.display}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-
-        {view.framework ? (
-          <div className="rounded-md bg-muted/60 px-3 py-2">
-            <p className="text-xs font-medium">{copy.frameworkTitle}</p>
-            <p className="mt-1 text-sm leading-relaxed">{view.framework}</p>
-          </div>
-        ) : null}
-
-        <div className="text-[11px] leading-relaxed text-muted-foreground">
-          <p>
-            {copy.portrait}
-            {" · "}
-            <a
-              href={bank.head.photoPageUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-foreground/25 underline-offset-2"
-            >
-              {copy.biography}
-            </a>
+      <div className="mt-6 grid max-w-xl grid-cols-2 gap-3">
+        <div className="min-w-0 rounded-lg bg-[#16325c] px-4 py-4 text-white">
+          <p className="text-[11px] leading-snug text-white/70">{view.policyName}</p>
+          <p
+            className={
+              longLevel
+                ? "mt-2 text-2xl leading-snug font-semibold"
+                : "mt-2 text-4xl leading-none font-semibold tracking-tight tabular-nums"
+            }
+          >
+            {view.policyDisplay}
           </p>
-          <SourceLine source={bank.primarySource} locale={locale} />
-          <SourceLine source={bank.inflationActual.source} locale={locale} />
-          {bank.sources.map((source) => (
-            <SourceLine key={source.url} source={source} locale={locale} />
-          ))}
+          <p className="mt-2 text-[11px] text-white/60">{view.policyAsOf}</p>
         </div>
-      </CardContent>
-    </Card>
+        <div className="min-w-0 rounded-lg bg-[#e7eef6] px-4 py-4 text-[#16325c]">
+          <p className="text-[11px] text-[#3d5270]">{copy.inflationTarget}</p>
+          <p className="mt-2 text-4xl leading-none font-semibold tracking-tight tabular-nums">
+            {view.targetDisplay}
+          </p>
+          <p className="mt-2 text-[11px] leading-snug text-[#3d5270]">
+            {view.latestGauge} {view.latestValue}
+            <span className="block">{view.latestPeriod}</span>
+          </p>
+        </div>
+      </div>
+
+      <dl className="mt-6 max-w-3xl">
+        <Field label={copy.colInstrument} value={view.policyName} />
+        <Field label={copy.colSetting} value={view.policyDisplay} />
+        <Field label={copy.colTarget} value={view.targetDisplay} />
+        <Field label={copy.colLatest} value={`${view.latestValue} · ${view.latestPeriod}`} />
+        <Field label={copy.colGauge} value={view.latestGauge} />
+        <Field label={copy.watches} value={view.indicators} />
+        <Field label={copy.setBy} value={view.bodyName} />
+        <Field label={copy.colMove} value={`${view.cycleLabel} · ${view.cycleSize}`} />
+        <Field label={copy.colDate} value={bank.cycle.date} />
+      </dl>
+
+      {hasNote ? (
+        <div className="mt-6 max-w-3xl rounded-md bg-[#e7eef6]/70 px-4 py-3">
+          <p className="text-xs font-medium text-[#16325c]">{copy.note}</p>
+          {view.bodyNote ? <p className="mt-1.5 text-sm leading-relaxed">{view.bodyNote}</p> : null}
+          {view.targetHint ? <p className="mt-1.5 text-sm leading-relaxed">{view.targetHint}</p> : null}
+          {view.framework ? (
+            <div className="mt-3">
+              <p className="text-xs font-medium">{copy.frameworkTitle}</p>
+              <p className="mt-1 text-sm leading-relaxed">{view.framework}</p>
+            </div>
+          ) : null}
+          {view.secondary.length > 0 ? (
+            <div className="mt-3">
+              <p className="text-xs font-medium">{copy.otherRates}</p>
+              {view.extraReason ? <p className="mt-1 text-sm leading-relaxed">{view.extraReason}</p> : null}
+              <ul className="mt-2 grid gap-1 text-sm">
+                {view.secondary.map((rate) => (
+                  <li key={rate.key} className="flex items-baseline justify-between gap-3">
+                    <span className="min-w-0">{rate.name}</span>
+                    <span className="font-medium tabular-nums">{rate.display}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="mt-6 max-w-3xl text-[11px] leading-relaxed text-muted-foreground">
+        <p className="text-xs font-medium text-foreground">{copy.sources}</p>
+        <p className="mt-1.5">
+          {copy.portrait}
+          {" · "}
+          <a
+            href={bank.head.photoPageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-foreground/25 underline-offset-2"
+          >
+            {copy.biography}
+          </a>
+        </p>
+        <SourceLine source={bank.primarySource} locale={locale} />
+        <SourceLine source={bank.inflationActual.source} locale={locale} />
+        {bank.sources.map((source) => (
+          <SourceLine key={source.url} source={source} locale={locale} />
+        ))}
+      </div>
+    </section>
   )
 }
