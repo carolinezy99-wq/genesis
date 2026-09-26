@@ -35,8 +35,8 @@ export function RateChart({ locale, caption, yAxis }: { locale: Locale; caption:
       <div className="min-w-0 overflow-x-auto">
         <ChartContainer
           config={chartConfig}
-          className="aspect-auto h-[320px] min-w-[680px] w-full"
-          initialDimension={{ width: 720, height: 320 }}
+          className="aspect-auto h-[250px] min-w-[680px] w-full"
+          initialDimension={{ width: 720, height: 250 }}
         >
           <BarChart data={data} margin={{ top: 28, right: 8, left: 0, bottom: 0 }}>
             <CartesianGrid vertical={false} strokeDasharray="3 3" />

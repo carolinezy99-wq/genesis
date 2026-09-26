@@ -1,4 +1,4 @@
-import { banks, sourceKindLabel, type Bank, type Source, type SourceKind } from "@/lib/banks"
+import { banks, sourceKindLabel, type Bank, type CycleKind, type Source, type SourceKind } from "@/lib/banks"
 
 export type Locale = "en" | "zh"
 
@@ -27,7 +27,15 @@ export const ui = {
     colMove: "Latest move",
     colDate: "Date",
     overview: "Overview",
-    sameFields: "Open a country tab for that bank’s full list. Anything that is not comparable sits in a short note on that tab.",
+    stanceTitle: "Policy stance",
+    stanceNote:
+      "Stance is the latest decision’s direction versus the previous setting, not the rate level. Singapore is the latest S$NEER slope. China is the latest open-market operation.",
+    tightening: "Tightening",
+    holding: "Holding",
+    easing: "Easing",
+    unclear: "Unclear",
+    none: "None",
+    sameFields: "Open a country tab for the full list.",
     note: "Note",
     sources: "Sources",
     latestNews: "Latest news",
@@ -70,7 +78,15 @@ export const ui = {
     colMove: "最近决定",
     colDate: "日期",
     overview: "全景对比",
-    sameFields: "点国家栏目可看该行的全部指标。不能直接对照的内容写在该栏的说明里。",
+    stanceTitle: "政策立场",
+    stanceNote:
+      "立场是最近一次决定相对上次设定的方向，不是利率高低。新加坡看最近一次新元名义有效汇率斜率。中国看最近一次公开市场操作。",
+    tightening: "收紧",
+    holding: "维持",
+    easing: "放松",
+    unclear: "尚不明确",
+    none: "无",
+    sameFields: "点国家栏目可看全部指标。",
     note: "说明",
     sources: "来源",
     latestNews: "最新新闻",
@@ -765,6 +781,39 @@ export function chartName(bank: Bank, locale: Locale) {
   return locale === "en" ? chartLabel[bank.id] : bank.shortLabel
 }
 
+export type Stance = "tightening" | "holding" | "easing" | "unclear"
+
+export function decisionText(stanceLabel: string, cycleLabel: string, size: string) {
+  const stance = stanceLabel.toLowerCase()
+  const cycle = cycleLabel.toLowerCase()
+  const same = stance === cycle || stance.startsWith(cycle) || cycle.startsWith(stance)
+  return same ? `${stanceLabel} · ${size}` : `${stanceLabel} · ${cycleLabel} · ${size}`
+}
+
+export function stanceOf(kind: CycleKind): Stance {
+  if (kind === "hike" || kind === "tighten") return "tightening"
+  if (kind === "hold") return "holding"
+  if (kind === "cut") return "easing"
+  return "unclear"
+}
+
+export function stanceBuckets(locale: Locale) {
+  const keys: Stance[] = ["tightening", "holding", "easing"]
+  const unclear = banks.filter((bank) => stanceOf(bank.cycle.kind) === "unclear")
+  const shown = unclear.length > 0 ? ([...keys, "unclear"] as Stance[]) : keys
+  return shown.map((key) => ({
+    key,
+    label: ui[locale][key],
+    banks: banks
+      .filter((bank) => stanceOf(bank.cycle.kind) === key)
+      .map((bank) => ({
+        id: bank.id,
+        name: bankTabLabel[bank.id][locale],
+        basis: `${bank.cycle.date} · ${locale === "zh" ? bank.cycle.sizeLabel : enBanks[bank.id].sizeLabel}`,
+      })),
+  }))
+}
+
 function bankNews(id: string, locale: Locale): { items: NewsItem[]; missing: string } {
   const own = news[id]?.[locale] ?? []
   if (own.length > 0) return { items: own, missing: "" }
@@ -819,6 +868,8 @@ export function presentBank(bank: Bank, locale: Locale) {
     indicators: locale === "zh" ? bank.indicators.join("、") : en.indicators.join(", "),
     cycleLabel: locale === "zh" ? bank.cycle.label : en.cycleLabel,
     cycleSize: locale === "zh" ? bank.cycle.sizeLabel : en.sizeLabel,
+    stance: stanceOf(bank.cycle.kind),
+    stanceLabel: ui[locale][stanceOf(bank.cycle.kind)],
     move: `${bank.cycle.date} · ${locale === "zh" ? bank.cycle.label : en.cycleLabel} · ${locale === "zh" ? bank.cycle.sizeLabel : en.sizeLabel}`,
   }
 }
@@ -841,7 +892,7 @@ export function comparisonRows(locale: Locale) {
       target: view.targetDisplay,
       latest: view.latestValue,
       gauge: view.gauge,
-      move: `${view.cycleLabel} · ${view.cycleSize}`,
+      move: decisionText(view.stanceLabel, view.cycleLabel, view.cycleSize),
       date: bank.cycle.date,
     }
   })
