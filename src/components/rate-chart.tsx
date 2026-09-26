@@ -35,7 +35,7 @@ export function RateChart() {
       <figcaption className="sr-only">
         八家以利率为工具的央行政策利率比较，纵轴单位为百分比。新加坡未列入。美国柱高为目标区间中点，柱顶标注区间。中国柱为7天期逆回购操作利率。
       </figcaption>
-      <div className="overflow-x-auto">
+      <div className="min-w-0 overflow-x-auto">
         <ChartContainer
           config={chartConfig}
           className="aspect-auto h-[320px] min-w-[680px] w-full"

@@ -1,7 +1,8 @@
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import type { Bank, CycleKind } from "@/lib/banks"
+import { sourceKindLabel, type Bank, type CycleKind, type Source } from "@/lib/banks"
+import { cn } from "@/lib/utils"
 
 const cycleClass: Record<CycleKind, string> = {
   hike: "bg-[#8c2f2b] text-white",
@@ -10,26 +11,34 @@ const cycleClass: Record<CycleKind, string> = {
   cut: "bg-[#1f4d3a] text-white",
 }
 
-function SourceLink({
-  title,
-  url,
-}: {
-  title: string
-  url: string
-}) {
+function KindMark({ label }: { label: string }) {
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="underline decoration-foreground/25 underline-offset-2 hover:decoration-foreground"
-    >
-      {title}
-    </a>
+    <span className="mr-1 inline-block rounded bg-muted px-1 py-px align-baseline text-[10px] tracking-normal text-foreground/70">
+      {label}
+    </span>
+  )
+}
+
+function SourceLine({ source }: { source: Source }) {
+  return (
+    <p className="mt-1 break-words">
+      <KindMark label={sourceKindLabel[source.kind]} />
+      {source.institution}，
+      <a
+        href={source.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline decoration-foreground/25 underline-offset-2 hover:decoration-foreground"
+      >
+        {source.title}
+      </a>
+      ，阅读于 {source.readOn}。
+    </p>
   )
 }
 
 export function BankCard({ bank }: { bank: Bank }) {
+  const longLevel = !/\d/.test(bank.policy.display)
   return (
     <Card className="h-full bg-card shadow-none">
       <CardHeader className="gap-3">
@@ -59,26 +68,39 @@ export function BankCard({ bank }: { bank: Bank }) {
             </Badge>
           </div>
         </div>
-        <p className="text-[11px] leading-relaxed text-muted-foreground">
+        <p className="text-[11px] leading-relaxed break-words text-muted-foreground">
           肖像：{bank.head.photoCredit}。
-          <SourceLink title={bank.head.photoPageTitle} url={bank.head.photoPageUrl} />
+          <KindMark label="官网" />
+          <a
+            href={bank.head.photoPageUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-foreground/25 underline-offset-2 hover:decoration-foreground"
+          >
+            {bank.head.photoPageTitle}
+          </a>
         </p>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        <div className="grid grid-cols-2 gap-2">
-          <div className="rounded-lg bg-[#1c2838] px-3 py-3 text-white">
+        <div className="grid grid-cols-1 gap-2 min-[480px]:grid-cols-2">
+          <div className="min-w-0 rounded-lg bg-[#1c2838] px-3 py-3 text-white">
             <p className="text-[11px] text-white/70">
               {bank.policy.nameZh}
-              <span className="mt-0.5 block text-white/55">{bank.policy.nameEn}</span>
+              <span className="mt-0.5 block break-words text-white/55">{bank.policy.nameEn}</span>
             </p>
-            <p className="mt-2 text-3xl leading-none font-semibold tracking-tight tabular-nums sm:text-4xl">
+            <p
+              className={cn(
+                "mt-2 font-semibold tracking-tight break-words tabular-nums",
+                longLevel ? "text-2xl leading-snug" : "text-3xl leading-none sm:text-4xl",
+              )}
+            >
               {bank.policy.display}
             </p>
             <p className="mt-2 text-[11px] text-white/65">{bank.policy.asOf}</p>
           </div>
-          <div className="rounded-lg bg-[#f3ead6] px-3 py-3 text-[#2a241c]">
+          <div className="min-w-0 rounded-lg bg-[#f3ead6] px-3 py-3 text-[#2a241c]">
             <p className="text-[11px] text-[#6a5e4a]">通胀目标</p>
-            <p className="mt-2 text-3xl leading-none font-semibold tracking-tight tabular-nums sm:text-4xl">
+            <p className="mt-2 text-3xl leading-none font-semibold tracking-tight break-words tabular-nums sm:text-4xl">
               {bank.inflationTarget.display}
             </p>
             <p className="mt-2 text-[11px] leading-snug text-[#6a5e4a]">
@@ -92,7 +114,7 @@ export function BankCard({ bank }: { bank: Bank }) {
           <ul className="grid gap-1 text-sm">
             {bank.policy.secondary.map((rate) => (
               <li key={rate.nameEn} className="flex items-baseline justify-between gap-3">
-                <span>
+                <span className="min-w-0 break-words">
                   {rate.nameZh}
                   <span className="ml-1 text-xs text-muted-foreground">({rate.nameEn})</span>
                 </span>
@@ -139,24 +161,10 @@ export function BankCard({ bank }: { bank: Bank }) {
         </dl>
 
         <div className="border-t border-border pt-3 text-[11px] leading-relaxed text-muted-foreground">
-          <p>
-            政策来源：{bank.primarySource.institution}，
-            <SourceLink title={bank.primarySource.title} url={bank.primarySource.url} />
-            ，阅读于 {bank.primarySource.readOn}。
-          </p>
-          <p className="mt-1">
-            通胀读数：{bank.inflationActual.source.institution}，
-            <SourceLink
-              title={bank.inflationActual.source.title}
-              url={bank.inflationActual.source.url}
-            />
-            。
-          </p>
+          <SourceLine source={bank.primarySource} />
+          <SourceLine source={bank.inflationActual.source} />
           {bank.sources.map((source) => (
-            <p key={source.url} className="mt-1">
-              {source.institution}，
-              <SourceLink title={source.title} url={source.url} />
-            </p>
+            <SourceLine key={source.url} source={source} />
           ))}
         </div>
       </CardContent>
