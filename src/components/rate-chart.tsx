@@ -10,26 +10,23 @@ import {
 import { chartBanks } from "@/lib/banks"
 import { chartName, presentBank, type Locale } from "@/lib/copy"
 
-const INK = "#2c3d55"
-const ACCENT = "#8c2f2b"
-
-const chartConfig = {
-  rate: {
-    label: "政策利率",
-    color: INK,
-  },
-} satisfies ChartConfig
+const NAVY = "#16325c"
 
 export function RateChart({ locale, caption, yAxis }: { locale: Locale; caption: string; yAxis: string }) {
+  const chartConfig = {
+    rate: {
+      label: locale === "en" ? "Rate" : "利率",
+      color: NAVY,
+    },
+  } satisfies ChartConfig
   const rows = chartBanks()
-  const peak = Math.max(...rows.map((bank) => bank.policy.chartValue ?? 0))
   const data = rows.map((bank) => ({
     name: chartName(bank, locale),
     rate: bank.policy.chartValue,
     barLabel: bank.policy.barLabel,
     full: `${presentBank(bank, locale).institution} · ${presentBank(bank, locale).policyName}`,
     midpoint: locale === "en" ? " (bar height is the midpoint)" : "（柱高为区间中点）",
-    fill: bank.policy.chartValue === peak ? ACCENT : INK,
+    fill: NAVY,
   }))
 
   return (
@@ -61,7 +58,7 @@ export function RateChart({ locale, caption, yAxis }: { locale: Locale; caption:
                 value: yAxis,
                 angle: -90,
                 position: "insideLeft",
-                style: { fill: "#5c564c", fontSize: 12 },
+                style: { fill: "#3d5270", fontSize: 12 },
               }}
             />
             <ChartTooltip

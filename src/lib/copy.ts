@@ -15,7 +15,7 @@ export const ui = {
     chartTitle: "Policy rates",
     chartAxisHint: "Percent. The figure is printed on each bar.",
     chartFoot:
-      "High to low. Rust is the highest rate. The US bar is the midpoint of 3.75–4.00%. China is the 7-day reverse repo, not the LPR. Singapore is not a policy rate, so it is only in the table.",
+      "High to low. The US bar is the midpoint of 3.75–4.00%. China is the 7-day reverse repo, not the LPR. Singapore is not a policy rate, so it is only in the table.",
     tableTitle: "All compared figures",
     tableHint: "Same columns for every bank. Singapore’s setting is the exchange-rate band, not a percent.",
     colBank: "Bank",
@@ -55,7 +55,7 @@ export const ui = {
     chartTitle: "政策利率",
     chartAxisHint: "单位：%。数字标在柱顶。",
     chartFoot:
-      "从高到低。深红色是最高利率。美国柱高是 3.75%–4.00% 的中点。中国是 7 天期逆回购，不是贷款报价利率。新加坡不是政策利率，只出现在表里。",
+      "从高到低。美国柱高是 3.75%–4.00% 的中点。中国是 7 天期逆回购，不是贷款报价利率。新加坡不是政策利率，只出现在表里。",
     tableTitle: "可对照指标",
     tableHint: "每家同一组列。新加坡的“当前水平”是汇率带，不是百分比。",
     colBank: "央行",
@@ -210,9 +210,9 @@ const enBanks: Record<string, EnBank> = {
     detail: "Policy rate held at 2.25%. Next overnight-rate announcement: 2026-10-28.",
   },
   pboc: {
-    bodyName: "People’s Bank of China (the Monetary Policy Committee is consultative)",
+    bodyName: "People's Bank of China",
     bodyNote:
-      "The Monetary Policy Committee’s quarterly meetings use the word “recommend”; they do not vote the policy rate. At the 7 May 2025 State Council press conference the Governor said the policy rate means the 7-day reverse repo operation rate. Operations are run by the Open Market Operations Office at a fixed rate by quantity tender. pboc.gov.cn did not resolve on 2026-09-26; this page uses pbc.gov.cn only.",
+      "The Monetary Policy Committee is consultative and does not vote the policy rate. The Monetary Policy Department drafts and organises implementation.",
     indicators: ["Consumer price index (CPI)", "Aggregate financing and money supply (matched to growth and price goals)"],
     targetDisplay: "around 2%",
     targetNote: "The 2026 government work report’s expected rise in consumer prices. It is not a point target under an inflation-targeting regime.",
@@ -246,8 +246,9 @@ const enBanks: Record<string, EnBank> = {
     detail: "Unanimous hold at 5.25%, with the neutral stance kept. Next meeting 2026-10-05 to 2026-10-07.",
   },
   mas: {
-    bodyName: "Monetary Authority of Singapore",
-    bodyNote: "The Economic Policy Group formulates monetary policy. Decisions are published as Monetary Policy Statements. There is no committee that votes a policy interest rate.",
+    bodyName: "Monetary and Investment Policy Meeting",
+    bodyNote:
+      "A committee of the MAS Board. The Economic Policy Group prepares the review. The Monetary and Domestic Markets Management Department implements it. MAS does not set a policy interest rate.",
     indicators: ["MAS Core Inflation (ex accommodation and private transport)", "CPI-All Items"],
     targetDisplay: "No point target",
     targetNote: "The aim is low and stable inflation over the medium term, not a published point target. The 2026 forecast band for both MAS Core and CPI-All Items is 1.5%–2.5%. That band is a projection.",
@@ -292,7 +293,7 @@ const linkText: Record<string, { en: string; zh: string }> = {
   },
   "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm": {
     en: "FOMC statement, 16 September 2026",
-    zh: "2026年9月16日联邦公开市场委员会声明",
+    zh: "2026年9月16日货币政策声明",
   },
   "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a1.htm": {
     en: "Implementation note, 16 September 2026",
@@ -300,7 +301,7 @@ const linkText: Record<string, { en: string; zh: string }> = {
   },
   "https://www.bea.gov/news/schedule": {
     en: "Release schedule: August 2026 PCE on 30 September",
-    zh: "发布日程：8月 PCE 于 9月30日",
+    zh: "发布日程：8月个人消费支出于 9月30日",
   },
   "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-17092026-ap": {
     en: "Euro-area inflation 3.2% in August 2026",
@@ -398,6 +399,10 @@ const linkText: Record<string, { en: string; zh: string }> = {
     en: "Past monetary policy decisions",
     zh: "历次货币政策决定",
   },
+  "https://www.mas.gov.sg/monetary-policy/singapores-monetary-policy-framework/faqs/section-4": {
+    en: "Monetary policy framework FAQ, section 4",
+    zh: "货币政策框架问答第四节",
+  },
   "https://www.businesstimes.com.sg/singapore/mas-tightens-monetary-policy-very-slightly-july-defying-expectations-hold": {
     en: "Business Times, 27 July 2026",
     zh: "《商业时报》2026年7月27日",
@@ -409,6 +414,14 @@ const linkText: Record<string, { en: string; zh: string }> = {
   "https://www.rba.gov.au/media-releases/2026/mr-26-19.html": {
     en: "Monetary policy decision, 11 August 2026",
     zh: "2026年8月11日货币政策决定",
+  },
+  "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html": {
+    en: "Monetary Policy Department",
+    zh: "货币政策司",
+  },
+  "https://www.rba.gov.au/about-rba/our-role.html": {
+    en: "Our role",
+    zh: "职能",
   },
   "https://www.rba.gov.au/cash-rate-target-overview.html": {
     en: "Cash rate target overview",
@@ -437,21 +450,32 @@ const bodyShort = {
     boc: "Governing Council",
     pboc: "People's Bank of China",
     rbi: "Monetary Policy Committee",
-    mas: "Monetary Authority of Singapore",
+    mas: "Monetary and Investment Policy Meeting",
     rba: "Monetary Policy Board",
   },
   zh: {
-    fed: "联邦公开市场委员会",
-    ecb: "管理委员会",
-    boe: "货币政策委员会",
-    boj: "政策委员会",
-    boc: "理事会",
+    fed: "Federal Open Market Committee",
+    ecb: "Governing Council",
+    boe: "Monetary Policy Committee",
+    boj: "Policy Board",
+    boc: "Governing Council",
     pboc: "中国人民银行",
-    rbi: "货币政策委员会",
-    mas: "新加坡金融管理局",
-    rba: "货币政策委员会",
+    rbi: "Monetary Policy Committee",
+    mas: "Monetary and Investment Policy Meeting",
+    rba: "Monetary Policy Board",
   },
 } as const
+
+const bodyNote: Record<string, { en: string; zh: string }> = {
+  pboc: {
+    en: "The Monetary Policy Committee is consultative. The Monetary Policy Department drafts and organises implementation.",
+    zh: "货币政策委员会是咨询机构。货币政策司拟订调控方案并组织实施。公开市场业务操作室发布操作公告。",
+  },
+  mas: {
+    en: "A committee of the Board. The Economic Policy Group prepares the review; the Monetary and Domestic Markets Management Department implements it.",
+    zh: "董事会下的委员会。Economic Policy Group 拟订审议，Monetary and Domestic Markets Management Department 负责实施。",
+  },
+}
 
 const extraReason: Record<string, { en: string; zh: string }> = {
   fed: {
@@ -526,6 +550,7 @@ export function presentBank(bank: Bank, locale: Locale) {
     extraReason: extraReason[bank.id]?.[locale] ?? "",
     framework: locale === "zh" ? (bank.frameworkNote ?? "") : (en.framework ?? ""),
     bodyName: bodyShort[locale][bank.id as keyof (typeof bodyShort)["en"]],
+    bodyNote: bodyNote[bank.id]?.[locale] ?? "",
     indicators: locale === "zh" ? bank.indicators.join("、") : en.indicators.join(", "),
     cycleLabel: locale === "zh" ? bank.cycle.label : en.cycleLabel,
     cycleSize: locale === "zh" ? bank.cycle.sizeLabel : en.sizeLabel,

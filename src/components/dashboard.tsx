@@ -27,7 +27,7 @@ export function Dashboard() {
             <button
               type="button"
               onClick={() => setLocale("en")}
-              className={`px-2.5 py-1 text-sm ${locale === "en" ? "bg-[#1c2838] text-white" : "text-muted-foreground"}`}
+              className={`px-2.5 py-1 text-sm ${locale === "en" ? "bg-[#16325c] text-white" : "text-muted-foreground"}`}
               aria-pressed={locale === "en"}
             >
               EN
@@ -35,7 +35,7 @@ export function Dashboard() {
             <button
               type="button"
               onClick={() => setLocale("zh")}
-              className={`px-2.5 py-1 text-sm ${locale === "zh" ? "bg-[#1c2838] text-white" : "text-muted-foreground"}`}
+              className={`px-2.5 py-1 text-sm ${locale === "zh" ? "bg-[#16325c] text-white" : "text-muted-foreground"}`}
               aria-pressed={locale === "zh"}
             >
               中文
@@ -49,13 +49,13 @@ export function Dashboard() {
       </header>
 
       <section className="mt-5 flex flex-wrap gap-2 text-sm" aria-label={copy.chartTitle}>
-        <span className="rounded-full bg-[#8c2f2b] px-3 py-1 text-white">
+        <span className="rounded-full bg-[#16325c] px-3 py-1 text-white">
           {copy.hikes} {hikes}
         </span>
-        <span className="rounded-full bg-[#e6e0d4] px-3 py-1 text-[#3c3832]">
+        <span className="rounded-full bg-[#e7eef6] px-3 py-1 text-[#16325c]">
           {copy.holds} {holds}
         </span>
-        <span className="rounded-full bg-[#8c2f2b] px-3 py-1 text-white">
+        <span className="rounded-full bg-[#16325c] px-3 py-1 text-white">
           {copy.tightens} {tightens}
         </span>
         <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">

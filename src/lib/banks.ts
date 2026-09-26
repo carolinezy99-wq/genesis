@@ -87,8 +87,8 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.federalreserve.gov/aboutthefed/bios/board/warsh.htm",
     },
     decisionBody: {
-      nameZh: "联邦公开市场委员会",
-      nameEn: "Federal Open Market Committee (FOMC)",
+      nameZh: "Federal Open Market Committee",
+      nameEn: "Federal Open Market Committee",
       note: "FOMC 决定联邦基金利率目标区间。2026年9月16日声明以 12–0 通过。",
     },
     indicators: ["个人消费支出物价指数", "核心个人消费支出物价指数（不含食品与能源）", "失业率与就业"],
@@ -146,7 +146,7 @@ export const banks: Bank[] = [
       {
         kind: "stats",
         institution: "U.S. Bureau of Economic Analysis",
-        title: "Release Schedule（August 2026 PCE 定于 2026-09-30）",
+        title: "Release Schedule（2026年8月个人消费支出定于 2026-09-30）",
         url: "https://www.bea.gov/news/schedule",
         readOn: DATA_AS_OF,
       },
@@ -167,9 +167,9 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.ecb.europa.eu/ecb/decisions/html/cvlagarde.en.html",
     },
     decisionBody: {
-      nameZh: "管理委员会",
+      nameZh: "Governing Council",
       nameEn: "Governing Council",
-      note: "德国、法国、意大利没有单独的政策利率，由欧洲央行管理委员会代表欧元区决策。",
+      note: "德国、法国、意大利没有单独的政策利率，由欧洲央行 Governing Council 代表欧元区决策。",
     },
     indicators: ["欧元区调和消费者物价指数", "不含能源与食品的通胀"],
     inflationTarget: {
@@ -232,8 +232,8 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.bankofengland.co.uk/about/people/andrew-bailey/biography",
     },
     decisionBody: {
-      nameZh: "货币政策委员会",
-      nameEn: "Monetary Policy Committee (MPC)",
+      nameZh: "Monetary Policy Committee",
+      nameEn: "Monetary Policy Committee",
       note: "MPC 决定 Bank Rate，每年八次会议，目标是使通胀回到 2%。",
     },
     indicators: ["消费者物价指数"],
@@ -302,7 +302,7 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.boj.or.jp/about/organization/policyboard/index.htm",
     },
     decisionBody: {
-      nameZh: "政策委员会",
+      nameZh: "Policy Board",
       nameEn: "Policy Board",
       note: "政策委员会决定金融市场调节方针。2026年9月18日为 7–2。",
     },
@@ -372,7 +372,7 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.bankofcanada.ca/profile/tiff-macklem/",
     },
     decisionBody: {
-      nameZh: "理事会",
+      nameZh: "Governing Council",
       nameEn: "Governing Council",
       note: "理事会决定隔夜利率目标。2026年9月2日决定维持政策利率。",
     },
@@ -445,9 +445,9 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.pbc.gov.cn/hanglingdao/128697/128734/index.html",
     },
     decisionBody: {
-      nameZh: "中国人民银行（货币政策委员会为咨询机构）",
-      nameEn: "People's Bank of China; Monetary Policy Committee is consultative",
-      note: "货币政策委员会例会用语是「建议」，不表决政策利率。行长在 2025-05-07 国新办发布会上说明：政策利率是指公开市场 7 天期逆回购操作利率。操作由公开市场业务操作室以固定利率、数量招标开展。pboc.gov.cn 在 2026-09-26 无法解析，本页只用 pbc.gov.cn。",
+      nameZh: "中国人民银行",
+      nameEn: "People's Bank of China",
+      note: "货币政策委员会是咨询机构，例会用语是「建议」，不表决政策利率。货币政策司拟订调控方案并组织实施。公开市场业务操作室发布操作公告。",
     },
     indicators: ["居民消费价格", "社会融资规模与货币供应量（与增长和价格目标相匹配）"],
     inflationTarget: {
@@ -524,6 +524,13 @@ export const banks: Bank[] = [
       },
       {
         kind: "official",
+        institution: "中国人民银行",
+        title: "货币政策司",
+        url: "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html",
+        readOn: DATA_AS_OF,
+      },
+      {
+        kind: "official",
         institution: "中国政府网",
         title: "李强作的政府工作报告（摘登）",
         url: "https://www.gov.cn/yaowen/liebiao/202603/content_7060692.htm",
@@ -546,8 +553,8 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.rbi.org.in/scripts/AboutUsDisplay.aspx?pg=MediaKit.htm",
     },
     decisionBody: {
-      nameZh: "货币政策委员会",
-      nameEn: "Monetary Policy Committee (MPC)",
+      nameZh: "Monetary Policy Committee",
+      nameEn: "Monetary Policy Committee",
       note: "MPC 决定流动性调节便利下的政策回购利率。第62次会议由行长主持，全体一致。",
     },
     indicators: ["消费者物价指数", "核心消费者物价指数（不含食品与燃料）"],
@@ -619,9 +626,9 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.mas.gov.sg/who-we-are/management-team",
     },
     decisionBody: {
-      nameZh: "新加坡金融管理局",
-      nameEn: "Monetary Authority of Singapore",
-      note: "经济政策组负责货币政策的拟订，决定以《货币政策声明》公布。没有以投票公布政策利率的委员会。",
+      nameZh: "Monetary and Investment Policy Meeting",
+      nameEn: "Monetary and Investment Policy Meeting",
+      note: "董事会下的委员会，决定货币政策立场。Economic Policy Group 拟订审议，Monetary and Domestic Markets Management Department 负责实施。不设定政策利率。",
     },
     indicators: ["核心通胀（剔除住宿与私人交通）", "整体通胀"],
     inflationTarget: {
@@ -675,6 +682,13 @@ export const banks: Bank[] = [
         readOn: DATA_AS_OF,
       },
       {
+        kind: "official",
+        institution: "Monetary Authority of Singapore",
+        title: "Frequently Asked Questions, section 4",
+        url: "https://www.mas.gov.sg/monetary-policy/singapores-monetary-policy-framework/faqs/section-4",
+        readOn: DATA_AS_OF,
+      },
+      {
         kind: "media",
         institution: "The Business Times",
         title: "MAS tightens monetary policy ‘very slightly’ in July",
@@ -698,9 +712,9 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.rba.gov.au/media/image-library/senior-rba-executives.html",
     },
     decisionBody: {
-      nameZh: "货币政策委员会",
+      nameZh: "Monetary Policy Board",
       nameEn: "Monetary Policy Board",
-      note: "委员会决定是否调整现金利率目标，成员包括行长、副行长、财政部长秘书及六名由财长任命的委员。",
+      note: "Monetary Policy Board 决定现金利率目标。行长负责日常执行。",
     },
     indicators: ["消费者物价指数", "截尾均值通胀"],
     inflationTarget: {
@@ -744,6 +758,13 @@ export const banks: Bank[] = [
       readOn: DATA_AS_OF,
     },
     sources: [
+      {
+        kind: "official",
+        institution: "Reserve Bank of Australia",
+        title: "Our role",
+        url: "https://www.rba.gov.au/about-rba/our-role.html",
+        readOn: DATA_AS_OF,
+      },
       {
         kind: "official",
         institution: "Reserve Bank of Australia",
