@@ -91,7 +91,7 @@ export const banks: Bank[] = [
       nameEn: "Federal Open Market Committee (FOMC)",
       note: "FOMC 决定联邦基金利率目标区间。2026年9月16日声明以 12–0 通过。",
     },
-    indicators: ["个人消费支出物价指数（PCE）", "核心 PCE（不含食品与能源）", "失业率与就业"],
+    indicators: ["个人消费支出物价指数", "核心个人消费支出物价指数（不含食品与能源）", "失业率与就业"],
     inflationTarget: {
       display: "2%",
       note: "FOMC 声明中的 2 percent goal。9月16日主席记者会与经济预测以 PCE 物价指数表述。",
@@ -99,7 +99,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "3.7%",
       period: "2026年7月，同比",
-      gauge: "PCE 物价指数；核心 PCE 3.3%。8月 PCE 预定 2026-09-30 发布，故此处仍为 7 月。",
+      gauge: "个人消费支出物价指数；核心 3.3%。8月数据预定 2026-09-30 发布，故此处仍为 7 月。",
       source: {
         kind: "stats",
         institution: "U.S. Bureau of Economic Analysis",
@@ -125,7 +125,7 @@ export const banks: Bank[] = [
       kind: "hike",
       label: "加息",
       date: "2026-09-16",
-      sizeLabel: "+25 bp",
+      sizeLabel: "+25 个基点",
       detail: "目标区间上调 1/4 个百分点，至 3.75%–4%。为 12–0 投票。",
     },
     primarySource: {
@@ -171,7 +171,7 @@ export const banks: Bank[] = [
       nameEn: "Governing Council",
       note: "德国、法国、意大利没有单独的政策利率，由欧洲央行管理委员会代表欧元区决策。",
     },
-    indicators: ["总体通胀（欧元区 HICP）", "不含能源与食品的通胀"],
+    indicators: ["欧元区调和消费者物价指数", "不含能源与食品的通胀"],
     inflationTarget: {
       display: "2%",
       note: "中期对称目标。9月10日决定写明 inflation stabilises at its 2% target in the medium term。",
@@ -179,7 +179,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "3.2%",
       period: "2026年8月，同比",
-      gauge: "欧元区 HICP（终值；快报曾为 3.3%）",
+      gauge: "调和消费者物价指数（终值；快报曾为 3.3%）",
       source: {
         kind: "stats",
         institution: "Eurostat",
@@ -205,7 +205,7 @@ export const banks: Bank[] = [
       kind: "hike",
       label: "加息",
       date: "2026-09-10",
-      sizeLabel: "+25 bp",
+      sizeLabel: "+25 个基点",
       detail: "三项关键利率同时上调 25 个基点。图中柱为存款便利利率。",
     },
     primarySource: {
@@ -236,7 +236,7 @@ export const banks: Bank[] = [
       nameEn: "Monetary Policy Committee (MPC)",
       note: "MPC 决定 Bank Rate，每年八次会议，目标是使通胀回到 2%。",
     },
-    indicators: ["消费者物价指数（CPI）"],
+    indicators: ["消费者物价指数"],
     inflationTarget: {
       display: "2%",
       note: "CPI 通胀目标。官网当前页同时给出最新通胀读数。",
@@ -244,7 +244,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "3.1%",
       period: "截至 2026年8月的 12 个月",
-      gauge: "CPI；核心 CPI 2.6%",
+      gauge: "消费者物价指数；核心 2.6%",
       source: {
         kind: "stats",
         institution: "Office for National Statistics",
@@ -267,7 +267,7 @@ export const banks: Bank[] = [
       kind: "hold",
       label: "维持",
       date: "2026-09-17",
-      sizeLabel: "0 bp",
+      sizeLabel: "0 个基点",
       detail: "6–3 维持在 3.75%。三名委员主张上调 25 个基点至 4%。下次会议 2026-11-05。",
     },
     primarySource: {
@@ -306,7 +306,7 @@ export const banks: Bank[] = [
       nameEn: "Policy Board",
       note: "政策委员会决定金融市场调节方针。2026年9月18日为 7–2。",
     },
-    indicators: ["消费者物价指数（生鲜食品除外）", "综合 CPI"],
+    indicators: ["消费者物价指数（生鲜食品除外）", "综合指数"],
     inflationTarget: {
       display: "2%",
       note: "物价稳定目标。政策委员会以基调 CPI 稳定在 2% 左右为着眼点。",
@@ -314,7 +314,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "1.7%",
       period: "2026年8月，同比",
-      gauge: "生鲜食品除外综合；综合 CPI 1.9%",
+      gauge: "生鲜食品除外综合；综合指数 1.9%",
       source: {
         kind: "stats",
         institution: "日本总务省统计局",
@@ -337,7 +337,7 @@ export const banks: Bank[] = [
       kind: "hike",
       label: "加息",
       date: "2026-09-18",
-      sizeLabel: "+25 bp",
+      sizeLabel: "+25 个基点",
       detail: "引导目标由「1.0% 左右」调整为「1.25% 左右」。浅田东一郎、佐藤绫乃反对。",
     },
     primarySource: {
@@ -376,7 +376,7 @@ export const banks: Bank[] = [
       nameEn: "Governing Council",
       note: "理事会决定隔夜利率目标。2026年9月2日决定维持政策利率。",
     },
-    indicators: ["总体消费者物价指数（CPI）", "剔除汽油的 CPI", "核心通胀"],
+    indicators: ["总体消费者物价指数", "剔除汽油的消费者物价指数", "核心通胀"],
     inflationTarget: {
       display: "2%",
       note: "1%–3% 控制区间的中点，以总体 CPI 的 12 个月变化衡量。现行协议至 2026-12-31。",
@@ -384,7 +384,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "3.0%",
       period: "2026年8月，同比",
-      gauge: "总体 CPI；剔除汽油 2.4%",
+      gauge: "总体消费者物价指数；剔除汽油 2.4%",
       source: {
         kind: "stats",
         institution: "Statistics Canada",
@@ -410,7 +410,7 @@ export const banks: Bank[] = [
       kind: "hold",
       label: "维持",
       date: "2026-09-02",
-      sizeLabel: "0 bp",
+      sizeLabel: "0 个基点",
       detail: "政策利率维持 2.25%。下次公布隔夜利率目标：2026-10-28。",
     },
     primarySource: {
@@ -449,7 +449,7 @@ export const banks: Bank[] = [
       nameEn: "People's Bank of China; Monetary Policy Committee is consultative",
       note: "货币政策委员会例会用语是「建议」，不表决政策利率。行长在 2025-05-07 国新办发布会上说明：政策利率是指公开市场 7 天期逆回购操作利率。操作由公开市场业务操作室以固定利率、数量招标开展。pboc.gov.cn 在 2026-09-26 无法解析，本页只用 pbc.gov.cn。",
     },
-    indicators: ["居民消费价格（CPI）", "社会融资规模与货币供应量（与增长和价格目标相匹配）"],
+    indicators: ["居民消费价格", "社会融资规模与货币供应量（与增长和价格目标相匹配）"],
     inflationTarget: {
       display: "2% 左右",
       note: "2026年政府工作报告的居民消费价格涨幅预期目标，不是通胀目标制下的点目标。",
@@ -457,7 +457,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "0.8%",
       period: "2026年8月，同比",
-      gauge: "CPI；核心 CPI（扣除食品和能源）1.0%",
+      gauge: "居民消费价格；核心 1.0%",
       source: {
         kind: "stats",
         institution: "国家统计局",
@@ -550,7 +550,7 @@ export const banks: Bank[] = [
       nameEn: "Monetary Policy Committee (MPC)",
       note: "MPC 决定流动性调节便利下的政策回购利率。第62次会议由行长主持，全体一致。",
     },
-    indicators: ["消费者物价指数（CPI）", "核心 CPI（不含食品与燃料）"],
+    indicators: ["消费者物价指数", "核心消费者物价指数（不含食品与燃料）"],
     inflationTarget: {
       display: "4%",
       note: "容忍区间 2%–6%。印度储备银行公报引述 2026年3月25日公报通知，目标延续至 2031年3月31日。",
@@ -558,7 +558,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "4.82%",
       period: "2026年8月，同比，暂定",
-      gauge: "CPI，基期 2024=100；7月终值 4.45%",
+      gauge: "消费者物价指数，基期 2024=100；7月终值 4.45%",
       source: {
         kind: "stats",
         institution: "Ministry of Statistics and Programme Implementation",
@@ -584,7 +584,7 @@ export const banks: Bank[] = [
       kind: "hold",
       label: "维持",
       date: "2026-08-05",
-      sizeLabel: "0 bp",
+      sizeLabel: "0 个基点",
       detail: "全体一致维持 5.25%，并继续中性立场。下次会议 2026-10-05 至 10-07。",
     },
     primarySource: {
@@ -623,7 +623,7 @@ export const banks: Bank[] = [
       nameEn: "Monetary Authority of Singapore",
       note: "经济政策组负责货币政策的拟订，决定以《货币政策声明》公布。没有以投票公布政策利率的委员会。",
     },
-    indicators: ["MAS 核心通胀（剔除住宿与私人交通）", "CPI-All Items"],
+    indicators: ["核心通胀（剔除住宿与私人交通）", "整体通胀"],
     inflationTarget: {
       display: "无点目标",
       note: "目标是中期低而稳定的通胀，不是一个公布的利率式通胀点目标。2026年全年核心与整体通胀预测均为 1.5%–2.5%，这是预测区间。",
@@ -631,7 +631,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "2.2%",
       period: "2026年8月，同比",
-      gauge: "MAS 核心通胀；CPI-All Items 2.3%",
+      gauge: "核心通胀；整体通胀 2.3%",
       source: {
         kind: "official",
         institution: "Monetary Authority of Singapore",
@@ -658,7 +658,7 @@ export const banks: Bank[] = [
       detail: "提高政策带升值斜率，幅度小于 4月的上调；带宽与中心水平不变。声明没有公布基点。《商业时报》同日报道复述了“非常轻微”上调，同样没有基点数。下一次声明不晚于 2026年10月。",
     },
     frameworkNote:
-      "新加坡的货币政策工具是新元名义有效汇率（S$NEER）的政策带，而不是政策利率。管理局让贸易加权汇率在一条爬升的政策带内波动，用汇率路径来约束进口价格和中期通胀。",
+      "新加坡的货币政策工具是新元名义有效汇率的政策带，而不是政策利率。管理局让贸易加权汇率在一条爬升的政策带内波动，用汇率路径来约束进口价格和中期通胀。",
     primarySource: {
       kind: "official",
       institution: "Monetary Authority of Singapore",
@@ -702,7 +702,7 @@ export const banks: Bank[] = [
       nameEn: "Monetary Policy Board",
       note: "委员会决定是否调整现金利率目标，成员包括行长、副行长、财政部长秘书及六名由财长任命的委员。",
     },
-    indicators: ["消费者物价指数（CPI）", "截尾均值通胀（trimmed mean）"],
+    indicators: ["消费者物价指数", "截尾均值通胀"],
     inflationTarget: {
       display: "2–3%",
       note: "使消费者价格通胀保持在 2% 至 3%，并实现可持续的充分就业。",
@@ -710,7 +710,7 @@ export const banks: Bank[] = [
     inflationActual: {
       display: "3.5%",
       period: "截至 2026年7月的 12 个月",
-      gauge: "CPI；截尾均值 3.6%。8月 CPI 预定 2026-09-30 发布。",
+      gauge: "消费者物价指数；截尾均值 3.6%。8月数据预定 2026-09-30 发布。",
       source: {
         kind: "stats",
         institution: "Australian Bureau of Statistics",
@@ -733,7 +733,7 @@ export const banks: Bank[] = [
       kind: "hold",
       label: "维持",
       date: "2026-08-11",
-      sizeLabel: "0 bp",
+      sizeLabel: "0 个基点",
       detail: "全体一致维持 4.35%。现金利率历史表显示，最近一次变动是 2026-05-06 加 25 个基点；2月、3月亦各加 25 个基点。下次决定 2026-09-29。",
     },
     primarySource: {
