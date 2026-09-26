@@ -14,11 +14,13 @@ You need Node.js 20 or newer. Open a terminal in this project folder, then paste
 
 ## 在你自己的电脑上长期查看 / Run it on your own computer
 
-这是长期可用的方式：网站跑在你这台电脑上，用这台电脑的浏览器打开。
+这是长期可用的方式：网站跑在你这台电脑上，用这台电脑的浏览器打开。先克隆代码仓库，再执行下面的命令。
 
-This is the durable way to view it. The site runs on your computer, and you open it in a browser on that same computer.
+This is the durable way to view it. The site runs on your computer, and you open it in a browser on that same computer. Clone the repository first, then run the commands below.
 
 ```bash
+git clone https://github.com/carolinezy99-wq/genesis.git
+cd genesis
 npm install
 npm run build
 npm start -- --hostname 0.0.0.0 --port 43127
