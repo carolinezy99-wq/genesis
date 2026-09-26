@@ -30,6 +30,7 @@ export const ui = {
     sameFields: "Open a country tab for that bank’s full list. Anything that is not comparable sits in a short note on that tab.",
     note: "Note",
     sources: "Sources",
+    latestNews: "Latest news",
     otherRates: "Other published rates",
     frameworkTitle: "Exchange-rate framework",
     setBy: "Set by",
@@ -72,6 +73,7 @@ export const ui = {
     sameFields: "点国家栏目可看该行的全部指标。不能直接对照的内容写在该栏的说明里。",
     note: "说明",
     sources: "来源",
+    latestNews: "最新新闻",
     otherRates: "其他公布利率",
     frameworkTitle: "汇率框架",
     setBy: "决策",
@@ -449,6 +451,225 @@ const linkText: Record<string, { en: string; zh: string }> = {
   },
 }
 
+export type NewsItem = { date: string; title: string; line: string; url: string }
+
+const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
+  fed: {
+    en: [
+      {
+        date: "2026-09-25",
+        title: "Federal Reserve Board announces approval of application by Peoples Bancorp Inc.",
+        line: "",
+        url: "https://www.federalreserve.gov/newsevents/pressreleases/orders20260925a.htm",
+      },
+      {
+        date: "2026-09-24",
+        title: "Federal Reserve Board requests public comment on two proposals related to establishing a regulatory framework for Board-supervised payment stablecoin issuers under the GENIUS Act",
+        line: "",
+        url: "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260924a.htm",
+      },
+      {
+        date: "2026-09-24",
+        title: "Federal Reserve Board issues enforcement action with former employee of Sandy Spring Bank",
+        line: "",
+        url: "https://www.federalreserve.gov/newsevents/pressreleases/enforcement20260924a.htm",
+      },
+    ],
+    zh: [],
+  },
+  ecb: {
+    en: [
+      {
+        date: "2026-09-24",
+        title: "ECB Executive Board member Isabel Schnabel to resign to take senior role at IMF",
+        line: "Isabel Schnabel has informed President Christine Lagarde that she will step down from her position on 3 January 2027.",
+        url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260924~bea1dd9824.en.html",
+      },
+      {
+        date: "2026-09-24",
+        title: "Philip R. Lane: The outlook for the euro area economy",
+        line: "",
+        url: "https://www.ecb.europa.eu/press/key/date/2026/html/ecb.sp260924~e0eceef02c.en.pdf",
+      },
+      {
+        date: "2026-09-23",
+        title: "Almost ten million people took part in ECB survey on new euro banknotes",
+        line: "9.96 million people shared their views on the future design of euro banknotes in the ECB’s public survey.",
+        url: "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260923~6ebddaf01e.en.html",
+      },
+    ],
+    zh: [],
+  },
+  boe: {
+    en: [
+      {
+        date: "2026-09-25",
+        title: "Minutes of the Market Participants Group meeting – 24 September 2026",
+        line: "",
+        url: "https://www.bankofengland.co.uk/minutes/2026/september/market-participants-group-meeting-25-september-2026",
+      },
+      {
+        date: "2026-09-21",
+        title: "Bank of England announces new office space in Leeds",
+        line: "The Bank of England has secured a new long-term premises in Leeds.",
+        url: "https://www.bankofengland.co.uk/news/2026/september/bank-of-england-announces-new-office-space-in-leeds",
+      },
+      {
+        date: "2026-09-17",
+        title: "Transcript of the Governor's pooled broadcast interview given on 17 September 2026",
+        line: "",
+        url: "https://www.bankofengland.co.uk/news/2026/september/the-governor-interview-transcript-17-september-2026",
+      },
+    ],
+    zh: [],
+  },
+  boj: {
+    en: [
+      {
+        date: "2026-09-25",
+        title: "Conduct of Funds-Supplying Operations against Pooled Collateral",
+        line: "",
+        url: "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/mpr260925a.pdf",
+      },
+      {
+        date: "2026-09-25",
+        title: "The Expansion and Diversification of Private Credit Funds",
+        line: "The private credit fund market has been expanding, particularly in the United States.",
+        url: "https://www.boj.or.jp/en/research/wps_rev/rev_2026/rev26e13.htm",
+      },
+      {
+        date: "2026-09-25",
+        title: "Granular Insights into Depositor Dynamics and Deposit Spreads in Japanese G-SIBs' Foreign Currency Deposits",
+        line: "",
+        url: "https://www.boj.or.jp/en/research/wps_rev/rev_2026/rev26e12.htm",
+      },
+    ],
+    zh: [],
+  },
+  boc: {
+    en: [
+      {
+        date: "2026-09-24",
+        title: "Global trade is changing how the Canadian economy works",
+        line: "International trade benefits the Canadian economy, but changes to our trade relationships are now forcing businesses to adjust to a new reality.",
+        url: "https://www.bankofcanada.ca/2026/09/global-trade-is-changing-how-the-canadian-economy-works/",
+      },
+      {
+        date: "2026-09-18",
+        title: "The AI transformation",
+        line: "AI is reshaping the economy, but its impact on what we produce and the jobs we do remains uncertain.",
+        url: "https://www.bankofcanada.ca/2026/09/the-ai-transformation/",
+      },
+      {
+        date: "2026-09-10",
+        title: "Bank of Canada Board launches process to fill external Deputy Governor position",
+        line: "",
+        url: "https://www.bankofcanada.ca/2026/09/bank-canada-board-launches-process-fill-external-deputy-governor-position/",
+      },
+    ],
+    zh: [],
+  },
+  pboc: {
+    en: [],
+    zh: [
+      {
+        date: "2026-09-24",
+        title: "中国人民银行货币政策委员会召开2026年第三季度例会",
+        line: "货币政策保持适度宽松。",
+        url: "https://www.pbc.gov.cn/goutongjiaoliu/113456/113469/2026092416074632670/index.html",
+      },
+      {
+        date: "2026-09-21",
+        title: "中国人民银行行长潘功胜会见香港特别行政区政府财政司司长陈茂波一行",
+        line: "双方就当前宏观经济与金融形势、内地与香港金融市场互联互通和香港离岸人民币市场建设交换了意见。",
+        url: "https://www.pbc.gov.cn/goutongjiaoliu/113456/113469/2026092118225220226/index.html",
+      },
+      {
+        date: "2026-09-17",
+        title: "中国人民银行副行长宣昌能会见贝宝全球执行副总裁艾伦",
+        line: "9月15日，宣昌能会见贝宝全球执行副总裁艾伦，围绕全球金融市场、支付体系以及贝宝在华展业交流。",
+        url: "https://www.pbc.gov.cn/goutongjiaoliu/113456/113469/2026091717202687422/index.html",
+      },
+    ],
+  },
+  rbi: {
+    en: [
+      {
+        date: "2026-09-25",
+        title: "RBI Bulletin – September 2026",
+        line: "",
+        url: "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63674",
+      },
+      {
+        date: "2026-09-25",
+        title: "RBI to conduct Overnight Variable Rate Reverse Repo auction under LAF on September 28, 2026",
+        line: "",
+        url: "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63673",
+      },
+      {
+        date: "2026-09-25",
+        title: "Auction of State Government Securities",
+        line: "",
+        url: "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63672",
+      },
+    ],
+    zh: [],
+  },
+  mas: {
+    en: [
+      {
+        date: "2026-09-24",
+        title: "Keynote Address by Mr Gan Kim Yong, Deputy Prime Minister and Minister for Trade and Industry, and Chairman of the Monetary Authority of Singapore, at the Institute of Banking and Finance (IBF) Distinction Evening on 24 September 2026",
+        line: "He spoke about preparing Singapore’s financial sector workforce for AI through skills development and stronger tripartite collaboration.",
+        url: "https://www.mas.gov.sg/news/speeches/2026/keynote-address-by-dpm-gan-kim-yong-at-the-ibf-distinction-evening-on-24-september-2026",
+      },
+      {
+        date: "2026-09-23",
+        title: "Consumer Price Developments in August 2026",
+        line: "This August 2026 report updates the latest consumer price developments in Singapore, prepared by MAS and the Ministry of Trade and Industry.",
+        url: "https://www.mas.gov.sg/news/consumer-price-developments/2026/consumer-price-developments-in-august-2026",
+      },
+      {
+        date: "2026-09-18",
+        title: "MAS and the People’s Bank of China strengthen cooperation in transition and adaptation finance at the 4th Singapore-China Green Finance Taskforce meeting",
+        line: "The taskforce met in Nanning on 17 September 2026.",
+        url: "https://www.mas.gov.sg/news/media-releases/2026/mas-and-pbc-strengthen-cooperation-at-the-4th-singapore-china-green-finance-taskforce-meeting",
+      },
+    ],
+    zh: [],
+  },
+  rba: {
+    en: [
+      {
+        date: "2026-09-23",
+        title: "Assessment of ASX Clearing and Settlement Facilities – September 2026",
+        line: "The Reserve Bank of Australia today released the 2026 Assessment of the ASX Clearing and Settlement Facilities.",
+        url: "https://www.rba.gov.au/media-releases/2026/mr-26-26.html",
+      },
+      {
+        date: "2026-09-03",
+        title: "Designation of Linfox Armaguard Pty Ltd under the Cash Distribution Framework Act 2026",
+        line: "",
+        url: "https://www.rba.gov.au/media-releases/2026/mr-26-25.html",
+      },
+      {
+        date: "2026-09-03",
+        title: "RITS Consultation and Retail CBDC Update",
+        line: "",
+        url: "https://www.rba.gov.au/media-releases/2026/mr-26-24.html",
+      },
+    ],
+    zh: [],
+  },
+}
+
+const newsMissing: Record<string, { en: string; zh: string }> = {
+  pboc: {
+    en: "The English press-release page opened, but it did not include article headlines on 2026-09-26.",
+    zh: "",
+  },
+}
+
 export function kindLabel(kind: SourceKind, locale: Locale) {
   return locale === "en" ? kindEn[kind] : sourceKindLabel[kind]
 }
@@ -464,7 +685,7 @@ const bodyShort = {
     boe: "Monetary Policy Committee",
     boj: "Policy Board",
     boc: "Governing Council",
-    pboc: "People's Bank of China",
+    pboc: "Monetary Policy Committee",
     rbi: "Monetary Policy Committee",
     mas: "Monetary and Investment Policy Meeting",
     rba: "Monetary Policy Board",
@@ -475,7 +696,7 @@ const bodyShort = {
     boe: "Monetary Policy Committee",
     boj: "Policy Board",
     boc: "Governing Council",
-    pboc: "中国人民银行",
+    pboc: "货币政策委员会",
     rbi: "Monetary Policy Committee",
     mas: "Monetary and Investment Policy Meeting",
     rba: "Monetary Policy Board",
@@ -488,8 +709,8 @@ const bodyNote: Record<string, { en: string; zh: string }> = {
     zh: "2026年8月个人消费支出预定9月30日发布，此处仍为7月。",
   },
   pboc: {
-    en: "The Monetary Policy Committee is consultative. The Monetary Policy Department drafts and organises implementation.",
-    zh: "货币政策委员会是咨询机构。货币政策司拟订调控方案并组织实施。公开市场业务操作室发布操作公告。",
+    en: "The committee is consultative: its quarterly meeting recommends a stance and does not vote the policy rate.",
+    zh: "该委员会是咨询机构，例会提出建议，不表决政策利率。",
   },
   mas: {
     en: "A committee of the Board. The Economic Policy Group prepares the review; the Monetary and Domestic Markets Management Department implements it. The statement does not give a basis-point size.",
@@ -544,8 +765,26 @@ export function chartName(bank: Bank, locale: Locale) {
   return locale === "en" ? chartLabel[bank.id] : bank.shortLabel
 }
 
+function bankNews(id: string, locale: Locale): { items: NewsItem[]; missing: string } {
+  const own = news[id]?.[locale] ?? []
+  if (own.length > 0) return { items: own, missing: "" }
+  if (locale === "zh") {
+    const english = news[id]?.en ?? []
+    if (english.length > 0) return { items: english, missing: "" }
+  }
+  return {
+    items: [],
+    missing:
+      newsMissing[id]?.[locale] ||
+      (locale === "en"
+        ? "The official news list could not be loaded on 2026-09-26."
+        : "2026-09-26 未能打开该行的新闻列表。"),
+  }
+}
+
 export function presentBank(bank: Bank, locale: Locale) {
   const en = enBanks[bank.id]
+  const headlines = bankNews(bank.id, locale)
   const name = personName(bank, locale)
   const institution = locale === "zh" ? bank.nameZh : bank.nameEn
   const title = locale === "zh" ? bank.head.titleZh : bank.head.titleEn
@@ -575,6 +814,8 @@ export function presentBank(bank: Bank, locale: Locale) {
     framework: locale === "zh" ? (bank.frameworkNote ?? "") : (en.framework ?? ""),
     bodyName: bodyShort[locale][bank.id as keyof (typeof bodyShort)["en"]],
     bodyNote: bodyNote[bank.id]?.[locale] ?? "",
+    news: headlines.items,
+    newsMissing: headlines.missing,
     indicators: locale === "zh" ? bank.indicators.join("、") : en.indicators.join(", "),
     cycleLabel: locale === "zh" ? bank.cycle.label : en.cycleLabel,
     cycleSize: locale === "zh" ? bank.cycle.sizeLabel : en.sizeLabel,

@@ -445,9 +445,9 @@ export const banks: Bank[] = [
       photoPageUrl: "https://www.pbc.gov.cn/hanglingdao/128697/128734/index.html",
     },
     decisionBody: {
-      nameZh: "中国人民银行",
-      nameEn: "People's Bank of China",
-      note: "货币政策委员会是咨询机构，例会用语是「建议」，不表决政策利率。货币政策司拟订调控方案并组织实施。公开市场业务操作室发布操作公告。",
+      nameZh: "货币政策委员会",
+      nameEn: "Monetary Policy Committee",
+      note: "该委员会是咨询机构，例会提出建议，不表决政策利率。",
     },
     indicators: ["居民消费价格", "社会融资规模与货币供应量（与增长和价格目标相匹配）"],
     inflationTarget: {

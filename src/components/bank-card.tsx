@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import type { Bank, CycleKind, Source } from "@/lib/banks"
@@ -9,19 +8,6 @@ const cycleClass: Record<CycleKind, string> = {
   tighten: "bg-[#16325c] text-white",
   hold: "bg-[#e7eef6] text-[#16325c]",
   cut: "bg-transparent text-[#16325c] ring-1 ring-[#16325c]",
-}
-
-/** Same frame for every bank. object-position plus scale keeps a head-and-shoulders crop. */
-const portraitStyle: Record<string, CSSProperties> = {
-  fed: { objectPosition: "50% 22%", transform: "scale(1.2)", transformOrigin: "50% 22%" },
-  ecb: { objectPosition: "50% 16%", transform: "scale(1.45)", transformOrigin: "50% 16%" },
-  boe: { objectPosition: "50% 30%", transform: "scale(2.15)", transformOrigin: "50% 30%" },
-  boj: { objectPosition: "50% 28%", transform: "scale(1.45)", transformOrigin: "50% 28%" },
-  boc: { objectPosition: "48% 20%", transform: "scale(2.8)", transformOrigin: "48% 20%" },
-  pboc: { objectPosition: "46% 18%", transform: "scale(1.25)", transformOrigin: "46% 18%" },
-  rbi: { objectPosition: "42% 10%", transform: "scale(1.55)", transformOrigin: "42% 10%" },
-  mas: { objectPosition: "55% 22%", transform: "scale(1.2)", transformOrigin: "55% 22%" },
-  rba: { objectPosition: "40% 16%", transform: "scale(2.4)", transformOrigin: "40% 16%" },
 }
 
 function KindMark({ label }: { label: string }) {
@@ -68,14 +54,13 @@ export function BankPanel({ bank, locale }: { bank: Bank; locale: Locale }) {
   return (
     <section className="rounded-xl bg-card px-4 py-5 ring-1 ring-foreground/10 sm:px-6 sm:py-6">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-        <div className="relative h-60 w-48 shrink-0 overflow-hidden rounded-md bg-[#d9e3f0]">
+        <div className="relative h-56 w-72 max-w-full shrink-0 overflow-hidden rounded-md bg-[#e7eef6]">
           <Image
             src={bank.head.photo}
             alt={view.photoAlt}
             fill
-            sizes="192px"
-            className="object-cover"
-            style={portraitStyle[bank.id]}
+            sizes="288px"
+            className="object-contain"
           />
         </div>
         <div className="min-w-0">
@@ -151,6 +136,30 @@ export function BankPanel({ bank, locale }: { bank: Bank; locale: Locale }) {
           ) : null}
         </div>
       ) : null}
+
+      <div className="mt-6 max-w-3xl">
+        <h3 className="text-sm font-medium">{copy.latestNews}</h3>
+        {view.news.length > 0 ? (
+          <ul className="mt-3 grid gap-3">
+            {view.news.map((item) => (
+              <li key={item.url} className="border-b border-border/80 pb-3 last:border-0">
+                <p className="text-xs tabular-nums text-muted-foreground">{item.date}</p>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-0.5 block text-sm font-medium underline decoration-foreground/25 underline-offset-2"
+                >
+                  {item.title}
+                </a>
+                {item.line ? <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.line}</p> : null}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-2 text-sm text-muted-foreground">{view.newsMissing}</p>
+        )}
+      </div>
 
       <div className="mt-6 max-w-3xl text-[11px] leading-relaxed text-muted-foreground">
         <p className="text-xs font-medium text-foreground">{copy.sources}</p>
