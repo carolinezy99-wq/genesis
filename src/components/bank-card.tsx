@@ -1,7 +1,8 @@
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { sourceKindLabel, type Bank, type CycleKind, type Source } from "@/lib/banks"
+import type { Bank, CycleKind, Source } from "@/lib/banks"
+import { kindLabel, presentBank, sourceTitle, ui, type Locale } from "@/lib/copy"
 import { cn } from "@/lib/utils"
 
 const cycleClass: Record<CycleKind, string> = {
@@ -19,26 +20,32 @@ function KindMark({ label }: { label: string }) {
   )
 }
 
-function SourceLine({ source }: { source: Source }) {
+function SourceLine({ source, locale }: { source: Source; locale: Locale }) {
+  const copy = ui[locale]
+  const sep = locale === "zh" ? "，" : ", "
   return (
     <p className="mt-1 break-words">
-      <KindMark label={sourceKindLabel[source.kind]} />
-      {source.institution}，
+      <KindMark label={kindLabel(source.kind, locale)} />
+      {source.institution}
+      {sep}
       <a
         href={source.url}
         target="_blank"
         rel="noopener noreferrer"
         className="underline decoration-foreground/25 underline-offset-2 hover:decoration-foreground"
       >
-        {source.title}
+        {sourceTitle(source, locale)}
       </a>
-      ，阅读于 {source.readOn}。
+      {sep}
+      {copy.readOn} {source.readOn}.
     </p>
   )
 }
 
-export function BankCard({ bank }: { bank: Bank }) {
-  const longLevel = !/\d/.test(bank.policy.display)
+export function BankCard({ bank, locale }: { bank: Bank; locale: Locale }) {
+  const copy = ui[locale]
+  const view = presentBank(bank, locale)
+  const longLevel = !/\d/.test(view.policyDisplay)
   return (
     <Card className="h-full bg-card shadow-none">
       <CardHeader className="gap-3">
@@ -46,7 +53,7 @@ export function BankCard({ bank }: { bank: Bank }) {
           <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-md bg-muted">
             <Image
               src={bank.head.photo}
-              alt={`${bank.head.name}，${bank.nameZh}${bank.head.titleZh}官方肖像`}
+              alt={view.photoAlt}
               fill
               sizes="80px"
               className="object-cover object-top"
@@ -54,23 +61,23 @@ export function BankCard({ bank }: { bank: Bank }) {
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-xs tracking-wide text-muted-foreground">
-              {bank.nameZh}
-              <span className="ml-1">({bank.nameEn})</span>
+              {view.institution}
+              <span className="ml-1">({view.institutionAlt})</span>
             </p>
             <h2 className="mt-1 text-lg leading-tight font-semibold">{bank.head.name}</h2>
             <p className="text-sm text-muted-foreground">
-              {bank.head.titleZh}
-              <span className="ml-1">({bank.head.titleEn})</span>
+              {view.title}
+              <span className="ml-1">({view.titleAlt})</span>
             </p>
             <Badge className={`mt-2 border-0 ${cycleClass[bank.cycle.kind]}`}>
-              {bank.cycle.label}
-              <span className="font-normal"> · {bank.cycle.sizeLabel}</span>
+              {view.cycleLabel}
+              <span className="font-normal"> · {view.cycleSize}</span>
             </Badge>
           </div>
         </div>
         <p className="text-[11px] leading-relaxed break-words text-muted-foreground">
-          肖像：{bank.head.photoCredit}。
-          <KindMark label="官网" />
+          {copy.portrait}: {bank.head.photoCredit}.{" "}
+          <KindMark label={copy.official} />
           <a
             href={bank.head.photoPageUrl}
             target="_blank"
@@ -85,8 +92,8 @@ export function BankCard({ bank }: { bank: Bank }) {
         <div className="grid grid-cols-1 gap-2 min-[480px]:grid-cols-2">
           <div className="min-w-0 rounded-lg bg-[#1c2838] px-3 py-3 text-white">
             <p className="text-[11px] text-white/70">
-              {bank.policy.nameZh}
-              <span className="mt-0.5 block break-words text-white/55">{bank.policy.nameEn}</span>
+              {view.policyName}
+              <span className="mt-0.5 block break-words text-white/55">{view.policyNameAlt}</span>
             </p>
             <p
               className={cn(
@@ -94,29 +101,29 @@ export function BankCard({ bank }: { bank: Bank }) {
                 longLevel ? "text-2xl leading-snug" : "text-3xl leading-none sm:text-4xl",
               )}
             >
-              {bank.policy.display}
+              {view.policyDisplay}
             </p>
-            <p className="mt-2 text-[11px] text-white/65">{bank.policy.asOf}</p>
+            <p className="mt-2 text-[11px] text-white/65">{view.policyAsOf}</p>
           </div>
           <div className="min-w-0 rounded-lg bg-[#f3ead6] px-3 py-3 text-[#2a241c]">
-            <p className="text-[11px] text-[#6a5e4a]">通胀目标</p>
+            <p className="text-[11px] text-[#6a5e4a]">{copy.inflationTarget}</p>
             <p className="mt-2 text-3xl leading-none font-semibold tracking-tight break-words tabular-nums sm:text-4xl">
-              {bank.inflationTarget.display}
+              {view.targetDisplay}
             </p>
             <p className="mt-2 text-[11px] leading-snug text-[#6a5e4a]">
-              最新 {bank.inflationActual.gauge.split("；")[0]} {bank.inflationActual.display}
-              <span className="block">{bank.inflationActual.period}</span>
+              {copy.latest} {view.latestGauge} {view.latestValue}
+              <span className="block">{view.latestPeriod}</span>
             </p>
           </div>
         </div>
 
         {bank.policy.secondary.length > 0 ? (
           <ul className="grid gap-1 text-sm">
-            {bank.policy.secondary.map((rate) => (
-              <li key={rate.nameEn} className="flex items-baseline justify-between gap-3">
+            {view.secondary.map((rate) => (
+              <li key={rate.key} className="flex items-baseline justify-between gap-3">
                 <span className="min-w-0 break-words">
-                  {rate.nameZh}
-                  <span className="ml-1 text-xs text-muted-foreground">({rate.nameEn})</span>
+                  {rate.name}
+                  <span className="ml-1 text-xs text-muted-foreground">({rate.alt})</span>
                 </span>
                 <span className="font-medium tabular-nums">{rate.display}</span>
               </li>
@@ -124,47 +131,39 @@ export function BankCard({ bank }: { bank: Bank }) {
           </ul>
         ) : null}
 
-        {bank.frameworkNote ? (
-          <p className="text-sm leading-relaxed">{bank.frameworkNote}</p>
-        ) : null}
+        {view.framework ? <p className="text-sm leading-relaxed">{view.framework}</p> : null}
 
         <dl className="grid gap-3 text-sm">
           <div>
-            <dt className="text-xs text-muted-foreground">决策机构</dt>
+            <dt className="text-xs text-muted-foreground">{copy.decisionBody}</dt>
             <dd className="mt-0.5">
-              {bank.decisionBody.nameZh}
-              <span className="ml-1 text-xs text-muted-foreground">
-                ({bank.decisionBody.nameEn})
-              </span>
+              {view.bodyName}
+              <span className="ml-1 text-xs text-muted-foreground">({view.bodyAlt})</span>
             </dd>
-            <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
-              {bank.decisionBody.note}
-            </dd>
+            <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">{view.bodyNote}</dd>
           </div>
           <div>
-            <dt className="text-xs text-muted-foreground">关注的价格与政策指标</dt>
-            <dd className="mt-0.5">{bank.indicators.join("、")}</dd>
+            <dt className="text-xs text-muted-foreground">{copy.indicators}</dt>
+            <dd className="mt-0.5">{view.indicators}</dd>
           </div>
           <div>
-            <dt className="text-xs text-muted-foreground">目标说明</dt>
-            <dd className="mt-0.5 text-muted-foreground">{bank.inflationTarget.note}</dd>
+            <dt className="text-xs text-muted-foreground">{copy.targetNote}</dt>
+            <dd className="mt-0.5 text-muted-foreground">{view.targetNote}</dd>
           </div>
           <div>
-            <dt className="text-xs text-muted-foreground">最近一次决定</dt>
+            <dt className="text-xs text-muted-foreground">{copy.latestDecision}</dt>
             <dd className="mt-0.5">
-              {bank.cycle.date} · {bank.cycle.label} · {bank.cycle.sizeLabel}
+              {bank.cycle.date} · {view.cycleLabel} · {view.cycleSize}
             </dd>
-            <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">
-              {bank.cycle.detail}
-            </dd>
+            <dd className="mt-1 text-xs leading-relaxed text-muted-foreground">{view.cycleDetail}</dd>
           </div>
         </dl>
 
         <div className="border-t border-border pt-3 text-[11px] leading-relaxed text-muted-foreground">
-          <SourceLine source={bank.primarySource} />
-          <SourceLine source={bank.inflationActual.source} />
+          <SourceLine source={bank.primarySource} locale={locale} />
+          <SourceLine source={bank.inflationActual.source} locale={locale} />
           {bank.sources.map((source) => (
-            <SourceLine key={source.url} source={source} />
+            <SourceLine key={source.url} source={source} locale={locale} />
           ))}
         </div>
       </CardContent>

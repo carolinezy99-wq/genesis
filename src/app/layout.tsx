@@ -10,9 +10,9 @@ const noto = Noto_Sans_SC({
 })
 
 export const metadata: Metadata = {
-  title: "全球央行货币政策",
+  title: "Global central bank policy",
   description:
-    "对照美联储、欧洲央行、英格兰银行、日本银行、加拿大银行、中国人民银行、印度储备银行、新加坡金融管理局和澳大利亚储备银行的政策立场。数据阅读日 2026-09-26。",
+    "Policy stance for the Federal Reserve, ECB, Bank of England, Bank of Japan, Bank of Canada, People's Bank of China, Reserve Bank of India, Monetary Authority of Singapore, and Reserve Bank of Australia. Figures read on 2026-09-26. English and Chinese.",
 }
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body className={`${noto.variable} antialiased`}>{children}</body>
     </html>
   )

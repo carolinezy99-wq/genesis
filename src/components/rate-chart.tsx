@@ -8,6 +8,7 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart"
 import { chartBanks } from "@/lib/banks"
+import { chartName, presentBank, type Locale } from "@/lib/copy"
 
 const INK = "#2c3d55"
 const ACCENT = "#8c2f2b"
@@ -19,22 +20,21 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function RateChart() {
+export function RateChart({ locale, caption, yAxis }: { locale: Locale; caption: string; yAxis: string }) {
   const rows = chartBanks()
   const peak = Math.max(...rows.map((bank) => bank.policy.chartValue ?? 0))
   const data = rows.map((bank) => ({
-    name: bank.shortLabel,
+    name: chartName(bank, locale),
     rate: bank.policy.chartValue,
     barLabel: bank.policy.barLabel,
-    full: `${bank.nameZh} · ${bank.policy.nameZh}`,
+    full: `${presentBank(bank, locale).institution} · ${presentBank(bank, locale).policyName}`,
+    midpoint: locale === "en" ? " (bar height is the midpoint)" : "（柱高为区间中点）",
     fill: bank.policy.chartValue === peak ? ACCENT : INK,
   }))
 
   return (
     <figure className="min-w-0">
-      <figcaption className="sr-only">
-        八家以利率为工具的央行政策利率比较，纵轴单位为百分比。新加坡未列入。美国柱高为目标区间中点，柱顶标注区间。中国柱为7天期逆回购操作利率。
-      </figcaption>
+      <figcaption className="sr-only">{caption}</figcaption>
       <div className="min-w-0 overflow-x-auto">
         <ChartContainer
           config={chartConfig}
@@ -58,7 +58,7 @@ export function RateChart() {
               ticks={[0, 1, 2, 3, 4, 5, 6]}
               tickFormatter={(value: number) => `${value}%`}
               label={{
-                value: "利率（%）",
+                value: yAxis,
                 angle: -90,
                 position: "insideLeft",
                 style: { fill: "#5c564c", fontSize: 12 },
@@ -69,9 +69,9 @@ export function RateChart() {
                 <ChartTooltipContent
                   formatter={(value, _name, item) => (
                     <span>
-                      {item.payload.full}：{item.payload.barLabel}%
+                      {item.payload.full}: {item.payload.barLabel}%
                       {typeof value === "number" && item.payload.barLabel.includes("–")
-                        ? "（柱高为区间中点）"
+                        ? item.payload.midpoint
                         : ""}
                     </span>
                   )}
