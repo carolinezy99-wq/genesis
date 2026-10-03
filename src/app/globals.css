@@ -49,7 +49,7 @@
 }
 
 :root {
-  --background: oklch(0.975 0.01 250);
+  --background: oklch(0.984 0.003 250);
   --foreground: oklch(0.24 0.04 255);
   --card: oklch(0.995 0.004 250);
   --card-foreground: oklch(0.24 0.04 255);
@@ -130,3 +130,12 @@
     @apply font-sans;
   }
 }
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Keep the localhost preview stylesheet hot-reloadable after production checks. */

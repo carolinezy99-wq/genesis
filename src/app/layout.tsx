@@ -12,7 +12,7 @@ const noto = Noto_Sans_SC({
 export const metadata: Metadata = {
   title: "Global central bank policy",
   description:
-    "Policy stance for the Federal Reserve, ECB, Bank of England, Bank of Japan, Bank of Canada, People's Bank of China, Reserve Bank of India, Monetary Authority of Singapore, and Reserve Bank of Australia. Figures read on 2026-09-26. English and Chinese.",
+    "An English-language visual comparison of policy rates, inflation targets, decision makers and policy cycles across nine major central banks. Updated 3 October 2026.",
 }
 
 export default function RootLayout({

@@ -4,9 +4,9 @@
 
 Nine central banks side by side: the person in charge, the deciding committee, the inflation target, the current setting, and whether the latest decision tightened, held, or eased.
 
-默认英文，右上角切到中文。数字写在 `src/lib/banks.ts`，于 2026-09-26 从官方页面核读，打开页面时不会重新抓取。
+The dashboard is English-only. Figures live in `src/lib/banks.ts` and were read from official pages on 2026-10-03. The site does not fetch them again when opened.
 
-The page opens in English. Use the control at the top right for Chinese. Figures live in `src/lib/banks.ts` and were read from official pages on 2026-09-26. The site does not fetch them again when you open it.
+The dashboard is English-only. Figures live in `src/lib/banks.ts` and were read from official pages on 2026-10-03. The site does not fetch them again when you open it.
 
 需要 Node.js 20 或更新版本。先进入本项目目录，再执行下面的命令。
 

@@ -6,7 +6,7 @@ export const ui = {
   en: {
     kicker: "Monetary policy",
     title: "Global central bank policy",
-    lede: "Nine central banks, read from official pages on 2026-09-26. Germany, France, and Italy are covered by the ECB.",
+    lede: "Nine central banks, updated from official releases through 3 October 2026. Germany, France, and Italy are covered by the ECB.",
     asOf: "Data as of",
     hikes: "Hikes",
     holds: "Holds",
@@ -57,7 +57,7 @@ export const ui = {
   zh: {
     kicker: "货币政策",
     title: "全球央行货币政策",
-    lede: "九家央行，数字于 2026-09-26 从官方页面核读。德、法、意由欧洲央行代表。",
+    lede: "九家主要央行，依据官方发布更新至 2026-10-03。德、法、意由欧洲央行代表。",
     asOf: "数据截至",
     hikes: "加息",
     holds: "维持",
@@ -164,8 +164,8 @@ const enBanks: Record<string, EnBank> = {
     indicators: ["PCE price index", "Core PCE (ex food and energy)", "Unemployment and employment"],
     targetDisplay: "2%",
     targetNote: "The FOMC statement’s 2 percent goal. The 16 September chair press conference and projections refer to the PCE price index.",
-    period: "July 2026, year over year",
-    gauge: "PCE price index; core PCE 3.3%. August PCE is scheduled for 2026-09-30, so this card still shows July.",
+    period: "August 2026, year over year",
+    gauge: "PCE price index; core PCE 3.0%.",
     gaugeShort: "PCE price index",
     policyName: "Federal funds rate target range",
     policyDisplay: "3.75–4.00%",
@@ -181,9 +181,9 @@ const enBanks: Record<string, EnBank> = {
     indicators: ["Headline inflation (euro-area HICP)", "Inflation excluding energy and food"],
     targetDisplay: "2%",
     targetNote: "Symmetric medium-term target. The 10 September decision says inflation stabilises at its 2% target in the medium term.",
-    period: "August 2026, year over year",
-    gauge: "Euro-area HICP (final; the flash estimate was 3.3%)",
-    gaugeShort: "HICP",
+    period: "September 2026, year over year, flash estimate released 2026-10-02",
+    gauge: "Euro-area HICP flash estimate; core 2.5% (August final 3.2%)",
+    gaugeShort: "HICP flash",
     policyName: "Deposit facility rate",
     policyDisplay: "2.50%",
     asOf: "Decided 2026-09-10, effective 2026-09-16",
@@ -306,17 +306,16 @@ const enBanks: Record<string, EnBank> = {
     indicators: ["Consumer price index (CPI)", "Trimmed mean inflation"],
     targetDisplay: "2–3%",
     targetNote: "Keep consumer price inflation between 2 and 3 percent, and sustain full employment.",
-    period: "12 months to July 2026",
-    gauge: "CPI; trimmed mean 3.6%. August CPI is scheduled for 2026-09-30.",
+    period: "12 months to August 2026",
+    gauge: "CPI; trimmed mean inflation 3.6%.",
     gaugeShort: "CPI",
     policyName: "Cash rate target",
-    policyDisplay: "4.35%",
-    asOf: "Decided 2026-08-11, effective 2026-08-12",
+    policyDisplay: "4.60%",
+    asOf: "Decided 2026-09-29",
     secondary: [],
-    cycleLabel: "Hold",
-    sizeLabel: "0 bp",
-    detail:
-      "Unanimous hold at 4.35%. The cash-rate history shows the last change was +25 bp on 2026-05-06; February and March 2026 were also +25 bp each. Next decision 2026-09-29.",
+    cycleLabel: "Hike",
+    sizeLabel: "+25 bp",
+    detail: "The Board unanimously raised the cash rate target by 25 basis points to 4.60% as upside inflation risks materialised.",
   },
 }
 
@@ -337,9 +336,9 @@ const linkText: Record<string, { en: string; zh: string }> = {
     en: "Release schedule: August 2026 PCE on 30 September",
     zh: "发布日程：8月个人消费支出于 9月30日",
   },
-  "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-17092026-ap": {
-    en: "Euro-area inflation 3.2% in August 2026",
-    zh: "2026年8月欧元区通胀 3.2%",
+  "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-02102026-ap": {
+    en: "Euro-area inflation 3.8% in September 2026 (flash estimate, released 2 October)",
+    zh: "2026年9月欧元区通胀快报 3.8%（10月2日发布）",
   },
   "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260910~314e508016.en.html": {
     en: "Monetary policy decisions, 10 September 2026",
@@ -467,7 +466,7 @@ const linkText: Record<string, { en: string; zh: string }> = {
   },
 }
 
-export type NewsItem = { date: string; title: string; line: string; url: string }
+export type NewsItem = { date: string; title: string; line: string; url: string; sourceLabel?: string }
 
 const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
   fed: {
@@ -519,22 +518,22 @@ const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
   boe: {
     en: [
       {
-        date: "2026-09-25",
-        title: "Minutes of the Market Participants Group meeting – 24 September 2026",
-        line: "",
-        url: "https://www.bankofengland.co.uk/minutes/2026/september/market-participants-group-meeting-25-september-2026",
+        date: "2026-09-29",
+        title: "Quantitative tightening: the next chapter",
+        line: "Deputy Governor Dave Ramsden explains why a hold can still be an active policy choice and why upside inflation risks matter.",
+        url: "https://www.bankofengland.co.uk/speech/2026/september/dave-ramsden-speech-on-quantitative-tightening",
       },
       {
-        date: "2026-09-21",
-        title: "Bank of England announces new office space in Leeds",
-        line: "The Bank of England has secured a new long-term premises in Leeds.",
-        url: "https://www.bankofengland.co.uk/news/2026/september/bank-of-england-announces-new-office-space-in-leeds",
+        date: "2026-09-25",
+        title: "The outlook for inflation",
+        line: "Deputy Governor Clare Lombardelli sets out the MPC's framework for energy shocks, second-round effects and the policy response.",
+        url: "https://www.bankofengland.co.uk/speech/2026/september/clare-lombardelli-speech-at-the-sixth-biennial-conference-poland",
       },
       {
         date: "2026-09-17",
-        title: "Transcript of the Governor's pooled broadcast interview given on 17 September 2026",
-        line: "",
-        url: "https://www.bankofengland.co.uk/news/2026/september/the-governor-interview-transcript-17-september-2026",
+        title: "Bank Rate maintained at 3.75% — September 2026",
+        line: "The MPC voted 6–3 to hold; three members preferred a 25 bp increase to 4.00%.",
+        url: "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026",
       },
     ],
     zh: [],
@@ -586,7 +585,29 @@ const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
     zh: [],
   },
   pboc: {
-    en: [],
+    en: [
+      {
+        date: "2026-09-24",
+        title: "PBoC Monetary Policy Committee holds its third-quarter meeting",
+        line: "The committee called for an appropriately accommodative monetary policy stance, stronger counter-cyclical adjustment and ample liquidity.",
+        url: "https://www.pbc.gov.cn/goutongjiaoliu/113456/113469/2026092416074632670/index.html",
+        sourceLabel: "Official release in Chinese · translated summary",
+      },
+      {
+        date: "2026-09-21",
+        title: "Governor Pan Gongsheng meets Hong Kong Financial Secretary Paul Chan",
+        line: "The discussion covered the macro-financial outlook, mainland–Hong Kong market connectivity and Hong Kong's offshore renminbi market.",
+        url: "https://www.pbc.gov.cn/goutongjiaoliu/113456/113469/2026092118225220226/index.html",
+        sourceLabel: "Official release in Chinese · translated summary",
+      },
+      {
+        date: "2026-09-17",
+        title: "Deputy Governor Xuan Changneng meets a PayPal global executive",
+        line: "The meeting covered global financial markets, payment systems and PayPal's business in China.",
+        url: "https://www.pbc.gov.cn/goutongjiaoliu/113456/113469/2026091717202687422/index.html",
+        sourceLabel: "Official release in Chinese · translated summary",
+      },
+    ],
     zh: [
       {
         date: "2026-09-24",
@@ -681,7 +702,7 @@ const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
 
 const newsMissing: Record<string, { en: string; zh: string }> = {
   pboc: {
-    en: "The English press-release page opened, but it did not include article headlines on 2026-09-26.",
+    en: "The English press-release page opened, but it did not include article headlines on 2026-10-03.",
     zh: "",
   },
 }
@@ -721,7 +742,7 @@ const bodyShort = {
 
 const bodyNote: Record<string, { en: string; zh: string }> = {
   fed: {
-    en: "August 2026 PCE is scheduled for 2026-09-30, so the reading shown is still July.",
+    en: "August 2026 PCE was released on 2026-09-30; headline inflation was 3.4% and core PCE was 3.0% year over year.",
     zh: "2026年8月个人消费支出预定9月30日发布，此处仍为7月。",
   },
   pboc: {
@@ -733,7 +754,7 @@ const bodyNote: Record<string, { en: string; zh: string }> = {
     zh: "董事会下的委员会。Economic Policy Group 拟订审议，Monetary and Domestic Markets Management Department 负责实施。声明没有公布基点。",
   },
   rba: {
-    en: "August 2026 CPI is scheduled for 2026-09-30, so the reading shown is still the twelve months to July.",
+    en: "August 2026 CPI was released on 2026-09-30; headline inflation rose to 4.0% while trimmed mean inflation was 3.6%.",
     zh: "2026年8月消费者物价指数预定9月30日发布，此处仍为截至7月的12个月。",
   },
 }
@@ -826,8 +847,8 @@ function bankNews(id: string, locale: Locale): { items: NewsItem[]; missing: str
     missing:
       newsMissing[id]?.[locale] ||
       (locale === "en"
-        ? "The official news list could not be loaded on 2026-09-26."
-        : "2026-09-26 未能打开该行的新闻列表。"),
+        ? "The official news list could not be loaded on 2026-10-03."
+        : "2026-10-03 未能打开该行的新闻列表。"),
   }
 }
 
@@ -897,4 +918,3 @@ export function comparisonRows(locale: Locale) {
     }
   })
 }
-
