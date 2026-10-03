@@ -60,7 +60,7 @@ export function BankGallery({ locale, onSelect }: { locale: Locale; onSelect: (i
             >
               <div className="flex items-center gap-3">
                 <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-white ring-1 ring-black/5">
-                  <Image src={bank.head.photo} alt={view.photoAlt} fill sizes="64px" className="object-contain" />
+                  <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${bank.head.photo}`} alt={view.photoAlt} fill sizes="64px" className="object-contain" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">

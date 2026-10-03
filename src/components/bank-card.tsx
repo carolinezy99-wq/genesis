@@ -31,7 +31,7 @@ function Portrait({ bank, alt }: { bank: Bank; alt: string }) {
   return (
     <div className="relative h-44 w-36 shrink-0 overflow-hidden rounded-2xl bg-slate-100 shadow-2xl ring-1 ring-white/25 sm:h-52 sm:w-40">
       <Image
-        src={bank.head.photo}
+        src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${bank.head.photo}`}
         alt={alt}
         fill
         sizes="160px"
