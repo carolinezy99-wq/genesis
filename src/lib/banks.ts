@@ -599,7 +599,7 @@ export const banks: Bank[] = [
       label: "加息",
       date: "2026-10-07",
       sizeLabel: "+25 个基点",
-      detail: "全体一致上调 25 个基点至 5.50%。立场由中性改为校准收紧，表决不是全体一致：Nagesh Kumar 与 Ram Singh 主张维持中性。下次会议为 2026-12-02 至 12-04。",
+      detail: "利率表决以 6–0 全体一致通过：回购利率上调 25 个基点至 5.50%。政策立场另行表决，以 4–2 由中性改为校准式收紧；Nagesh Kumar 与 Ram Singh 主张维持中性。下次会议为 2026-12-02 至 12-04。",
     },
     primarySource: {
       kind: "official",

@@ -95,7 +95,7 @@ export const policyProfiles: Record<string, PolicyProfile> = {
     outlook: { label: "Official assessment", headline: "Inflation risks require vigilance", detail: "The October statement paired resilient domestic growth with a less benign inflation outlook and external uncertainty.", source: rbiDecision },
     guidance: { label: "Policy guidance", headline: "Hike or pause", detail: "The calibrated-tightening stance removes near-term cuts from consideration; future action remains conditional on growth and inflation data.", source: rbiDecision },
     toolkit: { label: "Policy toolkit", headline: "Repo-led liquidity corridor", detail: "The policy repo rate under the liquidity adjustment facility anchors short-term funding conditions.", source: rbiDecision },
-    transparency: { label: "Decision signal", headline: "Unanimous rate, split stance", detail: "All six MPC members voted to raise the repo rate by 25 bp to 5.50%. Dr. Nagesh Kumar and Prof. Ram Singh wanted to keep the stance at neutral.", source: rbiDecision },
+    transparency: { label: "Decision signal", headline: "Rate 6–0 · stance 4–2", detail: "The six-member MPC unanimously raised the repo rate by 25 bp to 5.50% (6–0). The separate shift from neutral to calibrated tightening passed 4–2; Dr. Nagesh Kumar and Prof. Ram Singh preferred to retain neutral.", source: rbiDecision },
     architectureSource: rbiDecision,
   },
   mas: {

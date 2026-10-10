@@ -264,7 +264,7 @@ const enBanks: Record<string, EnBank> = {
   },
   rbi: {
     bodyName: "Monetary Policy Committee (MPC)",
-    bodyNote: "The MPC sets the policy repo rate under the liquidity adjustment facility. The 63rd meeting was chaired by the Governor; the rate increase was unanimous.",
+    bodyNote: "The six-member MPC sets the policy repo rate under the liquidity adjustment facility. At its 63rd meeting, the rate increase passed 6–0; the separate stance change passed 4–2.",
     indicators: ["Consumer price index (CPI)", "Core CPI (ex food and fuel)"],
     targetDisplay: "4%",
     targetNote: "Tolerance band 2%–6%. The RBI Bulletin cites the Gazette notification of 25 March 2026. The target runs through 31 March 2031.",
@@ -277,7 +277,7 @@ const enBanks: Record<string, EnBank> = {
     secondary: ["Standing deposit facility", "MSF and Bank Rate"],
     cycleLabel: "Hike",
     sizeLabel: "+25 bp",
-    detail: "Unanimous 25 bp increase to 5.50%. The stance changed from neutral to calibrated tightening by 4–2: Dr. Nagesh Kumar and Prof. Ram Singh wanted to keep the stance at neutral. Next meeting 2026-12-02 to 2026-12-04.",
+    detail: "Rate vote: the six-member MPC unanimously approved a 25 bp increase to 5.50% (6–0). Stance vote: the separate shift from neutral to calibrated tightening passed 4–2; Dr. Nagesh Kumar and Prof. Ram Singh preferred to retain neutral. Next meeting 2026-12-02 to 2026-12-04.",
   },
   mas: {
     bodyName: "Monetary and Investment Policy Meeting",

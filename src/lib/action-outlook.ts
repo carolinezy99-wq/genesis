@@ -83,8 +83,8 @@ export const actionOutlooks: Record<string, ActionOutlook> = {
   rbi: {
     recent: [
       p("Raised the policy repo rate by 25 bp to 5.50% on 7 October.", "10 月 7 日将政策回购利率上调 25 个基点至 5.50%。"),
-      p("The six-member MPC approved the increase unanimously.", "六名货币政策委员会成员全体一致支持加息。"),
-      p("The stance changed from neutral to calibrated tightening. That change was not unanimous: Dr. Nagesh Kumar and Prof. Ram Singh wanted to keep the stance at neutral.", "政策立场由中性转为校准式收紧。这一调整不是全体一致：Nagesh Kumar 与 Ram Singh 主张维持中性。"),
+      p("Rate vote: all six MPC members supported the 25 bp increase (6–0).", "利率表决：六名货币政策委员会成员全部支持加息 25 个基点（6–0）。"),
+      p("Stance vote: the shift from neutral to calibrated tightening passed 4–2. Dr. Nagesh Kumar and Prof. Ram Singh preferred to retain the neutral stance.", "政策立场表决：由中性转为校准式收紧，以 4–2 通过；Nagesh Kumar 与 Ram Singh 主张维持中性。"),
     ],
     forecast: [
       p("Base case for December: hike or hold; a near-term cut is off the table.", "12 月基准情景：加息或维持，近期降息基本不在考虑范围内。"),
