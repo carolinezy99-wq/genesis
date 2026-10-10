@@ -27,6 +27,7 @@ export type BankMetrics = {
   target: number | null
   targetBasis: string
   gap: number | null
+  realRate: number | null
   policySource: Source
   inflationSource: Source
   targetSource: Source
@@ -47,6 +48,7 @@ export function metricsFor(bank: Bank, locale: Locale): BankMetrics {
     target: t.value,
     targetBasis: t.basis[locale],
     gap: t.value == null ? null : round2(inflation - t.value),
+    realRate: policyRate == null ? null : round2(policyRate - inflation),
     policySource: bank.primarySource,
     inflationSource: bank.inflationActual.source,
     targetSource: t.sourceIndex != null ? (bank.sources[t.sourceIndex] ?? bank.primarySource) : bank.primarySource,

@@ -25,6 +25,7 @@ export const HISTORY_CHECKED_ON = "2026-10-03"
 const d = (date: string, action: DecisionAction, detail: string, url: string): Decision => ({ date, action, detail, url, verified: true })
 
 const FED = "https://www.federalreserve.gov/newsevents/pressreleases/"
+const BOE_DB = "https://www.bankofengland.co.uk/boeapps/database/Bank-Rate.asp"
 const BOC_KIR = "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/"
 const RBA_CR = "https://www.rba.gov.au/statistics/cash-rate/"
 const MAS_PAST = "https://www.mas.gov.sg/monetary-policy/past-monetary-policy-decisions"
@@ -62,14 +63,14 @@ export const history: Record<string, BankHistory> = {
   },
   boe: {
     decisions: [
-      d("2026-02-05", "hold", "3.75%, vote 5–4", "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/february-2026"),
-      d("2026-03-19", "hold", "3.75%", "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/march-2026"),
-      d("2026-04-30", "hold", "3.75%", "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/april-2026"),
-      d("2026-06-18", "hold", "3.75%", "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/june-2026"),
-      d("2026-07-30", "hold", "3.75%", "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/july-2026"),
+      d("2026-02-05", "hold", "3.75%", BOE_DB),
+      d("2026-03-19", "hold", "3.75%", BOE_DB),
+      d("2026-04-30", "hold", "3.75%", BOE_DB),
+      d("2026-06-18", "hold", "3.75%", BOE_DB),
+      d("2026-07-30", "hold", "3.75%", BOE_DB),
       d("2026-09-17", "hold", "3.75%, vote 6–3", "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026"),
     ],
-    historyNote: "Each date now opens that meeting's MPC Summary and Minutes. Bank Rate has been 3.75% since 2025-12-18.",
+    historyNote: "Bank Rate has been 3.75% since 2025-12-18 (Bank Rate history); meeting dates from the MPC calendar.",
     nextMeeting: { date: "2026-11-05", url: "https://www.bankofengland.co.uk/monetary-policy/upcoming-mpc-dates" },
     headline: { measure: "CPI", value: "3.1%", period: "Aug 2026", url: "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest" },
     core: { measure: "Core CPI (ex energy, food, alcohol & tobacco)", value: "2.6%", period: "Aug 2026", url: "https://www.ons.gov.uk/economy/inflationandpriceindices/bulletins/consumerpriceinflation/latest" },
@@ -106,10 +107,9 @@ export const history: Record<string, BankHistory> = {
     decisions: [
       d("2024-07-22", "cut", "−10 bp to 1.70%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5409998/index.html"),
       d("2024-09-27", "cut", "−20 bp to 1.50%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5468922/index.html"),
-      d("2025-05-08", "cut", "−10 bp to 1.40%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5699842/index.html"),
-      d("2026-09-24", "hold", "7-day reverse-repo rate unchanged at 1.40%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html"),
+      d("2025-05-07", "cut", "−10 bp to 1.40%, effective 2025-05-08", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5699842/index.html"),
     ],
-    historyNote: "The PBoC has no scheduled rate meetings. Squares are the published 7-day reverse-repo changes, plus the 24 September 2026 operation that restates 1.40%. The May 2025 cut was announced on 7 May and took effect on 8 May.",
+    historyNote: "The PBoC has no scheduled rate meetings. Shown: the last three changes to the 7-day reverse repo rate. It was still 1.40% at the 2026-09-29 operation.",
     nextMeeting: null,
     nextMeetingNote: "No scheduled rate meetings",
     headline: { measure: "CPI", value: "0.8%", period: "Aug 2026", url: "https://www.stats.gov.cn/sj/zxfbhjd/202609/t20260909_1965263.html" },
