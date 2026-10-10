@@ -24,12 +24,12 @@ const portraitFrame: Record<string, { position: string; zoom: number }> = {
 function Portrait({ bank, alt }: { bank: Bank; alt: string }) {
   const frame = portraitFrame[bank.id] ?? { position: "50% 25%", zoom: 1 }
   return (
-    <div className="relative h-28 w-24 shrink-0 overflow-hidden rounded-xl bg-[#f4f5f5] shadow-[0_18px_34px_-20px_rgba(30,42,50,.55)] ring-1 ring-black/10">
+    <div className="relative h-36 w-32 shrink-0 overflow-hidden rounded-2xl bg-[#f4f5f5] shadow-[0_20px_38px_-20px_rgba(30,42,50,.58)] ring-1 ring-black/10">
       <Image
         src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${bank.head.photo}`}
         alt={alt}
         fill
-        sizes="96px"
+        sizes="128px"
         priority
         className="object-cover"
         style={{ objectPosition: frame.position, transform: `scale(${frame.zoom})`, transformOrigin: frame.position }}
