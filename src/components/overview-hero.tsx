@@ -31,7 +31,7 @@ export function OverviewHero({ locale }: { locale: Locale }) {
   return (
     <div className="grid gap-4">
       <section className="hero-shell relative overflow-hidden rounded-[1.75rem] bg-[#0b2034] text-white shadow-[0_28px_70px_-38px_rgba(8,30,49,0.9)]">
-        <div className="absolute inset-y-0 right-0 hidden w-[53%] grid-cols-12 grid-rows-3 gap-px bg-white/20 lg:grid">
+        <div className="absolute inset-y-0 right-0 hidden w-[53%] grid-cols-12 grid-rows-3 gap-px bg-white/20 md:grid">
           {featured.map(({ id, layout }) => {
             const place = headquarters[id]
             const bank = banks.find((item) => item.id === id)
@@ -68,7 +68,7 @@ export function OverviewHero({ locale }: { locale: Locale }) {
         </div>
         <div className="pointer-events-none absolute inset-y-0 left-0 w-[43%] hero-grid opacity-20" />
 
-        <div className="relative z-10 px-5 py-7 sm:px-8 sm:py-9 lg:w-[40%] lg:py-11">
+        <div className="relative z-10 px-5 py-7 sm:px-8 sm:py-9 md:w-[40%] lg:py-11">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1 text-[10px] font-semibold tracking-[0.18em] text-white/70 uppercase backdrop-blur">
             <Landmark className="h-3.5 w-3.5" /> {label("全球货币政策观察", "Global monetary policy monitor")}
           </div>
@@ -78,7 +78,7 @@ export function OverviewHero({ locale }: { locale: Locale }) {
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300">
             {label("对照政策利率、通胀缺口、最近决策与下一次会议。", "Compare policy rates, inflation gaps, latest decisions and the next meeting on a single research surface.")}
           </p>
-          <div className="mt-7 grid max-w-2xl grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="mt-7 grid max-w-2xl grid-cols-2 gap-2 xl:grid-cols-4">
             {[
               { label: label("收紧", "Tightening"), value: s.tightening, color: stanceColor.tightening },
               { label: label("维持", "Holding"), value: s.holding, color: stanceColor.holding },
