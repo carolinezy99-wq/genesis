@@ -138,4 +138,23 @@
   }
 }
 
+@utility craft-card {
+  border-radius: 0.85rem;
+  border: 1px solid color-mix(in srgb, #1e3a52 14%, white);
+  background: #fff;
+  box-shadow:
+    0 1px 1px rgba(30, 58, 82, 0.05),
+    0 12px 28px -18px rgba(30, 58, 82, 0.38);
+}
+
+@utility craft-card-hover {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 1px 1px rgba(30, 58, 82, 0.06),
+      0 18px 34px -16px rgba(30, 58, 82, 0.42);
+  }
+}
+
 /* Keep the localhost preview stylesheet hot-reloadable after production checks. */

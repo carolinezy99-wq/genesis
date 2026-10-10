@@ -5,7 +5,6 @@ import { BankPanel } from "@/components/bank-card"
 import { CompareTable } from "@/components/compare-table"
 import { GapRealScatter, RateRealChart } from "@/components/compare-charts"
 import { GovernorDialog } from "@/components/governor-dialog"
-import { InflationTrends } from "@/components/inflation-trends"
 import { useLocale } from "@/components/locale"
 import { Reading } from "@/components/reading"
 import { banks, DATA_AS_OF } from "@/lib/banks"
@@ -45,8 +44,8 @@ export function Dashboard() {
   )
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
-      <header className="bg-white">
+    <div className="min-h-screen bg-[#e6edf3] text-slate-800">
+      <header className="border-b border-[#1e3a52]/10 bg-white shadow-[0_8px_24px_-20px_rgba(30,58,82,0.65)]">
         <div className="mx-auto max-w-7xl px-4 pt-5 pb-4 sm:px-6">
           <p className="text-[11px] font-medium tracking-wider text-slate-500 uppercase">{copy.kicker}</p>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight text-[#1e3a52] sm:text-3xl">{copy.title}</h1>
@@ -63,7 +62,7 @@ export function Dashboard() {
           </p>
         </div>
       </header>
-      <nav className="sticky top-0 z-30 border-b border-slate-200 bg-white">
+      <nav className="sticky top-0 z-30 border-b border-[#1e3a52]/10 bg-white/95 shadow-[0_8px_18px_-16px_rgba(30,58,82,0.7)] backdrop-blur">
           <div ref={stripRef} role="tablist" aria-label={label("央行", "Central banks")} className="no-scrollbar mx-auto flex max-w-7xl snap-x snap-mandatory gap-1 overflow-x-auto overscroll-x-contain px-4 sm:px-6">
             {tabs.map((item) => {
               const active = tab === item.id
@@ -85,15 +84,14 @@ export function Dashboard() {
           </div>
       </nav>
 
-      <main className="mx-auto max-w-7xl px-4 py-5 sm:px-6">
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
         {tab === "overview" ? (
           <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" className="grid gap-4">
             <CompareTable locale={locale} onSelect={select} onGovernor={setGovernorId} />
-            <div className="grid gap-4 lg:grid-cols-2">
+            <div className="grid gap-5 lg:grid-cols-2">
               <RateRealChart locale={locale} />
               <GapRealScatter locale={locale} />
             </div>
-            <InflationTrends locale={locale} />
             <Reading locale={locale} />
           </div>
         ) : selected ? (
@@ -103,10 +101,10 @@ export function Dashboard() {
         ) : null}
       </main>
 
-      <footer className="border-t border-slate-200 bg-white">
+      <footer className="mt-2 border-t border-[#1e3a52]/10 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-4 text-[11px] leading-relaxed text-slate-500 sm:px-6">
           <p className="text-xs text-slate-700">{copy.asOf} <strong className="font-semibold tabular-nums">{DATA_AS_OF}</strong>. {label("数字取自各央行与官方统计机构页面；打开网页时不会重新抓取。", "Figures were read from central-bank and official statistics pages on that date; the site does not re-fetch them.")}</p>
-          <p className="mt-1">{label("德国、法国、意大利由欧洲央行代表。实际利率与通胀缺口为本页根据所列数字计算的分析指标，不是央行官方表述。", "Germany, France and Italy are covered by the ECB. Real rate and inflation gap are computed on this page from the figures shown; they are not official central-bank language.")}</p>
+          <p className="mt-1">{label("德国、法国、意大利由欧洲央行代表。通胀缺口为本页根据所列数字计算的分析指标，不是央行官方表述。", "Germany, France and Italy are covered by the ECB. The inflation gap is computed on this page from the figures shown; it is not official central-bank language.")}</p>
         </div>
       </footer>
       <GovernorDialog bankId={governorId} locale={locale} onClose={closeGovernor} />

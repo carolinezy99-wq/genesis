@@ -1,10 +1,13 @@
 import Image from "next/image"
 import { DecisionStrip } from "@/components/decision-strip"
+import { BankReading } from "@/components/reading"
 import { SourceLink } from "@/components/source-link"
+import { Sparkline } from "@/components/sparkline"
 import { policyContext } from "@/lib/analysis"
 import type { Bank, Source } from "@/lib/banks"
-import { decisionText, kindLabel, presentBank, sourceTitle, ui, type Locale } from "@/lib/copy"
+import { chartName, kindLabel, presentBank, sourceTitle, ui, type Locale } from "@/lib/copy"
 import { history, HISTORY_CHECKED_ON } from "@/lib/history"
+import { inflationPathFor } from "@/lib/inflation-path"
 import { metricsFor, signed, stanceColor } from "@/lib/metrics"
 
 const portraitFrame: Record<string, { position: string; zoom: number }> = {
@@ -17,7 +20,7 @@ const portraitFrame: Record<string, { position: string; zoom: number }> = {
 function Portrait({ bank, alt }: { bank: Bank; alt: string }) {
   const frame = portraitFrame[bank.id] ?? { position: "50% 25%", zoom: 1 }
   return (
-    <div className="relative h-36 w-28 shrink-0 overflow-hidden rounded-md bg-slate-100 ring-1 ring-slate-200">
+    <div className="relative h-36 w-28 shrink-0 overflow-hidden rounded-xl bg-slate-100 shadow-[0_8px_20px_-14px_rgba(30,58,82,0.8)] ring-1 ring-[#1e3a52]/10">
       <Image
         src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${bank.head.photo}`}
         alt={alt}
@@ -33,7 +36,7 @@ function Portrait({ bank, alt }: { bank: Bank; alt: string }) {
 
 function Figure({ label, value, sub, source, locale, muted = false }: { label: string; value: string; sub: string; source?: Source; locale: Locale; muted?: boolean }) {
   return (
-    <div className="flex min-w-0 flex-col rounded-lg border border-slate-200 bg-white p-3 sm:p-4">
+    <div className="craft-card craft-card-hover flex min-w-0 flex-col p-4 sm:p-5">
       <p className="flex items-center justify-between gap-2 text-[11px] font-medium text-slate-500">
         <span>{label}</span>
         {source ? <SourceLink source={source} locale={locale} /> : null}
@@ -67,7 +70,7 @@ function Field({ label, value }: { label: string; value: string }) {
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
-  return <h3 className="text-sm font-semibold text-slate-900">{children}</h3>
+  return <h3 className="border-l-2 border-[#1e3a52] pl-2.5 text-sm font-semibold tracking-tight text-[#1e3a52]">{children}</h3>
 }
 
 export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Locale; onGovernor?: (id: string) => void }) {
@@ -76,25 +79,28 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
   const m = metricsFor(bank, locale)
   const h = history[bank.id]
   const context = policyContext[bank.id]
-  const decisionValue = decisionText(view.stanceLabel, view.cycleLabel, view.cycleSize)
   const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
+  const role = `${view.title}${locale === "zh" ? "，" : ", "}${view.institution}`
   const noRate = m.policyRate == null
+  const path = inflationPathFor(bank.id)
+  const otherInflation = (["headline", "core"] as const)
+    .map((key) => h?.[key])
+    .filter((item): item is NonNullable<typeof item> => item != null && item.value !== bank.inflationActual.display)
 
   return (
-    <article className="grid gap-4">
-      <section className="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
+    <article className="grid gap-5">
+      <section className="craft-card p-5 sm:p-6">
         <div className="flex gap-4">
           <button type="button" onClick={() => onGovernor?.(bank.id)} className="shrink-0 rounded-md text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a52]" aria-label={label("打开行长简介", "Open governor profile")}>
             <Portrait bank={bank} alt={view.photoAlt} />
           </button>
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-medium text-slate-500">{view.institution}</p>
-            <h2 className="mt-0.5 text-2xl font-semibold tracking-tight text-[#1e3a52] sm:text-3xl">
+            <h2 className="text-2xl font-semibold tracking-tight text-[#1e3a52] sm:text-3xl">
               <button type="button" onClick={() => onGovernor?.(bank.id)} className="text-left underline decoration-transparent underline-offset-4 hover:decoration-[#1e3a52]/40">
                 {view.name}
               </button>
             </h2>
-            <p className="mt-0.5 text-sm text-slate-600">{view.title} · {view.bodyName}</p>
+            <p className="mt-1 text-sm text-slate-600">{role}</p>
             <p className="mt-3 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-700">
               <span className="inline-flex items-center gap-1.5 font-medium"><span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: stanceColor[m.stance] }} />{view.stanceLabel}</span>
               <span className="text-slate-400">·</span>
@@ -110,7 +116,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
         </div>
       </section>
 
-      <section aria-label={label("核心数字", "Key figures")} className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+      <section aria-label={label("核心数字", "Key figures")} className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <Figure
           locale={locale}
           label={label("政策利率", "Policy rate")}
@@ -123,21 +129,25 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
         <Figure locale={locale} label={label("最新通胀", "Latest inflation")} value={bank.inflationActual.display} sub={`${m.inflationMeasure} · ${m.inflationPeriod}`} source={m.inflationSource} />
         <Figure
           locale={locale}
-          label={label("实际利率", "Real rate")}
-          value={signed(m.realRate, "%")}
-          muted={m.realRate == null}
-          sub={m.realRate == null ? label("无政策利率，不计算", "Not computed: no policy rate") : `${m.policyRate}% − ${m.inflation}% (${label("政策利率 − 最新通胀", "policy rate − latest inflation")})`}
-        />
-        <Figure
-          locale={locale}
           label={label("通胀缺口", "Inflation gap")}
           value={signed(m.gap, " pp")}
           muted={m.gap == null}
           sub={m.gap == null ? label("无点目标，不计算", "Not computed: no point target") : `${m.inflation}% − ${m.target}% (${label("最新通胀 − 目标", "latest inflation − target")})`}
         />
       </section>
+      {otherInflation.length > 0 || h?.coreNote ? (
+        <p className="text-[11px] leading-relaxed text-slate-500">
+          {otherInflation.map((item) => (
+            <span key={item.measure} className="mr-3">
+              {item.measure} {item.value}
+              <span className="text-slate-400"> · {item.period}</span>
+            </span>
+          ))}
+          {h?.coreNote}
+        </p>
+      ) : null}
 
-      <section className="grid gap-4 rounded-lg border border-slate-200 bg-white p-4 sm:p-5 lg:grid-cols-[1.4fr_1fr_1fr]">
+      <section className="craft-card grid gap-6 p-5 sm:p-6 lg:grid-cols-[1.4fr_0.8fr]">
         <div className="min-w-0">
           <SectionTitle>{label("近期政策决定（旧→新）", "Recent decisions (oldest → latest)")}</SectionTitle>
           <div className="mt-3"><DecisionStrip bankId={bank.id} locale={locale} size="lg" /></div>
@@ -158,34 +168,24 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
           )}
           <p className="mt-1 text-[11px] text-slate-500">{h?.nextMeetingNote ?? (h?.nextMeeting ? "" : label("未核实", "Not verified"))}</p>
         </div>
-        <div className="min-w-0">
-          <SectionTitle>{label("整体与核心通胀", "Headline vs core inflation")}</SectionTitle>
-          <dl className="mt-3 grid grid-cols-2 gap-3">
-            {(["headline", "core"] as const).map((k) => {
-              const item = h?.[k]
-              return (
-                <div key={k} className="min-w-0">
-                  <dt className="text-[11px] text-slate-500">{k === "headline" ? label("整体", "Headline") : label("核心", "Core")}</dt>
-                  <dd className="mt-0.5">
-                    {item ? (
-                      <>
-                        <span className="text-2xl font-semibold tabular-nums text-slate-900">{item.value}</span>{" "}
-                        <SourceLink source={{ kind: "stats", institution: item.measure, title: `${item.measure}, ${item.period}`, url: item.url, readOn: HISTORY_CHECKED_ON }} locale={locale} />
-                        <span className="block text-[11px] leading-snug text-slate-500">{item.measure} · {item.period}</span>
-                      </>
-                    ) : (
-                      <span className="text-2xl font-semibold text-slate-300">—</span>
-                    )}
-                  </dd>
-                </div>
-              )
-            })}
-          </dl>
-          {h?.coreNote ? <p className="mt-2 text-[11px] leading-snug text-slate-500">{h.coreNote}</p> : null}
-        </div>
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
+      <section className="craft-card p-5 sm:p-6">
+        <SectionTitle>{label("本行解读", "This bank")}</SectionTitle>
+        <div className="mt-3"><BankReading bank={bank} locale={locale} /></div>
+        {path ? (
+          <div className="mt-4 border-t border-slate-100 pt-4">
+            <p className="text-[11px] leading-snug text-slate-500">{path.measure[locale]}</p>
+            <Sparkline points={path.points} label={`${chartName(bank, locale)} ${path.measure[locale]}, ${path.period[locale]}`} />
+            <p className="mt-1 text-[11px] text-slate-500">
+              {path.period[locale]}{" "}
+              <SourceLink source={{ kind: "stats", institution: chartName(bank, locale), title: path.sourceTitle[locale], url: path.sourceUrl, readOn: HISTORY_CHECKED_ON }} locale={locale} />
+            </p>
+          </div>
+        ) : null}
+      </section>
+
+      <section className="craft-card p-5 sm:p-6">
         <SectionTitle>{label("比较前须知", "Before comparing")}</SectionTitle>
         <dl className="mt-3 grid gap-4 text-sm lg:grid-cols-3">
           <div><dt className="text-[11px] font-medium text-slate-500">{label("职责", "Mandate")}</dt><dd className="mt-1 leading-relaxed text-slate-800">{context.mandate}</dd></div>
@@ -195,18 +195,12 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
         {view.framework ? <p className="mt-4 border-t border-slate-100 pt-3 text-sm leading-relaxed text-slate-700">{view.framework}</p> : null}
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-2">
-        <div className="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
+      <section className="grid gap-5 lg:grid-cols-2">
+        <div className="craft-card p-5 sm:p-6">
           <SectionTitle>{label("决策要点", "Decision facts")}</SectionTitle>
           <dl className="mt-2 grid content-start sm:grid-cols-2 sm:gap-x-4">
-            <Field label={copy.colInstrument} value={view.policyName} />
-            <Field label={copy.colSetting} value={view.policyDisplay} />
-            <Field label={copy.colTarget} value={view.targetDisplay} />
-            <Field label={copy.colLatest} value={`${view.latestValue} · ${view.latestPeriod}`} />
-            <Field label={copy.colGauge} value={view.latestGauge} />
-            <Field label={copy.watches} value={view.indicators} />
             <Field label={copy.setBy} value={view.bodyName} />
-            <Field label={copy.colMove} value={`${decisionValue} · ${bank.cycle.date}`} />
+            <Field label={copy.watches} value={view.indicators} />
           </dl>
           {view.secondary.length > 0 ? (
             <div className="mt-4 rounded-md bg-slate-50 p-3">
@@ -219,7 +213,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
           ) : null}
         </div>
 
-        <div className="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
+        <div className="craft-card p-5 sm:p-6">
           <SectionTitle>{copy.latestNews}</SectionTitle>
           {view.news.length > 0 ? (
             <ul className="mt-2 grid gap-3">
@@ -237,7 +231,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
         </div>
       </section>
 
-      <section className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-[11px] leading-relaxed text-slate-500 sm:px-5">
+      <section className="craft-card px-5 py-4 text-[11px] leading-relaxed text-slate-500 sm:px-6">
         <p className="text-xs font-medium text-slate-800">{copy.sources}</p>
         <div className="mt-2 grid gap-1.5 sm:grid-cols-2">
           <SourceLine source={bank.primarySource} locale={locale} />

@@ -1,9 +1,9 @@
 "use client"
 
 import { chartName, presentBank, type Locale } from "@/lib/copy"
-import { banks } from "@/lib/banks"
+import type { Bank } from "@/lib/banks"
 import { inflationPathFor } from "@/lib/inflation-path"
-import { allMetrics, signed, summary } from "@/lib/metrics"
+import { allMetrics, metricsFor, summary } from "@/lib/metrics"
 
 export function Reading({ locale }: { locale: Locale }) {
   const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
@@ -11,21 +11,20 @@ export function Reading({ locale }: { locale: Locale }) {
   const rows = allMetrics(locale)
   const above = rows.filter((row) => row.m.gap != null && row.m.gap > 0)
   const below = rows.filter((row) => row.m.gap != null && row.m.gap < 0)
-  const negativeReal = rows.filter((row) => row.m.realRate != null && row.m.realRate < 0)
   const names = (list: typeof rows) => list.map((row) => chartName(row.bank, locale)).join(locale === "zh" ? "、" : ", ")
-
   const tighteningAbove = rows.filter((row) => row.m.stance === "tightening" && row.m.gap != null && row.m.gap > 0)
+  const holdingAbove = rows.filter((row) => row.m.stance === "holding" && row.m.gap != null && row.m.gap > 0)
 
   return (
-    <section id="reading" className="rounded-lg border border-slate-200 bg-white p-4 sm:p-5">
-      <h2 className="text-base font-semibold text-slate-900">{label("读数与走势", "Reading and trend")}</h2>
-      <p className="mt-0.5 text-xs leading-relaxed text-slate-500">
+    <section id="reading" className="craft-card p-5 sm:p-6">
+      <h2 className="border-l-2 border-[#1e3a52] pl-2.5 text-base font-semibold tracking-tight text-[#1e3a52]">{label("读数与走势", "Reading and trend")}</h2>
+      <p className="mt-2 text-xs leading-relaxed text-slate-500">
         {label(
-          "以下是对本页数字的分析性阅读，不是央行的官方指引，也不是预测。",
-          "This is an analytical reading of the figures on this page. It is not official central-bank guidance, and it is not a forecast.",
+          "以下是对本页数字的分析性阅读，不是央行的官方指引，也不是预测。各行的一句解读在该行页面。",
+          "This is an analytical reading of the figures on this page. It is not official central-bank guidance, and it is not a forecast. Each bank's one-line reading is on that bank's page.",
         )}
       </p>
-      <ol className="mt-4 grid gap-2 text-sm leading-relaxed text-slate-700">
+      <ol className="mt-4 grid gap-3 text-sm leading-relaxed text-slate-700">
         <li>
           {label("最近一次决定中，", "Of the latest decisions, ")}
           <strong className="font-semibold text-slate-900">{s.tightening}</strong>
@@ -43,14 +42,8 @@ export function Reading({ locale }: { locale: Locale }) {
         </li>
         <li>
           {label(
-            `实际利率为负的是${names(negativeReal)}。其余设定利率的央行实际利率为正。新加坡金管局不设政策利率，不计算实际利率。`,
-            `Real rates are negative in ${names(negativeReal)}. The other rate-setting banks have a positive real rate. MAS sets no policy rate, so no real rate is calculated.`,
-          )}
-        </li>
-        <li>
-          {label(
-            `最近一次决定为收紧、同时通胀仍高于目标的是${names(tighteningAbove)}。英国和加拿大在通胀仍高于目标时维持利率；其中加拿大的实际利率为负。`,
-            `${names(tighteningAbove)} tightened at the latest decision while inflation was still above target. The UK and Canada are holding with inflation still above target; Canada's real rate is negative.`,
+            `${names(tighteningAbove)}在最近一次决定中收紧，同时通胀仍高于目标。${names(holdingAbove)}在通胀仍高于目标时维持。`,
+            `${names(tighteningAbove)} tightened at the latest decision while inflation was still above target. ${names(holdingAbove)} are holding with inflation still above target.`,
           )}
         </li>
         <li>
@@ -60,32 +53,35 @@ export function Reading({ locale }: { locale: Locale }) {
           )}
         </li>
       </ol>
-      <h3 className="mt-5 text-sm font-semibold text-slate-900">{label("各央行一行", "One line per bank")}</h3>
-      <ul className="mt-2 grid gap-2 sm:grid-cols-2">
-        {rows.map(({ bank, m }) => {
-          const path = inflationPathFor(bank.id)
-          const first = path?.points[0]
-          const last = path?.points[path.points.length - 1]
-          const pathText = path && first && last
-            ? label(
-                `近12个月该口径从 ${first.value.toFixed(1)}% 到 ${last.value.toFixed(1)}%。`,
-                ` Over the last 12 months that gauge went from ${first.value.toFixed(1)}% to ${last.value.toFixed(1)}%.`,
-              )
-            : ""
-          const gapText = m.gap == null ? label("无点目标，不计缺口。", "No point target, so no gap.") : label(`缺口 ${signed(m.gap, " pp")}。`, `Gap ${signed(m.gap, " pp")}.`)
-          const realText = m.realRate == null ? label("不计实际利率。", "No real rate.") : label(`实际利率 ${signed(m.realRate, "%")}。`, `Real rate ${signed(m.realRate, "%")}.`)
-          return (
-            <li key={bank.id} className="rounded-lg border border-slate-200 px-3 py-2 text-xs leading-relaxed text-slate-700">
-              <span className="font-semibold text-slate-900">{chartName(bank, locale)}. </span>
-              {label(
-                `最近决定为${m.stance === "tightening" ? "收紧" : m.stance === "holding" ? "维持" : "宽松"}。通胀 ${bank.inflationActual.display}。${gapText}${realText}`,
-                `Latest decision is ${m.stance}. Inflation ${bank.inflationActual.display}. ${gapText} ${realText}`,
-              )}
-              {pathText}
-            </li>
-          )
-        })}
-      </ul>
     </section>
+  )
+}
+
+export function BankReading({ bank, locale }: { bank: Bank; locale: Locale }) {
+  const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
+  const m = metricsFor(bank, locale)
+  const path = inflationPathFor(bank.id)
+  const first = path?.points[0]
+  const last = path?.points[path.points.length - 1]
+  const stance = m.stance === "tightening" ? label("收紧", "tightening") : m.stance === "holding" ? label("维持", "holding") : m.stance === "easing" ? label("宽松", "easing") : label("方向未明", "unclear")
+  const gap = m.gap == null
+    ? label("没有点目标，因此本页不计算通胀缺口。", "There is no point target, so this page does not show an inflation gap.")
+    : m.gap > 0
+      ? label("通胀高于本页所用目标。", "Inflation is above the target used on this page.")
+      : m.gap < 0
+        ? label("通胀低于本页所用目标。", "Inflation is below the target used on this page.")
+        : label("通胀与本页所用目标相同。", "Inflation matches the target used on this page.")
+  const trend = path && first && last
+    ? label(
+        `近 12 个月该口径从 ${first.value.toFixed(1)}% 到 ${last.value.toFixed(1)}%。`,
+        `Over the last 12 months that gauge went from ${first.value.toFixed(1)}% to ${last.value.toFixed(1)}%.`,
+      )
+    : ""
+  return (
+    <p className="text-sm leading-relaxed text-slate-700">
+      {label(`最近决定为${stance}。${gap}`, `The latest decision is ${stance}. ${gap}`)}
+      {trend ? ` ${trend}` : ""}
+      <span className="mt-1 block text-[11px] text-slate-500">{label("这是对本行页面数字的分析性阅读，不是官方指引，也不是预测。", "An analytical reading of this bank's figures. Not official guidance, and not a forecast.")}</span>
+    </p>
   )
 }

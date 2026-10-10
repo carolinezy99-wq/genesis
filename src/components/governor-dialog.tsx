@@ -49,7 +49,7 @@ export function GovernorDialog({ bankId, locale, onClose }: { bankId: string | n
         role="dialog"
         aria-modal="true"
         aria-labelledby="governor-dialog-title"
-        className="relative max-h-[min(90vh,40rem)] w-full max-w-lg overflow-y-auto rounded-lg border border-slate-200 bg-white p-4 shadow-xl sm:p-5"
+        className="craft-card relative max-h-[min(90vh,40rem)] w-full max-w-lg overflow-y-auto p-5 shadow-[0_24px_60px_-24px_rgba(30,58,82,0.55)] sm:p-6"
       >
         <div className="flex items-start justify-between gap-3">
           <p className="text-[11px] font-medium tracking-wider text-slate-500 uppercase">{label("行长简介", "Governor")}</p>
@@ -69,7 +69,7 @@ export function GovernorDialog({ bankId, locale, onClose }: { bankId: string | n
           </div>
           <div className="min-w-0">
             <h2 id="governor-dialog-title" className="text-xl font-semibold tracking-tight text-[#1e3a52]">{view.name}</h2>
-            <p className="mt-1 text-sm text-slate-600">{view.title} · {view.institution}</p>
+            <p className="mt-1 text-sm text-slate-600">{view.title}{locale === "zh" ? "，" : ", "}{view.institution}</p>
           </div>
         </div>
         <dl className="mt-4 grid gap-3 text-sm">
