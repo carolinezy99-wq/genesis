@@ -35,7 +35,7 @@ const bocFramework = official("Bank of Canada", "Understanding our policy intere
 const pbocMeeting = official("People's Bank of China", "Monetary Policy Committee Q3 2026 meeting", "https://www.pbc.gov.cn/goutongjiaoliu/113456/113469/2026092416074632670/index.html")
 const pbocRate = official("People's Bank of China", "Open-market operation announcement No. 189 of 2026", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html")
 const pbocDepartment = official("People's Bank of China", "Monetary Policy Department", "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html")
-const rbiDecision = official("Reserve Bank of India", "Monetary Policy Statement — 3 to 5 August 2026", "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63287")
+const rbiDecision = official("Reserve Bank of India", "Monetary Policy Statement — 5 to 7 October 2026", "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63742")
 const masDecision = official("Monetary Authority of Singapore", "MAS Monetary Policy Statement — July 2026", "https://www.mas.gov.sg/news/monetary-policy-statements/2026/mas-monetary-policy-statement-27jul26")
 const masFramework = official("Monetary Authority of Singapore", "Singapore's monetary policy framework — FAQ section 4", "https://www.mas.gov.sg/monetary-policy/singapores-monetary-policy-framework/faqs/section-4")
 const rbaDecision = official("Reserve Bank of Australia", "Monetary Policy Decision — 29 September 2026", "https://www.rba.gov.au/media-releases/2026/mr-26-27.html")
@@ -91,11 +91,11 @@ export const policyProfiles: Record<string, PolicyProfile> = {
     architectureSource: pbocDepartment,
   },
   rbi: {
-    phase: { label: "Policy cycle", headline: "Neutral hold", detail: "The repo rate has stayed at 5.25% through four 2026 meetings after the December 2025 cut.", source: rbiDecision },
-    outlook: { label: "Official assessment", headline: "Inflation and growth assessed together", detail: "The August statement kept the flexible inflation-targeting framework at the centre of the growth-inflation assessment.", source: rbiDecision },
-    guidance: { label: "Policy guidance", headline: "Neutral stance", detail: "The neutral stance preserves flexibility to respond to the incoming inflation and growth outlook.", source: rbiDecision },
+    phase: { label: "Policy cycle", headline: "Calibrated tightening", detail: "The MPC raised the repo rate by 25 bp to 5.50% in October after four consecutive holds in 2026.", source: rbiDecision },
+    outlook: { label: "Official assessment", headline: "Inflation risks require vigilance", detail: "The October statement paired resilient domestic growth with a less benign inflation outlook and external uncertainty.", source: rbiDecision },
+    guidance: { label: "Policy guidance", headline: "Hike or pause", detail: "The calibrated-tightening stance removes near-term cuts from consideration; future action remains conditional on growth and inflation data.", source: rbiDecision },
     toolkit: { label: "Policy toolkit", headline: "Repo-led liquidity corridor", detail: "The policy repo rate under the liquidity adjustment facility anchors short-term funding conditions.", source: rbiDecision },
-    transparency: { label: "Decision signal", headline: "Unanimous hold", detail: "All MPC members voted to keep the repo rate unchanged at 5.25%.", source: rbiDecision },
+    transparency: { label: "Decision signal", headline: "Unanimous increase", detail: "All six MPC members voted to raise the repo rate by 25 bp to 5.50%.", source: rbiDecision },
     architectureSource: rbiDecision,
   },
   mas: {

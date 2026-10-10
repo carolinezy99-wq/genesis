@@ -7,7 +7,7 @@ import { analysis, policyContext } from "@/lib/analysis"
 import { chartName, presentBank, type Locale } from "@/lib/copy"
 
 export function Verified({ locale, compact = false }: { locale: Locale; compact?: boolean }) {
-  return <span className="inline-flex items-center gap-1 rounded-full bg-[#eaf7f1] px-2 py-1 text-[10px] font-semibold text-[#247658] ring-1 ring-[#2d9b75]/20"><CheckCheck className="h-3 w-3" />{compact ? (locale === "zh" ? "已核对" : "Checked") : (locale === "zh" ? "已核对 ×2 · 2026-10-03" : "Cross-checked ×2 · 3 Oct 2026")}</span>
+  return <span className="inline-flex items-center gap-1 rounded-full bg-[#eaf7f1] px-2 py-1 text-[10px] font-semibold text-[#247658] ring-1 ring-[#2d9b75]/20"><CheckCheck className="h-3 w-3" />{compact ? (locale === "zh" ? "已核对" : "Checked") : (locale === "zh" ? "已核对 ×2 · 2026-10-10" : "Cross-checked ×2 · 10 Oct 2026")}</span>
 }
 
 export function InflationGap({ locale }: { locale: Locale }) {

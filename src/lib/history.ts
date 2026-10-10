@@ -20,7 +20,7 @@ export type BankHistory = {
   coreNote?: string
 }
 
-export const HISTORY_CHECKED_ON = "2026-10-03"
+export const HISTORY_CHECKED_ON = "2026-10-10"
 
 const d = (date: string, action: DecisionAction, detail: string, url: string): Decision => ({ date, action, detail, url, verified: true })
 
@@ -117,15 +117,15 @@ export const history: Record<string, BankHistory> = {
   },
   rbi: {
     decisions: [
-      d("2025-10-01", "hold", "5.50%", `${RBI}61332`),
       d("2025-12-05", "cut", "−25 bp to 5.25%", `${RBI}61749`),
       d("2026-02-06", "hold", "5.25%", `${RBI}62169`),
       d("2026-04-08", "hold", "5.25%", `${RBI}62514`),
       d("2026-06-05", "hold", "5.25%", `${RBI}62863`),
       d("2026-08-05", "hold", "5.25%", `${RBI}63287`),
+      d("2026-10-07", "hike", "+25 bp to 5.50%", `${RBI}63742`),
     ],
-    nextMeeting: { date: "2026-10-07", url: `${RBI}62422` },
-    nextMeetingNote: "MPC 5–7 October; decision on the final day",
+    nextMeeting: { date: "2026-12-04", url: `${RBI}62422` },
+    nextMeetingNote: "MPC 2–4 December; decision on the final day",
     headline: { measure: "All-India CPI (2024=100), provisional", value: "4.82%", period: "Aug 2026", url: "https://www.mospi.gov.in/uploads/latestReleases/latest_release_1789381904344_6c792dcf-8a9f-4fca-93d3-99d833bdb358_Press_Release_of_CPI_for_August_2026.pdf" },
     core: null,
     coreNote: "MoSPI publishes no official core CPI series.",

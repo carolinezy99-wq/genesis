@@ -57,7 +57,7 @@ export const ui = {
   zh: {
     kicker: "货币政策",
     title: "全球央行货币政策",
-    lede: "九家主要央行，依据官方发布更新至 2026-10-03。德、法、意由欧洲央行代表。",
+    lede: "九家主要央行，依据官方发布更新至 2026-10-10。德、法、意由欧洲央行代表。",
     asOf: "数据截至",
     hikes: "加息",
     holds: "维持",
@@ -264,7 +264,7 @@ const enBanks: Record<string, EnBank> = {
   },
   rbi: {
     bodyName: "Monetary Policy Committee (MPC)",
-    bodyNote: "The MPC sets the policy repo rate under the liquidity adjustment facility. The 62nd meeting was chaired by the Governor and was unanimous.",
+    bodyNote: "The MPC sets the policy repo rate under the liquidity adjustment facility. The 63rd meeting was chaired by the Governor; the rate increase was unanimous.",
     indicators: ["Consumer price index (CPI)", "Core CPI (ex food and fuel)"],
     targetDisplay: "4%",
     targetNote: "Tolerance band 2%–6%. The RBI Bulletin cites the Gazette notification of 25 March 2026. The target runs through 31 March 2031.",
@@ -272,12 +272,12 @@ const enBanks: Record<string, EnBank> = {
     gauge: "CPI, base 2024=100; July final 4.45%",
     gaugeShort: "CPI",
     policyName: "Policy repo rate",
-    policyDisplay: "5.25%",
-    asOf: "2026-08-05 (meeting 3–5 August)",
+    policyDisplay: "5.50%",
+    asOf: "2026-10-07 (meeting 5–7 October)",
     secondary: ["Standing deposit facility", "MSF and Bank Rate"],
-    cycleLabel: "Hold",
-    sizeLabel: "0 bp",
-    detail: "Unanimous hold at 5.25%, with the neutral stance kept. Next meeting 2026-10-05 to 2026-10-07.",
+    cycleLabel: "Hike",
+    sizeLabel: "+25 bp",
+    detail: "Unanimous 25 bp increase to 5.50%, with the stance changed to calibrated tightening. Next meeting 2026-12-02 to 2026-12-04.",
   },
   mas: {
     bodyName: "Monetary and Investment Policy Meeting",
@@ -416,6 +416,10 @@ const linkText: Record<string, { en: string; zh: string }> = {
     en: "Monetary policy statement, 3–5 August 2026",
     zh: "2026年8月3–5日货币政策声明",
   },
+  "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63742": {
+    en: "Monetary policy statement, 5–7 October 2026",
+    zh: "2026年10月5–7日货币政策声明",
+  },
   "https://www.rbi.org.in/Scripts/BS_ViewBulletin.aspx?Id=24174": {
     en: "Bulletin note on the inflation target",
     zh: "公报：通胀目标通知",
@@ -518,22 +522,22 @@ const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
   boe: {
     en: [
       {
-        date: "2026-09-17",
-        title: "Bank Rate maintained at 3.75% — September 2026",
-        line: "Monetary Policy Summary and minutes of the September meeting.",
-        url: "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026",
+        date: "2026-10-09",
+        title: "Cross-Market Operational Resilience Group completes SIMEX26",
+        line: "Thirty-eight systemically important firms tested their response to a global disruption of cloud-based services.",
+        url: "https://www.bankofengland.co.uk/news/2026/october/cmorg-holds-sector-wide-cloud-outage-simulation-exercise",
       },
       {
-        date: "2026-09-17",
-        title: "Transcript of the Governor's pooled broadcast interview given on 17 September 2026",
-        line: "The interview followed publication of the Monetary Policy Summary and minutes.",
-        url: "https://www.bankofengland.co.uk/news/2026/september/the-governor-interview-transcript-17-september-2026",
+        date: "2026-10-08",
+        title: "Financial resilience in an age of repeated shocks",
+        line: "Governor Andrew Bailey said weaker growth, repeated supply shocks and changing market structures mean resilience cannot be taken for granted.",
+        url: "https://www.bankofengland.co.uk/speech/2026/october/andrew-bailey-speech-at-the-istanbul-economic-forum-central-bank-of-the-republic-of-turkey-istanbul",
       },
       {
-        date: "2026-09-17",
-        title: "Exchange of letters between the Governor and the Chancellor regarding CPI inflation — September 2026",
-        line: "The Governor and the Chancellor exchanged letters on CPI inflation.",
-        url: "https://www.bankofengland.co.uk/letter/2026/cpi-inflation-september-2026",
+        date: "2026-10-01",
+        title: "Financial conditions: what’s priced in?",
+        line: "Catherine L. Mann discussed monetary-policy strategy, financial conditions and upside inflation risks.",
+        url: "https://www.bankofengland.co.uk/speech/2026/october/catherine-mann-nomura-investor-conference",
       },
     ],
     zh: [],
@@ -702,7 +706,7 @@ const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
 
 const newsMissing: Record<string, { en: string; zh: string }> = {
   pboc: {
-    en: "The English press-release page opened, but it did not include article headlines on 2026-10-03.",
+    en: "The English press-release page opened, but it did not include article headlines on 2026-10-10.",
     zh: "",
   },
 }
@@ -847,8 +851,8 @@ function bankNews(id: string, locale: Locale): { items: NewsItem[]; missing: str
     missing:
       newsMissing[id]?.[locale] ||
       (locale === "en"
-        ? "The official news list could not be loaded on 2026-10-03."
-        : "2026-10-03 未能打开该行的新闻列表。"),
+        ? "The official news list could not be loaded on 2026-10-10."
+        : "2026-10-10 未能打开该行的新闻列表。"),
   }
 }
 

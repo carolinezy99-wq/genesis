@@ -12,7 +12,7 @@ const noto = Noto_Sans_SC({
 export const metadata: Metadata = {
   title: "Global central bank policy",
   description:
-    "An English-language visual comparison of policy rates, inflation targets, decision makers and policy cycles across nine major central banks. Updated 3 October 2026.",
+    "An English-language visual comparison of policy rates, inflation targets, decision makers and policy cycles across nine major central banks. Updated 10 October 2026.",
 }
 
 export default function RootLayout({

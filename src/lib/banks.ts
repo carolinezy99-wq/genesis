@@ -1,4 +1,4 @@
-export const DATA_AS_OF = "2026-10-03"
+export const DATA_AS_OF = "2026-10-10"
 
 export type CycleKind = "hike" | "hold" | "cut" | "tighten"
 
@@ -555,7 +555,7 @@ export const banks: Bank[] = [
     decisionBody: {
       nameZh: "Monetary Policy Committee",
       nameEn: "Monetary Policy Committee",
-      note: "MPC 决定流动性调节便利下的政策回购利率。第62次会议由行长主持，全体一致。",
+      note: "MPC 决定流动性调节便利下的政策回购利率。第63次会议由行长主持，加息决定获全体一致通过。",
     },
     indicators: ["消费者物价指数", "核心消费者物价指数（不含食品与燃料）"],
     inflationTarget: {
@@ -577,28 +577,28 @@ export const banks: Bank[] = [
     policy: {
       nameZh: "政策回购利率",
       nameEn: "Policy repo rate",
-      display: "5.25%",
-      chartValue: 5.25,
-      barLabel: "5.25",
+      display: "5.50%",
+      chartValue: 5.5,
+      barLabel: "5.50",
       includeInChart: true,
-      asOf: "2026-08-05（会议 8月3–5日）",
+      asOf: "2026-10-07（会议 10月5–7日）",
       secondary: [
-        { nameZh: "常设存款便利利率", nameEn: "Standing deposit facility", display: "5.00%" },
-        { nameZh: "边际常设便利利率 / 银行利率", nameEn: "MSF and Bank Rate", display: "5.50%" },
+        { nameZh: "常设存款便利利率", nameEn: "Standing deposit facility", display: "5.25%" },
+        { nameZh: "边际常设便利利率 / 银行利率", nameEn: "MSF and Bank Rate", display: "5.75%" },
       ],
     },
     cycle: {
-      kind: "hold",
-      label: "维持",
-      date: "2026-08-05",
-      sizeLabel: "0 个基点",
-      detail: "全体一致维持 5.25%，并继续中性立场。下次会议 2026-10-05 至 10-07。",
+      kind: "hike",
+      label: "加息",
+      date: "2026-10-07",
+      sizeLabel: "+25 个基点",
+      detail: "全体一致加息 25 个基点至 5.50%，并将立场改为“校准式收紧”。下次会议为 2026-12-02 至 12-04。",
     },
     primarySource: {
       kind: "official",
       institution: "Reserve Bank of India",
-      title: "Monetary Policy Statement, 3 to 5 August 2026",
-      url: "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63287",
+      title: "Monetary Policy Statement, 5 to 7 October 2026",
+      url: "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63742",
       readOn: DATA_AS_OF,
     },
     sources: [
