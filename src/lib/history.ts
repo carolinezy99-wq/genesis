@@ -105,11 +105,14 @@ export const history: Record<string, BankHistory> = {
   },
   pboc: {
     decisions: [
-      d("2024-07-22", "cut", "−10 bp to 1.70%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5409998/index.html"),
-      d("2024-09-27", "cut", "−20 bp to 1.50%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5468922/index.html"),
-      d("2025-05-07", "cut", "−10 bp to 1.40%, effective 2025-05-08", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5699842/index.html"),
+      d("2026-09-22", "hold", "7-day operation at 1.40%, RMB 35bn", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092208451519789/index.html"),
+      d("2026-09-23", "hold", "7-day operation at 1.40%, RMB 8bn", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092308513432696/index.html"),
+      d("2026-09-24", "hold", "7-day operation at 1.40%, RMB 51.5bn", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html"),
+      d("2026-09-28", "hold", "7-day operation at 1.40%, RMB 139bn", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092808454683233/index.html"),
+      d("2026-09-29", "hold", "7-day operation at 1.40%, RMB 90.5bn", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092908461628271/index.html"),
+      d("2026-10-09", "hold", "7-day operation at 1.40%, RMB 2bn", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026100908472888323/index.html"),
     ],
-    historyNote: "The PBoC has no scheduled rate meetings. Shown: the last three changes to the 7-day reverse repo rate. The latest conducted 7-day operation was Announcement [2026] No. 194 on 2026-10-09: CNY 2 billion at 1.40%. Announcement [2026] No. 195 on 2026-10-10 was a zero operation.",
+    historyNote: "The PBoC has no scheduled rate meetings. Shown: the latest six conducted 7-day reverse repo operations, all at the unchanged 1.40% policy rate. Zero-operation notices are excluded; Announcement [2026] No. 195 on 2026-10-10 reported no 7-day operation.",
     nextMeeting: null,
     nextMeetingNote: "No scheduled rate meetings",
     headline: { measure: "CPI", value: "0.8%", period: "Aug 2026", url: "https://www.stats.gov.cn/sj/zxfbhjd/202609/t20260909_1965263.html" },
