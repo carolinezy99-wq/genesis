@@ -1,10 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import { CalendarDays, Landmark } from "lucide-react"
+import { Landmark } from "lucide-react"
 import { banks, DATA_AS_OF } from "@/lib/banks"
-import { bankTabLabel, chartName, type Locale } from "@/lib/copy"
-import { history } from "@/lib/history"
+import { chartName, type Locale } from "@/lib/copy"
 import { stanceColor, summary } from "@/lib/metrics"
 import { headquarters } from "@/lib/places"
 
@@ -23,14 +22,8 @@ const featured = [
 export function OverviewHero({ locale }: { locale: Locale }) {
   const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
   const s = summary(locale)
-  const calendar = banks
-    .map((bank) => ({ bank, meeting: history[bank.id]?.nextMeeting, note: history[bank.id]?.nextMeetingNote }))
-    .filter((item): item is typeof item & { meeting: NonNullable<typeof item.meeting> } => Boolean(item.meeting))
-    .sort((a, b) => a.meeting.date.localeCompare(b.meeting.date))
-
   return (
-    <div className="grid gap-4">
-      <section className="hero-shell relative overflow-hidden rounded-[1.75rem] bg-[#0b2034] text-white shadow-[0_28px_70px_-38px_rgba(8,30,49,0.9)]">
+    <section className="hero-shell relative overflow-hidden rounded-[1.75rem] bg-[#0b2034] text-white shadow-[0_28px_70px_-38px_rgba(8,30,49,0.9)]">
         <div className="absolute inset-y-0 right-0 hidden w-[53%] grid-cols-12 grid-rows-3 gap-px bg-white/20 md:grid">
           {featured.map(({ id, layout }) => {
             const place = headquarters[id]
@@ -94,24 +87,6 @@ export function OverviewHero({ locale }: { locale: Locale }) {
             ))}
           </div>
         </div>
-      </section>
-      <aside className="craft-card flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:px-5">
-        <div className="flex shrink-0 items-center gap-2 pr-2 text-[#142c41]">
-          <CalendarDays className="h-4 w-4 text-[#b4532a]" />
-          <div>
-            <p className="text-[10px] font-semibold tracking-[0.14em] uppercase">{label("会议提醒", "Meeting watch")}</p>
-            <p className="text-[10px] text-slate-400">{label("下一轮已核实日程", "Next verified dates")}</p>
-          </div>
-        </div>
-        <div className="flex min-w-0 gap-2 overflow-x-auto pb-1 sm:pb-0">
-          {calendar.slice(0, 6).map(({ bank, meeting, note }) => (
-            <div key={bank.id} title={note} className="flex shrink-0 items-center gap-2 rounded-lg bg-[#f3f6f8] px-3 py-2">
-              <span className="text-xs font-semibold tabular-nums text-[#b4532a]">{meeting.date.slice(5)}</span>
-              <span className="text-xs font-medium text-slate-700">{bankTabLabel[bank.id][locale]}</span>
-            </div>
-          ))}
-        </div>
-      </aside>
-    </div>
+    </section>
   )
 }

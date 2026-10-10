@@ -4,10 +4,11 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { BankPanel } from "@/components/bank-card"
 import { BankGallery } from "@/components/bank-gallery"
 import { CompareTable } from "@/components/compare-table"
-import { RateRealChart } from "@/components/compare-charts"
+import { InflationGapChart } from "@/components/compare-charts"
 import { GovernorDialog } from "@/components/governor-dialog"
 import { useLocale } from "@/components/locale"
 import { OverviewHero } from "@/components/overview-hero"
+import { MeetingWatch } from "@/components/meeting-watch"
 import { Reading } from "@/components/reading"
 import { banks, DATA_AS_OF } from "@/lib/banks"
 import { bankTabLabel, ui } from "@/lib/copy"
@@ -80,7 +81,10 @@ export function Dashboard() {
         {tab === "overview" ? (
           <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" className="grid gap-7">
             <OverviewHero locale={locale} />
-            <RateRealChart locale={locale} />
+            <div className="grid gap-5 md:grid-cols-[minmax(0,1.45fr)_minmax(17rem,.65fr)]">
+              <InflationGapChart locale={locale} />
+              <MeetingWatch locale={locale} onSelect={select} />
+            </div>
             <Reading locale={locale} />
             <CompareTable locale={locale} onSelect={select} onGovernor={setGovernorId} />
             <BankGallery locale={locale} onSelect={select} />

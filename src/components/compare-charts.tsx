@@ -47,6 +47,77 @@ function Tip({ active, payload, locale }: { active?: boolean; payload?: Array<{ 
   )
 }
 
+function gapRows(locale: Locale) {
+  return allMetrics(locale)
+    .filter(({ m }) => m.gap != null)
+    .map(({ bank, m }) => ({
+      id: bank.id,
+      name: chartName(bank, locale),
+      gap: m.gap!,
+      inflation: m.inflation,
+      target: m.target!,
+      measure: m.inflationMeasure,
+    }))
+}
+
+function GapValueLabel(props: { x?: number | string; y?: number | string; width?: number | string; height?: number | string; value?: unknown }) {
+  const value = Number(props.value)
+  const x = Number(props.x)
+  const y = Number(props.y) + Number(props.height) / 2 + 4
+  const width = Number(props.width)
+  const positive = value >= 0
+  return (
+    <text x={positive ? x + width + 7 : x - 7} y={y} textAnchor={positive ? "start" : "end"} fontSize={11} fontWeight={600} fill="#1e293b">
+      {signed(value, " pp")}
+    </text>
+  )
+}
+
+function GapTip({ active, payload, locale }: { active?: boolean; payload?: Array<{ payload: ReturnType<typeof gapRows>[number] }>; locale: Locale }) {
+  if (!active || !payload?.length) return null
+  const d = payload[0].payload
+  return (
+    <div className="rounded-lg border border-[#1e3a52]/10 bg-white px-3 py-2 text-xs shadow-[0_8px_24px_-12px_rgba(30,58,82,0.45)]">
+      <p className="font-semibold text-slate-900">{d.name}</p>
+      <p className="text-slate-600">{locale === "zh" ? "最新通胀" : "Latest inflation"} {d.inflation}%</p>
+      <p className="text-slate-600">{locale === "zh" ? "目标" : "Target"} {d.target}%</p>
+      <p className="font-semibold text-[#15344d]">{locale === "zh" ? "实际缺口" : "Actual gap"} {signed(d.gap, " pp")}</p>
+    </div>
+  )
+}
+
+export function InflationGapChart({ locale }: { locale: Locale }) {
+  const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
+  const data = gapRows(locale).sort((a, b) => b.gap - a.gap)
+  const xMax = Math.max(2, Math.ceil(Math.max(...data.map((d) => Math.abs(d.gap))) * 2) / 2)
+  const config = { gap: { label: label("通胀缺口", "Inflation gap"), color: "#b4532a" } } satisfies ChartConfig
+  return (
+    <Panel
+      title={label("实际通胀缺口", "Actual inflation gap")}
+      note={label("最新通胀减去本页所用目标；正值表示高于目标，负值表示低于目标。新加坡金管局无点目标，不列入。", "Latest inflation minus the target used on this page. Positive values are above target; negative values are below. MAS has no point target and is excluded.")}
+    >
+      <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-500">
+        <span className="inline-flex items-center gap-1"><span className="h-2.5 w-2.5 rounded-sm bg-[#b4532a]" />{label("高于目标", "Above target")}</span>
+        <span className="inline-flex items-center gap-1"><span className="h-2.5 w-2.5 rounded-sm bg-[#2c7a70]" />{label("低于目标", "Below target")}</span>
+      </div>
+      <ChartContainer config={config} className="mt-2 aspect-auto h-[420px] w-full" initialDimension={{ width: 700, height: 420 }}>
+        <BarChart data={data} layout="vertical" margin={{ top: 4, right: 54, left: 0, bottom: 4 }}>
+          <CartesianGrid horizontal={false} strokeDasharray="3 4" stroke="#e2e8f0" />
+          <XAxis type="number" domain={[-xMax, xMax]} ticks={[-xMax, -1, 0, 1, xMax]} tickFormatter={(v) => `${v > 0 ? "+" : ""}${v} pp`} axisLine={false} tickLine={false} fontSize={10} />
+          <YAxis type="category" dataKey="name" width={76} axisLine={false} tickLine={false} tick={{ fill: "#1e293b", fontSize: 12, fontWeight: 600 }} />
+          <ReferenceLine x={0} stroke="#64748b" strokeWidth={1.25} />
+          <ChartTooltip cursor={{ fill: "#f1f5f9" }} content={<GapTip locale={locale} />} />
+          <Bar dataKey="gap" barSize={17} radius={3} isAnimationActive={false}>
+            {data.map((d) => <Cell key={d.id} fill={d.gap >= 0 ? "#b4532a" : "#2c7a70"} />)}
+            <LabelList dataKey="gap" content={(p) => <GapValueLabel {...(p as object)} />} />
+          </Bar>
+        </BarChart>
+      </ChartContainer>
+      <p className="text-[11px] text-slate-500">{label("目标为区间时使用中点；该缺口由页面所列数据计算，并非央行官方表述。", "Range targets use their midpoint. The gap is calculated from the figures shown and is not official central-bank language.")}</p>
+    </Panel>
+  )
+}
+
 export function RateRealChart({ locale }: { locale: Locale }) {
   const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
   const data = rated(locale).sort((a, b) => b.policy - a.policy)
