@@ -100,10 +100,10 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
         <div className="relative flex flex-col items-center justify-center gap-4 overflow-hidden bg-[radial-gradient(circle_at_16%_12%,rgba(255,255,255,.9),transparent_36%),linear-gradient(145deg,#f4f5f5_0%,#e7eaec_58%,#d8dde0_100%)] p-6 text-center text-[#142c41] md:px-6 md:py-7 xl:px-8">
           <div className="pointer-events-none absolute inset-0 hero-grid opacity-[.035] mix-blend-multiply" />
           <div className="pointer-events-none absolute -right-20 -bottom-24 h-64 w-64 rounded-full bg-[#9aa8b1]/20 blur-3xl" />
-          <button type="button" onClick={() => onGovernor?.(bank.id)} className="relative shrink-0 rounded-xl text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a52]" aria-label={label("打开行长简介", "Open governor profile")}>
+          <button type="button" onClick={() => onGovernor?.(bank.id)} className="bank-portrait-enter relative shrink-0 rounded-xl text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a52]" aria-label={label("打开行长简介", "Open governor profile")}>
             <Portrait bank={bank} alt={view.photoAlt} />
           </button>
-          <div className="relative min-w-0">
+          <div className="bank-copy-enter relative min-w-0">
             <p className="text-[9px] font-semibold tracking-[0.14em] text-[#66727a] uppercase xl:text-[10px]">{chartName(bank, locale)} · {view.institution}</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#142c41]">
               <button type="button" onClick={() => onGovernor?.(bank.id)} className="underline decoration-transparent underline-offset-4 hover:decoration-[#142c41]/35">
@@ -118,7 +118,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
         </div>
         {place ? (
           <figure className="border-t border-[#1e3a52]/10 bg-[#f7f8f8] md:border-t-0 md:border-l">
-            <div className="group relative isolate h-60 overflow-hidden bg-[#d9e1e6] sm:h-64 md:h-72">
+            <div className="bank-building-enter group relative isolate h-60 overflow-hidden bg-[#d9e1e6] sm:h-64 md:h-72">
               <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${place.image}`}
                 alt=""
@@ -137,7 +137,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/20" />
             </div>
-            <figcaption className="border-t border-slate-200/70 bg-white/75 px-4 py-3 text-center text-[11px] leading-relaxed text-slate-500 backdrop-blur-sm">
+            <figcaption className="bank-caption-enter border-t border-slate-200/70 bg-white/75 px-4 py-3 text-center text-[11px] leading-relaxed text-slate-500 backdrop-blur-sm">
               <a href={place.addressUrl} target="_blank" rel="noopener noreferrer" className="block text-sm font-medium text-slate-800 underline decoration-slate-300 underline-offset-2">
                 {place.address[locale]}
               </a>

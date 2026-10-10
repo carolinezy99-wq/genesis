@@ -91,7 +91,7 @@ export function Dashboard() {
           </div>
         ) : selected ? (
           <div role="tabpanel" id={`panel-${selected.id}`} aria-labelledby={`tab-${selected.id}`}>
-            <BankPanel bank={selected} locale={locale} onGovernor={setGovernorId} />
+            <BankPanel key={selected.id} bank={selected} locale={locale} onGovernor={setGovernorId} />
           </div>
         ) : null}
       </main>
