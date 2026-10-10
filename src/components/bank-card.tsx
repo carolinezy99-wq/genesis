@@ -21,12 +21,12 @@ const portraitFrame: Record<string, { position: string; zoom: number }> = {
 function Portrait({ bank, alt }: { bank: Bank; alt: string }) {
   const frame = portraitFrame[bank.id] ?? { position: "50% 25%", zoom: 1 }
   return (
-    <div className="relative h-40 w-32 shrink-0 overflow-hidden rounded-2xl bg-slate-100 shadow-[0_18px_36px_-20px_rgba(0,0,0,.9)] ring-1 ring-white/15 sm:h-44 sm:w-36">
+    <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-xl bg-slate-100 shadow-[0_16px_30px_-20px_rgba(0,0,0,.9)] ring-1 ring-white/15 sm:h-28 sm:w-24">
       <Image
         src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${bank.head.photo}`}
         alt={alt}
         fill
-        sizes="144px"
+        sizes="96px"
         priority
         className="object-cover"
         style={{ objectPosition: frame.position, transform: `scale(${frame.zoom})`, transformOrigin: frame.position }}
@@ -122,14 +122,24 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
         </div>
         {place ? (
           <figure className="border-t border-[#1e3a52]/10 lg:border-t-0 lg:border-l">
-            <div className="relative h-52 bg-slate-100 sm:h-60 lg:h-56">
+            <div className="group relative isolate h-64 overflow-hidden bg-[#d9e1e6] sm:h-72 lg:h-64">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${place.image}`}
+                alt=""
+                aria-hidden="true"
+                fill
+                sizes="384px"
+                className="scale-110 object-cover opacity-35 blur-xl saturate-75"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#102b42]/10 via-white/5 to-[#102b42]/20" />
               <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${place.image}`}
                 alt={place.alt[locale]}
                 fill
-                sizes="288px"
-                className="object-cover"
+                sizes="384px"
+                className="object-contain drop-shadow-[0_12px_22px_rgba(8,30,49,0.24)] transition-transform duration-500 group-hover:scale-[1.015]"
               />
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/20" />
             </div>
             <figcaption className="px-4 py-3 text-[11px] leading-relaxed text-slate-500">
               <a href={place.addressUrl} target="_blank" rel="noopener noreferrer" className="block text-sm font-medium text-slate-800 underline decoration-slate-300 underline-offset-2">
