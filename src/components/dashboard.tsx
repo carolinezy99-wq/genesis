@@ -80,14 +80,14 @@ export function Dashboard() {
       <main className="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-8">
         {tab === "overview" ? (
           <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" className="grid gap-7">
-            <OverviewHero locale={locale} />
-            <div className="grid gap-5 md:grid-cols-[minmax(0,1.45fr)_minmax(17rem,.65fr)]">
+            <div className="overview-hero-enter"><OverviewHero locale={locale} /></div>
+            <div className="overview-module-enter overview-delay-1 grid gap-5 md:grid-cols-[minmax(0,1.45fr)_minmax(17rem,.65fr)]">
               <InflationGapChart locale={locale} />
               <MeetingWatch locale={locale} onSelect={select} />
             </div>
-            <Reading locale={locale} />
-            <CompareTable locale={locale} onSelect={select} onGovernor={setGovernorId} />
-            <BankGallery locale={locale} onSelect={select} />
+            <div className="overview-module-enter overview-delay-2"><Reading locale={locale} /></div>
+            <div className="overview-module-enter overview-delay-3"><CompareTable locale={locale} onSelect={select} onGovernor={setGovernorId} /></div>
+            <div className="overview-module-enter overview-delay-4"><BankGallery locale={locale} onSelect={select} /></div>
           </div>
         ) : selected ? (
           <div role="tabpanel" id={`panel-${selected.id}`} aria-labelledby={`tab-${selected.id}`}>
