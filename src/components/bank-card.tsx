@@ -24,7 +24,7 @@ const portraitFrame: Record<string, { position: string; zoom: number }> = {
 function Portrait({ bank, alt }: { bank: Bank; alt: string }) {
   const frame = portraitFrame[bank.id] ?? { position: "50% 25%", zoom: 1 }
   return (
-    <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-xl bg-[#f4f5f5] shadow-[0_18px_34px_-20px_rgba(30,42,50,.55)] ring-1 ring-black/10 sm:h-28 sm:w-24 md:h-24 md:w-20 xl:h-28 xl:w-24">
+    <div className="relative h-28 w-24 shrink-0 overflow-hidden rounded-xl bg-[#f4f5f5] shadow-[0_18px_34px_-20px_rgba(30,42,50,.55)] ring-1 ring-black/10">
       <Image
         src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${bank.head.photo}`}
         alt={alt}
@@ -97,16 +97,16 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
     <article className="grid gap-5">
       <section className="craft-card overflow-hidden">
         <div className="grid md:grid-cols-[19rem_minmax(0,1fr)] xl:grid-cols-[22rem_minmax(0,1fr)]">
-        <div className="relative flex items-center gap-4 overflow-hidden bg-[radial-gradient(circle_at_16%_12%,rgba(255,255,255,.9),transparent_36%),linear-gradient(145deg,#f4f5f5_0%,#e7eaec_58%,#d8dde0_100%)] p-5 text-[#142c41] sm:p-6 md:px-5 md:py-7 xl:gap-5 xl:px-7">
+        <div className="relative flex flex-col items-center justify-center gap-4 overflow-hidden bg-[radial-gradient(circle_at_16%_12%,rgba(255,255,255,.9),transparent_36%),linear-gradient(145deg,#f4f5f5_0%,#e7eaec_58%,#d8dde0_100%)] p-6 text-center text-[#142c41] md:px-6 md:py-7 xl:px-8">
           <div className="pointer-events-none absolute inset-0 hero-grid opacity-[.035] mix-blend-multiply" />
           <div className="pointer-events-none absolute -right-20 -bottom-24 h-64 w-64 rounded-full bg-[#9aa8b1]/20 blur-3xl" />
-          <button type="button" onClick={() => onGovernor?.(bank.id)} className="shrink-0 rounded-md text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a52]" aria-label={label("打开行长简介", "Open governor profile")}>
+          <button type="button" onClick={() => onGovernor?.(bank.id)} className="relative shrink-0 rounded-xl text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a52]" aria-label={label("打开行长简介", "Open governor profile")}>
             <Portrait bank={bank} alt={view.photoAlt} />
           </button>
-          <div className="relative min-w-0 flex-1">
+          <div className="relative min-w-0">
             <p className="text-[9px] font-semibold tracking-[0.14em] text-[#66727a] uppercase xl:text-[10px]">{chartName(bank, locale)} · {view.institution}</p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#142c41] xl:text-3xl">
-              <button type="button" onClick={() => onGovernor?.(bank.id)} className="text-left underline decoration-transparent underline-offset-4 hover:decoration-[#142c41]/35">
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#142c41]">
+              <button type="button" onClick={() => onGovernor?.(bank.id)} className="underline decoration-transparent underline-offset-4 hover:decoration-[#142c41]/35">
                 {view.name}
               </button>
             </h2>
@@ -117,8 +117,8 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
           </div>
         </div>
         {place ? (
-          <figure className="contents">
-            <div className="group relative isolate h-60 overflow-hidden border-t border-[#1e3a52]/10 bg-[#d9e1e6] sm:h-64 md:h-72 md:border-t-0 md:border-l">
+          <figure className="border-t border-[#1e3a52]/10 bg-[#f7f8f8] md:border-t-0 md:border-l">
+            <div className="group relative isolate h-60 overflow-hidden bg-[#d9e1e6] sm:h-64 md:h-72">
               <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${place.image}`}
                 alt=""
@@ -137,7 +137,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/20" />
             </div>
-            <figcaption className="border-t border-slate-200/70 bg-white/75 px-4 py-3 text-[11px] leading-relaxed text-slate-500 backdrop-blur-sm md:col-span-2 md:px-5">
+            <figcaption className="border-t border-slate-200/70 bg-white/75 px-4 py-3 text-[11px] leading-relaxed text-slate-500 backdrop-blur-sm">
               <a href={place.addressUrl} target="_blank" rel="noopener noreferrer" className="block text-sm font-medium text-slate-800 underline decoration-slate-300 underline-offset-2">
                 {place.address[locale]}
               </a>
