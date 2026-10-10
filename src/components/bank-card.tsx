@@ -24,7 +24,7 @@ const portraitFrame: Record<string, { position: string; zoom: number }> = {
 function Portrait({ bank, alt }: { bank: Bank; alt: string }) {
   const frame = portraitFrame[bank.id] ?? { position: "50% 25%", zoom: 1 }
   return (
-    <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-xl bg-slate-100 shadow-[0_16px_30px_-20px_rgba(0,0,0,.9)] ring-1 ring-white/15 sm:h-28 sm:w-24">
+    <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-xl bg-[#f7f3ec] shadow-[0_18px_35px_-20px_rgba(54,42,31,.65)] ring-1 ring-black/10 sm:h-28 sm:w-24">
       <Image
         src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${bank.head.photo}`}
         alt={alt}
@@ -98,22 +98,22 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
     <article className="grid gap-5">
       <section className="craft-card overflow-hidden">
         <div className="grid lg:grid-cols-[minmax(0,1fr)_24rem]">
-        <div className="relative flex items-center gap-5 overflow-hidden bg-[#102b42] p-5 text-white sm:p-8">
-          <div className="pointer-events-none absolute inset-0 hero-grid opacity-25" />
-          <div className="pointer-events-none absolute -right-20 -bottom-24 h-72 w-72 rounded-full bg-[#b4532a]/15 blur-3xl" />
+        <div className="relative flex items-center gap-5 overflow-hidden bg-[radial-gradient(circle_at_82%_18%,rgba(180,83,42,.18),transparent_34%),linear-gradient(135deg,#f8f3ea_0%,#e9dfd1_55%,#d9c8b3_100%)] p-5 text-[#142c41] sm:p-8">
+          <div className="pointer-events-none absolute inset-0 hero-grid opacity-[.07] mix-blend-multiply" />
+          <div className="pointer-events-none absolute -right-20 -bottom-24 h-72 w-72 rounded-full bg-[#a9613f]/20 blur-3xl" />
           <button type="button" onClick={() => onGovernor?.(bank.id)} className="shrink-0 rounded-md text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a52]" aria-label={label("打开行长简介", "Open governor profile")}>
             <Portrait bank={bank} alt={view.photoAlt} />
           </button>
           <div className="relative min-w-0 flex-1">
-            <p className="text-[10px] font-semibold tracking-[0.16em] text-white/45 uppercase">{chartName(bank, locale)} · {view.institution}</p>
-            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-4xl">
-              <button type="button" onClick={() => onGovernor?.(bank.id)} className="text-left underline decoration-transparent underline-offset-4 hover:decoration-white/35">
+            <p className="text-[10px] font-semibold tracking-[0.16em] text-[#6f675e] uppercase">{chartName(bank, locale)} · {view.institution}</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-[#142c41] sm:text-4xl">
+              <button type="button" onClick={() => onGovernor?.(bank.id)} className="text-left underline decoration-transparent underline-offset-4 hover:decoration-[#142c41]/35">
                 {view.name}
               </button>
             </h2>
-            <p className="mt-1.5 text-sm text-slate-300">{role}</p>
-            <p className="mt-3 text-[11px] text-white/40">
-              {copy.portrait} · <a href={bank.head.photoPageUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-white/25 underline-offset-2 hover:text-white/70">{copy.biography}</a>
+            <p className="mt-1.5 text-sm text-[#52616b]">{role}</p>
+            <p className="mt-3 text-[11px] text-[#776e64]">
+              {copy.portrait} · <a href={bank.head.photoPageUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-[#776e64]/35 underline-offset-2 hover:text-[#142c41]">{copy.biography}</a>
             </p>
           </div>
         </div>
