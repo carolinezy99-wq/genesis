@@ -28,8 +28,26 @@ export function Dashboard() {
   }, [tab])
 
   const select = (id: string) => {
-    setTab(id)
+    if (window.scrollY <= 48 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window.scrollTo({ top: 0, behavior: "auto" })
+      setTab(id)
+      return
+    }
+
+    let finished = false
+    let fallback = 0
+    const openProfile = () => {
+      if (finished) return
+      finished = true
+      window.clearTimeout(fallback)
+      window.removeEventListener("scrollend", openProfile)
+      window.scrollTo({ top: 0, behavior: "auto" })
+      setTab(id)
+    }
+
+    window.addEventListener("scrollend", openProfile, { once: true })
     window.scrollTo({ top: 0, behavior: "smooth" })
+    fallback = window.setTimeout(openProfile, 1600)
   }
 
   const tabs = [
