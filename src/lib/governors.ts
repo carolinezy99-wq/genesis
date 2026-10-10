@@ -75,16 +75,16 @@ export const governors: Record<string, GovernorProfile> = {
   },
   pboc: {
     term: {
-      en: "Governor since 25 July 2023; PBoC Party Secretary since 1 July 2023.",
-      zh: "2023年7月25日起任中国人民银行行长；2023年7月1日起任中国人民银行党委书记。",
+      en: "Governor since 25 July 2023. The leadership page lists him as Party Secretary and Governor.",
+      zh: "2023年7月25日起任行长。领导页载明现任党委书记、行长。",
     },
     prior: {
-      en: "PBoC Deputy Governor, June 2012–July 2023, and Administrator of the State Administration of Foreign Exchange, January 2016–November 2023. Previously Executive Director and Vice President of Agricultural Bank of China, 2008–2012. From 1993 to 2008 he held a series of roles at ICBC, including Vice President of the Shenzhen branch, head of financial planning and the joint-stock reform office, and Board Secretary.",
-      zh: "2012年6月至2023年7月任中国人民银行副行长，2016年1月至2023年11月兼任国家外汇管理局局长。2008—2012年任中国农业银行执行董事、副行长。1993—2008年在中国工商银行历任深圳分行副行长、计划财务部负责人、股份制改革办公室主任及董事会秘书等职。",
+      en: "Administrator of the State Administration of Foreign Exchange, January 2016–November 2023.",
+      zh: "2016年1月至2023年11月任国家外汇管理局局长。",
     },
     education: {
-      en: "PhD in economics, Renmin University of China. An IMF–PBoC conference biography also records postdoctoral research at Cambridge University and a senior research fellowship at Harvard University.",
-      zh: "中国人民大学经济学博士。IMF—中国人民银行联合会议简历另载：曾在剑桥大学从事博士后研究，并曾任哈佛大学高级研究员。",
+      en: "Postgraduate, PhD in economics.",
+      zh: "研究生学历，经济学博士。",
     },
     bioUrl: "https://www.pbc.gov.cn/hanglingdao/128697/128734/index.html",
     bioLabel: { en: "PBoC leadership page", zh: "人民银行领导简历" },
@@ -94,11 +94,7 @@ export const governors: Record<string, GovernorProfile> = {
     },
     sources: [
       {
-        url: "https://www.imf.org/-/media/files/conferences/2018/6th-pbc/bio-combined.pdf",
-        label: { en: "Career and education: IMF–PBoC conference biography", zh: "履历与教育：IMF—人民银行联合会议简历" },
-      },
-      {
-        url: "https://www.safe.gov.cn/big5/big5/www.safe.gov.cn/safe/file/file/20241012/13639a85db344eeca5ac45c9ebe7e671.pdf",
+        url: "https://www.safe.gov.cn/safe/file/file/20241012/13639a85db344eeca5ac45c9ebe7e671.pdf",
         label: { en: "SAFE tenure: 2023 Annual Report", zh: "外汇局任职：国家外汇管理局2023年年报" },
       },
     ],

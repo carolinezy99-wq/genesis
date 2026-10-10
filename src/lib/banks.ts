@@ -146,7 +146,7 @@ export const banks: Bank[] = [
       {
         kind: "stats",
         institution: "U.S. Bureau of Economic Analysis",
-        title: "Release Schedule（2026年8月个人消费支出定于 2026-09-30）",
+        title: "Release Schedule（2026年9月个人收入与支出定于 2026-10-29）",
         url: "https://www.bea.gov/news/schedule",
         readOn: DATA_AS_OF,
       },
@@ -178,8 +178,8 @@ export const banks: Bank[] = [
     },
     inflationActual: {
       display: "3.8%",
-      period: "2026年9月，同比，快报（2026-10-02 发布）",
-      gauge: "调和消费者物价指数快报；核心 2.5%（8月终值 3.2%）",
+      period: "2026年9月，同比，快报（2026-10-02 发布）。8月整体终值 3.2%",
+      gauge: "调和消费者物价指数快报；核心 2.5%。8月核心终值 2.4%",
       source: {
         kind: "stats",
         institution: "Eurostat",
@@ -344,15 +344,15 @@ export const banks: Bank[] = [
       kind: "official",
       institution: "Bank of Japan",
       title: "Change in the Guideline for Money Market Operations (September 2026 MPM)",
-      url: "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918b.pdf",
+      url: "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918a.pdf",
       readOn: DATA_AS_OF,
     },
     sources: [
       {
         kind: "official",
         institution: "Bank of Japan",
-        title: "Interest rate applied to the complementary deposit facility",
-        url: "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918a.pdf",
+        title: "(Reference) Change in the Guideline for Money Market Operations (September 2026 MPM)",
+        url: "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918b.pdf",
         readOn: DATA_AS_OF,
       },
     ],
@@ -473,7 +473,7 @@ export const banks: Bank[] = [
       chartValue: 1.4,
       barLabel: "1.40",
       includeInChart: true,
-      asOf: "2026-09-24 操作，公告〔2026〕第189号",
+      asOf: "2026-10-09 操作，公告〔2026〕第194号",
       secondary: [
         { nameZh: "1年期贷款市场报价利率", nameEn: "1-year LPR", display: "3.0%" },
         { nameZh: "5年期以上贷款市场报价利率", nameEn: "5-year-plus LPR", display: "3.5%" },
@@ -482,18 +482,25 @@ export const banks: Bank[] = [
     cycle: {
       kind: "hold",
       label: "维持",
-      date: "2026-09-24",
+      date: "2026-10-09",
       sizeLabel: "操作利率未变",
-      detail: "2026-09-24 公告〔2026〕第189号的操作利率仍为 1.40%。上一次调整见公告〔2025〕第1号：2025-05-08 起由 1.50% 下调至 1.40%（−10 bp）。1年期与 5年期以上 LPR 于 2026-09-20 公布，至下次发布前有效。",
+      detail: "2026-10-09 公告〔2026〕第194号开展 20 亿元 7 天期逆回购，利率 1.40%。2026-10-10 公告〔2026〕第195号的 7 天期操作量为零。上一次调整见公告〔2025〕第1号：2025-05-08 起由 1.50% 下调至 1.40%（−10 bp）。1年期与 5年期以上 LPR 于 2026-09-20 公布，至下次发布前有效。",
     },
     primarySource: {
       kind: "official",
       institution: "中国人民银行",
-      title: "公开市场业务交易公告〔2026〕第189号",
-      url: "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html",
+      title: "公开市场业务交易公告〔2026〕第194号",
+      url: "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026100908472888323/index.html",
       readOn: DATA_AS_OF,
     },
     sources: [
+      {
+        kind: "official",
+        institution: "中国人民银行",
+        title: "公开市场业务交易公告〔2026〕第195号（7天期操作量为零）",
+        url: "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026101008463186617/index.html",
+        readOn: DATA_AS_OF,
+      },
       {
         kind: "official",
         institution: "中国人民银行",
@@ -548,7 +555,7 @@ export const banks: Bank[] = [
       titleZh: "行长",
       titleEn: "Governor",
       photo: "/portraits/rbi-sanjay-malhotra.jpg",
-      photoCredit: "Reserve Bank of India（媒体资料；照片说明含 Nishikant Gamre Photography）",
+      photoCredit: "Reserve Bank of India",
       photoPageTitle: "Photographs of the Governor and Deputy Governors",
       photoPageUrl: "https://www.rbi.org.in/scripts/AboutUsDisplay.aspx?pg=MediaKit.htm",
     },
@@ -592,7 +599,7 @@ export const banks: Bank[] = [
       label: "加息",
       date: "2026-10-07",
       sizeLabel: "+25 个基点",
-      detail: "全体一致加息 25 个基点至 5.50%，并将立场改为“校准式收紧”。下次会议为 2026-12-02 至 12-04。",
+      detail: "全体一致上调 25 个基点至 5.50%。立场由中性改为校准收紧，表决不是全体一致：Nagesh Kumar 与 Ram Singh 主张维持中性。下次会议为 2026-12-02 至 12-04。",
     },
     primarySource: {
       kind: "official",

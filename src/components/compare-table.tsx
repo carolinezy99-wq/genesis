@@ -147,8 +147,8 @@ export function CompareTable({ locale, onSelect, onGovernor }: { locale: Locale;
       </div>
       <p className="border-t border-slate-200 px-4 py-3 text-[11px] leading-relaxed text-slate-500 sm:px-5">
         {label(
-          "通胀缺口 = 最新通胀 − 目标（区间取中点）。美国使用目标区间中点 3.875%。新加坡金管局无点目标，因此不计算通胀缺口。所用通胀口径见每格下方。近期决定为最近六次例会决定，均已在央行官网核对（悬停查看日期与内容）；中国人民银行没有例会，显示最近三次 7 天期逆回购利率调整。职责一列为各行法定目标的简要表述，链向官方框架页面。",
-          "Inflation gap = latest inflation − target (range midpoint where the target is a range). The US uses the 3.875% midpoint of its target range. MAS has no point target, so no inflation gap is calculated. The inflation measure used is named under each figure. Recent decisions are the last six scheduled decisions, each checked on the bank's official site (hover a square for date and detail); for the PBoC, which has no scheduled meetings, they are the last three changes to its 7-day rate. The mandate column is a short statement of each statutory objective, linked to the official framework page.",
+          "通胀缺口 = 最新通胀 − 目标（通胀目标为区间时取中点）。美国的缺口是个人消费支出通胀减去 2% 目标。3.875% 是 3.75%–4.00% 联邦基金利率区间的中点，只用于政策利率排序，不进入通胀缺口。新加坡金管局无点目标，因此不计算通胀缺口。所用通胀口径见每格下方。近期决定为最近六次例会决定，均已在央行官网核对（悬停查看日期与内容）；中国人民银行没有例会，显示最近三次 7 天期逆回购利率调整。职责一列为各行法定目标的简要表述，链向官方框架页面。",
+          "Inflation gap = latest inflation − target (range midpoint where the inflation target is a range). The US gap is PCE inflation minus the 2% goal. The 3.875% figure is the midpoint of the 3.75–4.00% federal funds range and is used only to rank policy rates. MAS has no point target, so no inflation gap is calculated. The inflation measure used is named under each figure. Recent decisions are the last six scheduled decisions, each checked on the bank's official site (hover a square for date and detail); for the PBoC, which has no scheduled meetings, they are the last three changes to its 7-day rate. The mandate column is a short statement of each statutory objective, linked to the official framework page.",
         )}
         {" "}{ui[locale].asOf} {DATA_AS_OF}.
       </p>

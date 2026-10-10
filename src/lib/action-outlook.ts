@@ -70,7 +70,7 @@ export const actionOutlooks: Record<string, ActionOutlook> = {
   },
   pboc: {
     recent: [
-      p("Kept the 7-day reverse-repo operation rate at 1.40% in late September.", "9 月下旬将 7 天期逆回购操作利率维持在 1.40%。"),
+      p("The latest conducted 7-day reverse repo was 9 October, Announcement [2026] No. 194, at 1.40%. The 10 October announcement was a zero operation.", "最近一次实际开展的 7 天期逆回购是 10 月 9 日公告〔2026〕第194号，利率 1.40%。10 月 10 日公告的操作量为零。"),
       p("The Q3 policy meeting retained an appropriately accommodative stance.", "第三季度货币政策委员会例会继续保持适度宽松立场。"),
       p("Support has also come through targeted and structural instruments, not only the headline rate.", "政策支持也通过定向与结构性工具实施，并非只依赖主要利率。"),
     ],
@@ -84,7 +84,7 @@ export const actionOutlooks: Record<string, ActionOutlook> = {
     recent: [
       p("Raised the policy repo rate by 25 bp to 5.50% on 7 October.", "10 月 7 日将政策回购利率上调 25 个基点至 5.50%。"),
       p("The six-member MPC approved the increase unanimously.", "六名货币政策委员会成员全体一致支持加息。"),
-      p("The stance changed from neutral to calibrated tightening.", "政策立场由中性转为校准式收紧。"),
+      p("The stance changed from neutral to calibrated tightening. That change was not unanimous: Dr. Nagesh Kumar and Prof. Ram Singh wanted to keep the stance at neutral.", "政策立场由中性转为校准式收紧。这一调整不是全体一致：Nagesh Kumar 与 Ram Singh 主张维持中性。"),
     ],
     forecast: [
       p("Base case for December: hike or hold; a near-term cut is off the table.", "12 月基准情景：加息或维持，近期降息基本不在考虑范围内。"),
@@ -108,7 +108,7 @@ export const actionOutlooks: Record<string, ActionOutlook> = {
     recent: [
       p("Raised the cash-rate target by 25 bp to 4.60% in September.", "9 月将现金利率目标上调 25 个基点至 4.60%。"),
       p("That was the fourth 25 bp increase of 2026 and was approved unanimously.", "这是 2026 年第四次加息 25 个基点，并获全体一致通过。"),
-      p("The Board says inflation remains elevated and the labour market is tight.", "董事会认为通胀仍然偏高，劳动力市场依然紧张。"),
+      p("The Board says inflation remains elevated. Labour market conditions have eased broadly as expected in recent months.", "董事会认为通胀仍然偏高。劳动力市场状况近月已大体如预期放缓。"),
     ],
     forecast: [
       p("Base case: retain a tightening bias, with another 25 bp move possible.", "基准情景：继续保持收紧倾向，并可能再次加息 25 个基点。"),

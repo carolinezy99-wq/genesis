@@ -131,10 +131,10 @@ export const headquarters: Record<string, Headquarters> = {
     image: "/buildings/rba.jpg",
     width: 825,
     height: 1100,
-    alt: { en: "Reserve Bank of Australia head office, Martin Place, Sydney", zh: "澳大利亚储备银行总部，悉尼马丁广场" },
-    address: { en: "65 Martin Place, Sydney NSW 2000", zh: "65 Martin Place, Sydney NSW 2000" },
+    alt: { en: "Reserve Bank building, 65 Martin Place, Sydney", zh: "澳大利亚储备银行大楼，悉尼 65 Martin Place" },
+    address: { en: "8 Chifley Square, Sydney NSW 2000", zh: "8 Chifley Square, Sydney NSW 2000" },
     addressUrl: "https://www.rba.gov.au/contact/locations.html",
-    note: { en: "The head-office building is closed for refurbishment.", zh: "总行大楼因翻修关闭。" },
+    note: { en: "65 Martin Place is currently closed for refurbishment of the Reserve Bank building.", zh: "65 Martin Place 因储备银行大楼翻修，目前关闭。" },
     credit: {
       author: "Danausi",
       licence: "Public domain",

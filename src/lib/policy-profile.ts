@@ -28,12 +28,12 @@ const fedDecision = official("Federal Reserve", "FOMC statement — 16 September
 const fedImplementation = official("Federal Reserve", "Implementation Note — 16 September 2026", "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a1.htm")
 const ecbDecision = official("European Central Bank", "Monetary policy decisions — 10 September 2026", "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp260910~314e508016.en.html")
 const boeDecision = official("Bank of England", "MPC Summary and Minutes — September 2026", "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/september-2026")
-const bojDecision = official("Bank of Japan", "Change in the Guideline for Money Market Operations — September 2026", "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918b.pdf")
-const bojFullDecision = official("Bank of Japan", "Monetary Policy Meeting decision and outlook — September 2026", "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918a.pdf")
+const bojDecision = official("Bank of Japan", "Change in the Guideline for Money Market Operations — September 2026", "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918a.pdf")
+const bojFullDecision = official("Bank of Japan", "Change in the Guideline for Money Market Operations — September 2026", "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918a.pdf")
 const bocDecision = official("Bank of Canada", "Policy-rate decision — 2 September 2026", "https://www.bankofcanada.ca/2026/09/fad-press-release-2026-09-02/")
 const bocFramework = official("Bank of Canada", "Understanding our policy interest rate", "https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/")
 const pbocMeeting = official("People's Bank of China", "Monetary Policy Committee Q3 2026 meeting", "https://www.pbc.gov.cn/goutongjiaoliu/113456/113469/2026092416074632670/index.html")
-const pbocRate = official("People's Bank of China", "Open-market operation announcement No. 189 of 2026", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html")
+const pbocRate = official("People's Bank of China", "Open-market operation announcement No. 194 of 2026", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026100908472888323/index.html")
 const pbocDepartment = official("People's Bank of China", "Monetary Policy Department", "https://www.pbc.gov.cn/zhengcehuobisi/125207/index.html")
 const rbiDecision = official("Reserve Bank of India", "Monetary Policy Statement — 5 to 7 October 2026", "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63742")
 const masDecision = official("Monetary Authority of Singapore", "MAS Monetary Policy Statement — July 2026", "https://www.mas.gov.sg/news/monetary-policy-statements/2026/mas-monetary-policy-statement-27jul26")
@@ -95,7 +95,7 @@ export const policyProfiles: Record<string, PolicyProfile> = {
     outlook: { label: "Official assessment", headline: "Inflation risks require vigilance", detail: "The October statement paired resilient domestic growth with a less benign inflation outlook and external uncertainty.", source: rbiDecision },
     guidance: { label: "Policy guidance", headline: "Hike or pause", detail: "The calibrated-tightening stance removes near-term cuts from consideration; future action remains conditional on growth and inflation data.", source: rbiDecision },
     toolkit: { label: "Policy toolkit", headline: "Repo-led liquidity corridor", detail: "The policy repo rate under the liquidity adjustment facility anchors short-term funding conditions.", source: rbiDecision },
-    transparency: { label: "Decision signal", headline: "Unanimous increase", detail: "All six MPC members voted to raise the repo rate by 25 bp to 5.50%.", source: rbiDecision },
+    transparency: { label: "Decision signal", headline: "Unanimous rate, split stance", detail: "All six MPC members voted to raise the repo rate by 25 bp to 5.50%. Dr. Nagesh Kumar and Prof. Ram Singh wanted to keep the stance at neutral.", source: rbiDecision },
     architectureSource: rbiDecision,
   },
   mas: {
@@ -108,7 +108,7 @@ export const policyProfiles: Record<string, PolicyProfile> = {
   },
   rba: {
     phase: { label: "Policy cycle", headline: "Active tightening", detail: "September delivered the fourth 25 bp increase of 2026, taking the cash rate to 4.60%.", source: rbaDecision },
-    outlook: { label: "Official assessment", headline: "Inflation risks are materialising", detail: "The Board said inflation was elevated and some upside risks had materialised, while labour-market conditions remained tight.", source: rbaDecision },
+    outlook: { label: "Official assessment", headline: "Inflation risks are materialising", detail: "The Board said inflation remains elevated and some upside risks are materialising. Labour market conditions have eased broadly as expected in recent months.", source: rbaDecision },
     guidance: { label: "Forward guidance", headline: "Further tightening remains possible", detail: "The Board said it would do what is necessary to return inflation to target and did not rule out further rate increases.", source: rbaDecision },
     toolkit: { label: "Policy toolkit", headline: "Cash-rate target as the active instrument", detail: "The cash-rate target influences funding costs, credit, demand and the exchange rate.", source: rbaRole },
     transparency: { label: "Decision signal", headline: "Unanimous increase", detail: "The Monetary Policy Board voted unanimously for the September 25 bp rise.", source: rbaDecision },

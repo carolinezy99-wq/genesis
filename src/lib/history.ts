@@ -59,7 +59,7 @@ export const history: Record<string, BankHistory> = {
     nextMeetingNote: "Governing Council 28–29 October",
     headline: { measure: "HICP, flash", value: "3.8%", period: "Sep 2026", url: "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-02102026-ap" },
     core: { measure: "HICP ex energy, food, alcohol & tobacco, flash", value: "2.5%", period: "Sep 2026", url: "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-02102026-ap" },
-    coreNote: "Eurostat flash estimate released 2026-10-02; full September data due 2026-10-16. August final was 3.2%.",
+    coreNote: "Eurostat flash estimate released 2026-10-02; full September data due 2026-10-16. August core (ex energy, food, alcohol and tobacco) was 2.4%.",
   },
   boe: {
     decisions: [
@@ -109,7 +109,7 @@ export const history: Record<string, BankHistory> = {
       d("2024-09-27", "cut", "−20 bp to 1.50%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5468922/index.html"),
       d("2025-05-07", "cut", "−10 bp to 1.40%, effective 2025-05-08", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5699842/index.html"),
     ],
-    historyNote: "The PBoC has no scheduled rate meetings. Shown: the last three changes to the 7-day reverse repo rate. It was still 1.40% at the 2026-09-29 operation.",
+    historyNote: "The PBoC has no scheduled rate meetings. Shown: the last three changes to the 7-day reverse repo rate. The latest conducted 7-day operation was Announcement [2026] No. 194 on 2026-10-09: CNY 2 billion at 1.40%. Announcement [2026] No. 195 on 2026-10-10 was a zero operation.",
     nextMeeting: null,
     nextMeetingNote: "No scheduled rate meetings",
     headline: { measure: "CPI", value: "0.8%", period: "Aug 2026", url: "https://www.stats.gov.cn/sj/zxfbhjd/202609/t20260909_1965263.html" },
@@ -141,7 +141,7 @@ export const history: Record<string, BankHistory> = {
     ],
     historyNote: "MAS adjusts the S$NEER band, not an interest rate: ▲ = tighten, ▼ = ease. No basis-point sizes are published.",
     nextMeeting: { date: "2026-10-14", url: "https://www.mas.gov.sg/monetary-policy/advance-release-calendar" },
-    nextMeetingNote: "Statement due no later than this date",
+    nextMeetingNote: "Statement for Oct 2026",
     headline: { measure: "CPI-All Items", value: "2.3%", period: "Aug 2026", url: "https://www.mas.gov.sg/news/consumer-price-developments/2026/consumer-price-developments-in-august-2026" },
     core: { measure: "MAS Core Inflation", value: "2.2%", period: "Aug 2026", url: "https://www.mas.gov.sg/news/consumer-price-developments/2026/consumer-price-developments-in-august-2026" },
   },

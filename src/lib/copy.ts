@@ -181,8 +181,8 @@ const enBanks: Record<string, EnBank> = {
     indicators: ["Headline inflation (euro-area HICP)", "Inflation excluding energy and food"],
     targetDisplay: "2%",
     targetNote: "Symmetric medium-term target. The 10 September decision says inflation stabilises at its 2% target in the medium term.",
-    period: "September 2026, year over year, flash estimate released 2026-10-02",
-    gauge: "Euro-area HICP flash estimate; core 2.5% (August final 3.2%)",
+    period: "September 2026 flash, released 2026-10-02. August headline final was 3.2%",
+    gauge: "Euro-area HICP flash estimate; core 2.5%. August headline final was 3.2%; August core was 2.4%",
     gaugeShort: "HICP flash",
     policyName: "Deposit facility rate",
     policyDisplay: "2.50%",
@@ -190,7 +190,7 @@ const enBanks: Record<string, EnBank> = {
     secondary: ["Main refinancing operations", "Marginal lending facility"],
     cycleLabel: "Hike",
     sizeLabel: "+25 bp",
-    detail: "All three key rates were raised by 25 basis points. The bar in the chart is the deposit facility rate.",
+    detail: "All three key rates were raised by 25 basis points. The compared rate is the deposit facility rate.",
   },
   boe: {
     bodyName: "Monetary Policy Committee (MPC)",
@@ -255,12 +255,12 @@ const enBanks: Record<string, EnBank> = {
     gaugeShort: "CPI",
     policyName: "7-day reverse repo operation rate",
     policyDisplay: "1.40%",
-    asOf: "2026-09-24 operation, Announcement [2026] No. 189",
+    asOf: "2026-10-09 operation, Announcement [2026] No. 194",
     secondary: ["1-year LPR", "5-year-plus LPR"],
     cycleLabel: "Hold",
     sizeLabel: "Operation rate unchanged",
     detail:
-      "Announcement [2026] No. 189 on 2026-09-24 was still at 1.40%. The previous change is Announcement [2025] No. 1: from 1.50% to 1.40% effective 2025-05-08 (−10 bp). The 1-year and 5-year-plus LPRs were published on 2026-09-20 and stay in force until the next release.",
+      "Announcement [2026] No. 194 on 2026-10-09 conducted a 7-day reverse repo of CNY 2 billion at 1.40%. Announcement [2026] No. 195 on 2026-10-10 was a zero 7-day operation. The previous change is Announcement [2025] No. 1: from 1.50% to 1.40% effective 2025-05-08 (−10 bp). The 1-year and 5-year-plus LPRs were published on 2026-09-20 and stay in force until the next release.",
   },
   rbi: {
     bodyName: "Monetary Policy Committee (MPC)",
@@ -277,7 +277,7 @@ const enBanks: Record<string, EnBank> = {
     secondary: ["Standing deposit facility", "MSF and Bank Rate"],
     cycleLabel: "Hike",
     sizeLabel: "+25 bp",
-    detail: "Unanimous 25 bp increase to 5.50%, with the stance changed to calibrated tightening. Next meeting 2026-12-02 to 2026-12-04.",
+    detail: "Unanimous 25 bp increase to 5.50%. The stance changed from neutral to calibrated tightening by 4–2: Dr. Nagesh Kumar and Prof. Ram Singh wanted to keep the stance at neutral. Next meeting 2026-12-02 to 2026-12-04.",
   },
   mas: {
     bodyName: "Monetary and Investment Policy Meeting",
@@ -296,7 +296,7 @@ const enBanks: Record<string, EnBank> = {
     cycleLabel: "Tighten",
     sizeLabel: "Basis points not published",
     detail:
-      "MAS raised the rate of appreciation of the band by less than the April increase. The width and centre were unchanged. The statement does not give basis points. The Business Times report the same day repeats “very slightly” and also gives no basis-point figure. The next statement is due no later than October 2026.",
+      "MAS raised the rate of appreciation of the band by less than the April increase. The width and centre were unchanged. The statement does not give basis points. The Business Times report the same day repeats “very slightly” and also gives no basis-point figure. The next statement is the 14 October 2026 statement.",
     framework:
       "Singapore’s monetary policy instrument is the policy band for the Singapore dollar nominal effective exchange rate (S$NEER), not a policy interest rate. MAS lets the trade-weighted exchange rate fluctuate inside a crawling band, and uses that path to restrain import prices and medium-term inflation.",
   },
@@ -333,8 +333,8 @@ const linkText: Record<string, { en: string; zh: string }> = {
     zh: "2026年9月16日实施说明",
   },
   "https://www.bea.gov/news/schedule": {
-    en: "Release schedule: August 2026 PCE on 30 September",
-    zh: "发布日程：8月个人消费支出于 9月30日",
+    en: "Release schedule: September 2026 Personal Income and Outlays on 29 October",
+    zh: "发布日程：9月个人收入与支出于 10月29日",
   },
   "https://ec.europa.eu/eurostat/web/products-euro-indicators/w/2-02102026-ap": {
     en: "Euro-area inflation 3.8% in September 2026 (flash estimate, released 2 October)",
@@ -361,12 +361,12 @@ const linkText: Record<string, { en: string; zh: string }> = {
     zh: "2026年8月日本消费者物价指数",
   },
   "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918b.pdf": {
-    en: "Money-market guideline, 18 September 2026",
-    zh: "2026年9月18日金融市场调节方针",
+    en: "(Reference) Change in the Guideline for Money Market Operations, September 2026",
+    zh: "2026年9月金融市场调节方针说明",
   },
   "https://www.boj.or.jp/en/mopo/mpmdeci/mpr_2026/k260918a.pdf": {
-    en: "Complementary deposit facility rate",
-    zh: "互补存款便利适用利率",
+    en: "Change in the Guideline for Money Market Operations, 18 September 2026",
+    zh: "2026年9月18日金融市场调节方针",
   },
   "https://www150.statcan.gc.ca/n1/daily-quotidien/260914/dq260914a-eng.htm": {
     en: "Consumer price index, August 2026",
@@ -384,9 +384,13 @@ const linkText: Record<string, { en: string; zh: string }> = {
     en: "CPI up 0.8% year over year in August 2026",
     zh: "2026年8月居民消费价格同比上涨 0.8%",
   },
-  "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html": {
-    en: "Open-market announcement [2026] No. 189",
-    zh: "公开市场业务交易公告〔2026〕第189号",
+  "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026100908472888323/index.html": {
+    en: "Open-market announcement [2026] No. 194",
+    zh: "公开市场业务交易公告〔2026〕第194号",
+  },
+  "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026101008463186617/index.html": {
+    en: "Open-market announcement [2026] No. 195 (zero 7-day operation)",
+    zh: "公开市场业务交易公告〔2026〕第195号（7天期操作量为零）",
   },
   "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5699842/index.html": {
     en: "Open-market announcement [2025] No. 1",
@@ -523,7 +527,7 @@ const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
     en: [
       {
         date: "2026-10-09",
-        title: "Cross-Market Operational Resilience Group completes SIMEX26",
+        title: "CMORG holds sector-wide cloud outage simulation exercise",
         line: "Thirty-eight systemically important firms tested their response to a global disruption of cloud-based services.",
         url: "https://www.bankofengland.co.uk/news/2026/october/cmorg-holds-sector-wide-cloud-outage-simulation-exercise",
       },
@@ -558,8 +562,8 @@ const news: Record<string, { en: NewsItem[]; zh: NewsItem[] }> = {
       },
       {
         date: "2026-10-01",
-        title: "Tankan (September): Summary and Outline",
-        line: "The September Tankan summary and outline.",
+        title: "Tankan (Sept. 2026 Survey)",
+        line: "Summary and outline of the September 2026 Tankan.",
         url: "https://www.boj.or.jp/en/statistics/tk/tankan09a.htm",
       },
     ],
@@ -769,8 +773,8 @@ const extraReason: Record<string, { en: string; zh: string }> = {
     zh: "目标区间的走廊利率，不纳入对照。",
   },
   ecb: {
-    en: "The other two key rates. The chart uses the deposit facility rate.",
-    zh: "另外两项关键利率。对照柱是存款便利利率。",
+    en: "The other two key rates. The compared rate is the deposit facility rate.",
+    zh: "另外两项关键利率。用于对照的是存款便利利率。",
   },
   boc: {
     en: "Top and bottom of the overnight corridor.",
