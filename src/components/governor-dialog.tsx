@@ -89,6 +89,11 @@ export function GovernorDialog({ bankId, locale, onClose }: { bankId: string | n
               {profile.termSource.label[locale]}
             </a>
           ) : null}
+          {profile.sources?.map((source) => (
+            <a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer" className="text-slate-600 underline decoration-slate-300 underline-offset-2">
+              {source.label[locale]}
+            </a>
+          ))}
         </p>
       </div>
     </div>
