@@ -21,12 +21,12 @@ const portraitFrame: Record<string, { position: string; zoom: number }> = {
 function Portrait({ bank, alt }: { bank: Bank; alt: string }) {
   const frame = portraitFrame[bank.id] ?? { position: "50% 25%", zoom: 1 }
   return (
-    <div className="relative h-36 w-28 shrink-0 overflow-hidden rounded-xl bg-slate-100 shadow-[0_8px_20px_-14px_rgba(30,58,82,0.8)] ring-1 ring-[#1e3a52]/10">
+    <div className="relative h-40 w-32 shrink-0 overflow-hidden rounded-2xl bg-slate-100 shadow-[0_18px_36px_-20px_rgba(0,0,0,.9)] ring-1 ring-white/15 sm:h-44 sm:w-36">
       <Image
         src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${bank.head.photo}`}
         alt={alt}
         fill
-        sizes="112px"
+        sizes="144px"
         priority
         className="object-cover"
         style={{ objectPosition: frame.position, transform: `scale(${frame.zoom})`, transformOrigin: frame.position }}
@@ -92,34 +92,37 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
   return (
     <article className="grid gap-5">
       <section className="craft-card overflow-hidden">
-        <div className="grid lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <div className="flex gap-4 p-5 sm:p-6">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_24rem]">
+        <div className="relative flex items-center gap-5 overflow-hidden bg-[#102b42] p-5 text-white sm:p-8">
+          <div className="pointer-events-none absolute inset-0 hero-grid opacity-25" />
+          <div className="pointer-events-none absolute -right-20 -bottom-24 h-72 w-72 rounded-full bg-[#b4532a]/15 blur-3xl" />
           <button type="button" onClick={() => onGovernor?.(bank.id)} className="shrink-0 rounded-md text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a52]" aria-label={label("打开行长简介", "Open governor profile")}>
             <Portrait bank={bank} alt={view.photoAlt} />
           </button>
-          <div className="min-w-0 flex-1">
-            <h2 className="text-2xl font-semibold tracking-tight text-[#1e3a52] sm:text-3xl">
-              <button type="button" onClick={() => onGovernor?.(bank.id)} className="text-left underline decoration-transparent underline-offset-4 hover:decoration-[#1e3a52]/40">
+          <div className="relative min-w-0 flex-1">
+            <p className="text-[10px] font-semibold tracking-[0.16em] text-white/45 uppercase">{chartName(bank, locale)} · {view.institution}</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-4xl">
+              <button type="button" onClick={() => onGovernor?.(bank.id)} className="text-left underline decoration-transparent underline-offset-4 hover:decoration-white/35">
                 {view.name}
               </button>
             </h2>
-            <p className="mt-1 text-sm text-slate-600">{role}</p>
-            <p className="mt-3 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-700">
+            <p className="mt-1.5 text-sm text-slate-300">{role}</p>
+            <p className="mt-4 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-200">
               <span className="inline-flex items-center gap-1.5 font-medium"><span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: stanceColor[m.stance] }} />{view.stanceLabel}</span>
-              <span className="text-slate-400">·</span>
+              <span className="text-white/30">·</span>
               <span>{view.cycleSize}</span>
-              <span className="text-slate-400">·</span>
+              <span className="text-white/30">·</span>
               <span className="tabular-nums">{bank.cycle.date}</span>
               <SourceLink source={bank.primarySource} locale={locale} />
             </p>
-            <p className="mt-2 text-[11px] text-slate-400">
-              {copy.portrait} · <a href={bank.head.photoPageUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">{copy.biography}</a>
+            <p className="mt-3 text-[11px] text-white/40">
+              {copy.portrait} · <a href={bank.head.photoPageUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-white/25 underline-offset-2 hover:text-white/70">{copy.biography}</a>
             </p>
           </div>
         </div>
         {place ? (
           <figure className="border-t border-[#1e3a52]/10 lg:border-t-0 lg:border-l">
-            <div className="relative h-44 bg-slate-100 sm:h-52">
+            <div className="relative h-52 bg-slate-100 sm:h-60 lg:h-56">
               <Image
                 src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${place.image}`}
                 alt={place.alt[locale]}
