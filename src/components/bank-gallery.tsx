@@ -78,16 +78,6 @@ export function BankGallery({ locale, onSelect }: { locale: Locale; onSelect: (i
                   <p className="truncate text-[11px] text-muted-foreground">{view.bodyName}</p>
                 </div>
               </div>
-              <div className="mt-3 flex items-end justify-between border-t border-black/8 pt-2.5">
-                <div>
-                  <p className="text-[10px] tracking-wide text-muted-foreground uppercase">{view.policyName}</p>
-                  <p className="mt-0.5 text-xl font-semibold tabular-nums tracking-tight">{view.policyDisplay}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-[10px] tracking-wide text-muted-foreground uppercase">{locale === "zh" ? "通胀 / 目标" : "Inflation / target"}</p>
-                  <p className="mt-0.5 text-sm font-semibold tabular-nums">{view.latestValue} <span className="font-normal text-muted-foreground">/ {view.targetDisplay}</span></p>
-                </div>
-              </div>
             </button>
           )
         })}

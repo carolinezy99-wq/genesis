@@ -1,13 +1,12 @@
 "use client"
 
-import { chartName, presentBank, type Locale } from "@/lib/copy"
+import { chartName, type Locale } from "@/lib/copy"
 import type { Bank } from "@/lib/banks"
 import { inflationPathFor } from "@/lib/inflation-path"
-import { allMetrics, metricsFor, summary } from "@/lib/metrics"
+import { allMetrics, metricsFor } from "@/lib/metrics"
 
 export function Reading({ locale }: { locale: Locale }) {
   const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
-  const s = summary(locale)
   const rows = allMetrics(locale)
   const above = rows.filter((row) => row.m.gap != null && row.m.gap > 0)
   const below = rows.filter((row) => row.m.gap != null && row.m.gap < 0)
@@ -26,15 +25,6 @@ export function Reading({ locale }: { locale: Locale }) {
       </p>
       <ol className="mt-4 grid gap-3 text-sm leading-relaxed text-slate-700">
         <li>
-          {label("最近一次决定中，", "Of the latest decisions, ")}
-          <strong className="font-semibold text-slate-900">{s.tightening}</strong>
-          {label(" 家收紧，", " are tightening, ")}
-          <strong className="font-semibold text-slate-900">{s.holding}</strong>
-          {label(" 家维持，", " are holding, and ")}
-          <strong className="font-semibold text-slate-900">{s.easing}</strong>
-          {label(" 家宽松。", " are easing.")}
-        </li>
-        <li>
           {label(
             `通胀高于本页所用目标的是${names(above)}。低于目标的是${names(below)}。新加坡金管局没有点目标。`,
             `Inflation is above the target used on this page in ${names(above)}. It is below target in ${names(below)}. MAS has no point target.`,
@@ -44,12 +34,6 @@ export function Reading({ locale }: { locale: Locale }) {
           {label(
             `${names(tighteningAbove)}在最近一次决定中收紧，同时通胀仍高于目标。${names(holdingAbove)}在通胀仍高于目标时维持。`,
             `${names(tighteningAbove)} tightened at the latest decision while inflation was still above target. ${names(holdingAbove)} are holding with inflation still above target.`,
-          )}
-        </li>
-        <li>
-          {label(
-            `政策利率最高的是${chartName(s.highest.bank, locale)} ${presentBank(s.highest.bank, locale).policyDisplay}。设定利率的央行中最低的是${chartName(s.lowest.bank, locale)} ${presentBank(s.lowest.bank, locale).policyDisplay}。`,
-            `The highest policy rate is ${chartName(s.highest.bank, locale)} at ${presentBank(s.highest.bank, locale).policyDisplay}. The lowest among rate-setting banks is ${chartName(s.lowest.bank, locale)} at ${presentBank(s.lowest.bank, locale).policyDisplay}.`,
           )}
         </li>
       </ol>

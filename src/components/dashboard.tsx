@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { BankPanel } from "@/components/bank-card"
 import { BankGallery } from "@/components/bank-gallery"
 import { CompareTable } from "@/components/compare-table"
-import { GapRealScatter, RateRealChart } from "@/components/compare-charts"
+import { RateRealChart } from "@/components/compare-charts"
 import { GovernorDialog } from "@/components/governor-dialog"
 import { useLocale } from "@/components/locale"
 import { OverviewHero } from "@/components/overview-hero"
@@ -79,14 +79,11 @@ export function Dashboard() {
       <main className="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 lg:px-8">
         {tab === "overview" ? (
           <div role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" className="grid gap-7">
-            <OverviewHero locale={locale} onSelect={select} />
-            <BankGallery locale={locale} onSelect={select} />
-            <div className="grid gap-5 lg:grid-cols-2">
-              <RateRealChart locale={locale} />
-              <GapRealScatter locale={locale} />
-            </div>
+            <OverviewHero locale={locale} />
+            <RateRealChart locale={locale} />
             <Reading locale={locale} />
             <CompareTable locale={locale} onSelect={select} onGovernor={setGovernorId} />
+            <BankGallery locale={locale} onSelect={select} />
           </div>
         ) : selected ? (
           <div role="tabpanel" id={`panel-${selected.id}`} aria-labelledby={`tab-${selected.id}`}>
