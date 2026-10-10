@@ -137,7 +137,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/20" />
             </div>
-            <figcaption className="border-t border-slate-200/70 bg-white/75 px-4 py-3 text-[11px] leading-relaxed text-slate-500 backdrop-blur-sm">
+            <figcaption className="border-t border-slate-200/70 bg-white/75 px-4 py-3 text-center text-[11px] leading-relaxed text-slate-500 backdrop-blur-sm">
               <a href={place.addressUrl} target="_blank" rel="noopener noreferrer" className="block text-sm font-medium text-slate-800 underline decoration-slate-300 underline-offset-2">
                 {place.address[locale]}
               </a>
