@@ -9,6 +9,7 @@ import { chartName, kindLabel, presentBank, sourceTitle, ui, type Locale } from 
 import { history, HISTORY_CHECKED_ON } from "@/lib/history"
 import { inflationPathFor } from "@/lib/inflation-path"
 import { metricsFor, signed, stanceColor } from "@/lib/metrics"
+import { headquarters } from "@/lib/places"
 
 const portraitFrame: Record<string, { position: string; zoom: number }> = {
   boc: { position: "49% 30%", zoom: 1.15 },
@@ -81,6 +82,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
   const context = policyContext[bank.id]
   const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
   const role = `${view.title}${locale === "zh" ? "，" : ", "}${view.institution}`
+  const place = headquarters[bank.id]
   const noRate = m.policyRate == null
   const path = inflationPathFor(bank.id)
   const otherInflation = (["headline", "core"] as const)
@@ -89,8 +91,9 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
 
   return (
     <article className="grid gap-5">
-      <section className="craft-card p-5 sm:p-6">
-        <div className="flex gap-4">
+      <section className="craft-card overflow-hidden">
+        <div className="grid lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="flex gap-4 p-5 sm:p-6">
           <button type="button" onClick={() => onGovernor?.(bank.id)} className="shrink-0 rounded-md text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1e3a52]" aria-label={label("打开行长简介", "Open governor profile")}>
             <Portrait bank={bank} alt={view.photoAlt} />
           </button>
@@ -113,6 +116,37 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
               {copy.portrait} · <a href={bank.head.photoPageUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">{copy.biography}</a>
             </p>
           </div>
+        </div>
+        {place ? (
+          <figure className="border-t border-[#1e3a52]/10 lg:border-t-0 lg:border-l">
+            <div className="relative h-44 bg-slate-100 sm:h-52">
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${place.image}`}
+                alt={place.alt[locale]}
+                fill
+                sizes="288px"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="px-4 py-3 text-[11px] leading-relaxed text-slate-500">
+              <a href={place.addressUrl} target="_blank" rel="noopener noreferrer" className="block text-sm font-medium text-slate-800 underline decoration-slate-300 underline-offset-2">
+                {place.address[locale]}
+              </a>
+              {place.note ? <span className="mt-1 block">{place.note[locale]}</span> : null}
+              <span className="mt-1 block">
+                {place.credit.author}
+                {" · "}
+                {place.credit.licenceUrl ? (
+                  <a href={place.credit.licenceUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">{place.credit.licence}</a>
+                ) : (
+                  place.credit.licence
+                )}
+                {" · "}
+                <a href={place.credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-slate-300 underline-offset-2">{label("来源", "Source")}</a>
+              </span>
+            </figcaption>
+          </figure>
+        ) : null}
         </div>
       </section>
 
@@ -222,6 +256,7 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
                   <p className="text-[11px] tabular-nums text-slate-500">{item.date}</p>
                   <a href={item.url} target="_blank" rel="noopener noreferrer" className="mt-0.5 block text-sm font-medium break-words text-slate-800 underline decoration-slate-300 underline-offset-2">{item.title}</a>
                   {item.line ? <p className="mt-1 text-sm leading-relaxed text-slate-500">{item.line}</p> : null}
+                  {item.sourceLabel ? <p className="mt-1 text-[11px] text-slate-400">{item.sourceLabel}</p> : null}
                 </li>
               ))}
             </ul>

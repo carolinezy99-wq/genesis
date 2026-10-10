@@ -105,6 +105,7 @@ export function Dashboard() {
         <div className="mx-auto max-w-7xl px-4 py-4 text-[11px] leading-relaxed text-slate-500 sm:px-6">
           <p className="text-xs text-slate-700">{copy.asOf} <strong className="font-semibold tabular-nums">{DATA_AS_OF}</strong>. {label("数字取自各央行与官方统计机构页面；打开网页时不会重新抓取。", "Figures were read from central-bank and official statistics pages on that date; the site does not re-fetch them.")}</p>
           <p className="mt-1">{label("德国、法国、意大利由欧洲央行代表。通胀缺口为本页根据所列数字计算的分析指标，不是央行官方表述。", "Germany, France and Italy are covered by the ECB. The inflation gap is computed on this page from the figures shown; it is not official central-bank language.")}</p>
+          <p className="mt-1">{label("各行新闻已于 2026-10-10 按官网更新。其余数字仍使用其各自标注的日期。", "News was refreshed on 2026-10-10 from each bank's official site. Other figures keep the dates shown with them.")}</p>
         </div>
       </footer>
       <GovernorDialog bankId={governorId} locale={locale} onClose={closeGovernor} />
