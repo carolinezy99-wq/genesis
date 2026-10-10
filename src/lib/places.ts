@@ -87,16 +87,16 @@ export const headquarters: Record<string, Headquarters> = {
   },
   pboc: {
     image: "/buildings/pboc.jpg",
-    width: 1100,
-    height: 825,
-    alt: { en: "People's Bank of China headquarters, Beijing", zh: "中国人民银行总行，北京" },
+    width: 1920,
+    height: 1538,
+    alt: { en: "People's Bank of China head office on Beijing Financial Street", zh: "北京金融街的中国人民银行总行办公楼" },
     address: { en: "No. 32 Chengfang Street, Xicheng District, Beijing 100800", zh: "北京市西城区成方街32号，邮编 100800" },
     addressUrl: "https://www.pbc.gov.cn/bangongting/135485/3310241/index.html",
     credit: {
-      author: "Max12Max",
-      licence: "CC BY-SA 4.0",
-      licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:People%27s_Bank_of_China_Headquarter,_Beijing.jpg",
+      author: "Boubloub",
+      licence: "CC0 1.0",
+      licenceUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Beijing_PBC_NewHQ.jpg",
     },
   },
   rbi: {

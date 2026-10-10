@@ -3,13 +3,16 @@ import { DecisionStrip } from "@/components/decision-strip"
 import { BankReading } from "@/components/reading"
 import { SourceLink } from "@/components/source-link"
 import { Sparkline } from "@/components/sparkline"
+import { ListChecks, Telescope } from "lucide-react"
 import { policyContext } from "@/lib/analysis"
-import type { Bank, Source } from "@/lib/banks"
+import { actionOutlooks } from "@/lib/action-outlook"
+import { DATA_AS_OF, type Bank, type Source } from "@/lib/banks"
 import { chartName, kindLabel, presentBank, sourceTitle, ui, type Locale } from "@/lib/copy"
 import { history, HISTORY_CHECKED_ON } from "@/lib/history"
 import { inflationPathFor } from "@/lib/inflation-path"
 import { metricsFor, signed, stanceColor } from "@/lib/metrics"
 import { headquarters } from "@/lib/places"
+import { policyProfiles } from "@/lib/policy-profile"
 
 const portraitFrame: Record<string, { position: string; zoom: number }> = {
   boc: { position: "49% 30%", zoom: 1.15 },
@@ -80,6 +83,8 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
   const m = metricsFor(bank, locale)
   const h = history[bank.id]
   const context = policyContext[bank.id]
+  const actionOutlook = actionOutlooks[bank.id]
+  const policyProfile = policyProfiles[bank.id]
   const label = (zh: string, en: string) => (locale === "zh" ? zh : en)
   const role = `${view.title}${locale === "zh" ? "，" : ", "}${view.institution}`
   const place = headquarters[bank.id]
@@ -216,6 +221,52 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
           <p className="mt-1 text-[11px] text-slate-500">{h?.nextMeetingNote ?? (h?.nextMeeting ? "" : label("未核实", "Not verified"))}</p>
         </div>
       </section>
+
+      {actionOutlook ? (
+        <section className="grid gap-4 lg:grid-cols-2">
+          <div className="craft-card overflow-hidden p-5 sm:p-6">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="eyebrow flex items-center gap-1.5"><ListChecks className="h-3.5 w-3.5" />{label("近期动作", "Recent moves")}</p>
+                <h3 className="mt-1 text-lg font-semibold tracking-tight text-[#142c41]">{label("最近发生了什么", "What changed")}</h3>
+              </div>
+              <SourceLink source={bank.primarySource} locale={locale} />
+            </div>
+            <ul className="mt-4 grid gap-3 text-sm leading-relaxed text-slate-700">
+              {actionOutlook.recent.map((item) => (
+                <li key={item.en} className="flex gap-2.5">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#b4532a]" />
+                  <span>{item[locale]}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="craft-card overflow-hidden border-[#d7b46a]/35 bg-[linear-gradient(145deg,#fff_0%,#fbf7ed_100%)] p-5 sm:p-6">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="eyebrow flex items-center gap-1.5"><Telescope className="h-3.5 w-3.5" />{label("未来展望", "Forward outlook")}</p>
+                <h3 className="mt-1 text-lg font-semibold tracking-tight text-[#142c41]">{label("分析基准情景", "Analytical base case")}</h3>
+              </div>
+              {policyProfile ? <SourceLink source={policyProfile.guidance.source} locale={locale} /> : null}
+            </div>
+            <ul className="mt-4 grid gap-3 text-sm leading-relaxed text-slate-700">
+              {actionOutlook.forecast.map((item) => (
+                <li key={item.en} className="flex gap-2.5">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#d7a94f]" />
+                  <span>{item[locale]}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 border-t border-[#d7b46a]/25 pt-3 text-[10px] leading-relaxed text-slate-500">
+              {label(
+                `基于截至 ${DATA_AS_OF} 的官方决定与通胀数据形成的情景判断，不是央行指引或投资建议。`,
+                `Scenario view derived from official decisions and inflation data available through ${DATA_AS_OF}. Not central-bank guidance or investment advice.`,
+              )}
+            </p>
+          </div>
+        </section>
+      ) : null}
 
       <section className="craft-card p-5 sm:p-6">
         <SectionTitle>{label("本行解读", "This bank")}</SectionTitle>
