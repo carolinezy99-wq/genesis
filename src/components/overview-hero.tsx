@@ -8,7 +8,7 @@ import { history } from "@/lib/history"
 import { metricsFor, stanceColor, summary } from "@/lib/metrics"
 import { headquarters } from "@/lib/places"
 
-const featured = ["ecb", "boj", "fed"]
+const featured = ["fed", "ecb", "boe", "boj", "boc", "pboc", "rbi", "mas", "rba"]
 
 const stanceIcon = {
   tightening: ArrowUpRight,
@@ -34,24 +34,32 @@ export function OverviewHero({ locale, onSelect }: { locale: Locale; onSelect: (
   return (
     <div className="grid gap-5">
       <section className="hero-shell relative overflow-hidden rounded-[1.75rem] bg-[#0b2034] text-white shadow-[0_28px_70px_-38px_rgba(8,30,49,0.9)]">
-        <div className="absolute inset-y-0 right-0 hidden w-[52%] lg:grid lg:grid-cols-3">
-          {featured.map((id, index) => {
+        <div className="absolute inset-y-0 right-0 hidden w-[60%] lg:grid lg:grid-cols-3 lg:grid-rows-3">
+          {featured.map((id) => {
             const place = headquarters[id]
+            const bank = banks.find((item) => item.id === id)
             return place ? (
-              <div key={id} className="relative overflow-hidden border-l border-white/10" style={{ transform: `skewX(${index === 1 ? -4 : 0}deg)` }}>
+              <div key={id} className="relative overflow-hidden border-l border-t border-white/15 first:border-t-0">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${place.image}`}
                   alt={place.alt[locale]}
                   fill
                   priority
-                  sizes="220px"
-                  className="object-cover opacity-55 saturate-[.8]"
+                  sizes="260px"
+                  className="object-cover opacity-75 saturate-[.78] contrast-[1.06]"
                 />
+                {bank ? (
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#071725]/85 via-[#071725]/45 to-transparent px-2.5 pt-6 pb-1.5">
+                    <span className="block truncate text-[9px] font-semibold tracking-[0.12em] text-white/85 uppercase">
+                      {chartName(bank, locale)}
+                    </span>
+                  </div>
+                ) : null}
               </div>
             ) : null
           })}
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#0b2034_0%,rgba(11,32,52,.96)_43%,rgba(11,32,52,.4)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#0b2034_0%,rgba(11,32,52,.98)_36%,rgba(11,32,52,.74)_51%,rgba(11,32,52,.08)_100%)]" />
         <div className="pointer-events-none absolute inset-0 hero-grid opacity-20" />
 
         <div className="relative z-10 max-w-3xl px-5 py-7 sm:px-8 sm:py-9 lg:py-11">
