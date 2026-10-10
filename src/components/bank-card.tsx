@@ -10,7 +10,7 @@ import { DATA_AS_OF, type Bank, type Source } from "@/lib/banks"
 import { chartName, kindLabel, presentBank, sourceTitle, ui, type Locale } from "@/lib/copy"
 import { history, HISTORY_CHECKED_ON } from "@/lib/history"
 import { inflationPathFor } from "@/lib/inflation-path"
-import { metricsFor, signed, stanceColor } from "@/lib/metrics"
+import { metricsFor, signed } from "@/lib/metrics"
 import { headquarters } from "@/lib/places"
 import { policyProfiles } from "@/lib/policy-profile"
 
@@ -112,14 +112,6 @@ export function BankPanel({ bank, locale, onGovernor }: { bank: Bank; locale: Lo
               </button>
             </h2>
             <p className="mt-1.5 text-sm text-slate-300">{role}</p>
-            <p className="mt-4 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-200">
-              <span className="inline-flex items-center gap-1.5 font-medium"><span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: stanceColor[m.stance] }} />{view.stanceLabel}</span>
-              <span className="text-white/30">·</span>
-              <span>{view.cycleSize}</span>
-              <span className="text-white/30">·</span>
-              <span className="tabular-nums">{bank.cycle.date}</span>
-              <SourceLink source={bank.primarySource} locale={locale} />
-            </p>
             <p className="mt-3 text-[11px] text-white/40">
               {copy.portrait} · <a href={bank.head.photoPageUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-white/25 underline-offset-2 hover:text-white/70">{copy.biography}</a>
             </p>

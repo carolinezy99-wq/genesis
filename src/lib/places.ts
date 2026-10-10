@@ -86,7 +86,7 @@ export const headquarters: Record<string, Headquarters> = {
     },
   },
   pboc: {
-    image: "/buildings/pboc.jpg",
+    image: "/buildings/pboc-flag.jpg",
     width: 1100,
     height: 825,
     alt: { en: "People's Bank of China headquarters, Beijing", zh: "中国人民银行总行，北京" },
