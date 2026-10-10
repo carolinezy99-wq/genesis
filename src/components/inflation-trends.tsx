@@ -48,8 +48,8 @@ export function InflationTrends({ locale }: { locale: Locale }) {
       </div>
       <p className="mt-3 text-[11px] leading-relaxed text-slate-500">
         {label(
-          "欧元区、中国、印度和新加坡没有这条线：这里没有核对到 2025年9月至2026年8月完整的官方月度序列。它们的最新读数仍在上方对照表中。",
-          "The euro area, China, India and Singapore have no line here: a complete official monthly series for September 2025–August 2026 was not available from the sources checked. Their latest readings stay in the table above.",
+          "中国、印度和新加坡没有这条线：这里没有核对到 2025年9月至2026年8月完整的官方月度序列。它们的最新读数仍在上方对照表中。",
+          "China, India and Singapore have no line here: a complete official monthly series for September 2025–August 2026 was not available from the sources checked. Their latest readings stay in the table above.",
         )}
       </p>
     </section>
