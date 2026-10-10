@@ -6,6 +6,7 @@ const isStaticExport = isSitesStaticExport || isGitHubPages;
 const basePath = isGitHubPages ? "/genesis" : undefined;
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   output: isStaticExport ? "export" : undefined,
   basePath,
   assetPrefix: basePath,

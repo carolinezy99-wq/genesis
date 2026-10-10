@@ -104,14 +104,12 @@ export const history: Record<string, BankHistory> = {
   },
   pboc: {
     decisions: [
-      d("2026-04-30", "hold", "7-day reverse-repo rate unchanged at 1.40%", "https://www.mnimarkets.com/articles/pboc-injects-cny1257bn-via-omo-1777512396005"),
-      d("2026-05-29", "hold", "7-day reverse-repo rate unchanged at 1.40%", "https://www.mnimarkets.com/articles/pboc-withdraws-cny30bn-via-omo-1780018265305"),
-      d("2026-06-29", "hold", "7-day reverse-repo rate unchanged at 1.40%", "https://finance.yahoo.com/economy/policy/articles/china-debuts-overnight-reverse-repos-050826868.html"),
-      d("2026-07-29", "hold", "7-day reverse-repo rate unchanged at 1.40%", "https://uk.marketscreener.com/news/china-sets-overnight-reverse-repo-rate-steady-at-1-25-sources-say-ce7f51d2dd89f22d"),
-      d("2026-08-19", "hold", "7-day reverse-repo rate unchanged at 1.40%", "https://www.mnimarkets.com/articles/pboc-withdraws-cny1423bn-during-omo-1787102873686"),
+      d("2024-07-22", "cut", "−10 bp to 1.70%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5409998/index.html"),
+      d("2024-09-27", "cut", "−20 bp to 1.50%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5468922/index.html"),
+      d("2025-05-08", "cut", "−10 bp to 1.40%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125469/5699842/index.html"),
       d("2026-09-24", "hold", "7-day reverse-repo rate unchanged at 1.40%", "https://www.pbc.gov.cn/zhengcehuobisi/125207/125213/125431/125475/2026092408454713496/index.html"),
     ],
-    historyNote: "The PBoC has no scheduled rate meetings. Shown are six representative 2026 policy-rate checkpoints, cross-checked with the PBoC, Reuters and MNI—not six rate changes or MPC-style votes. The last actual rate change was the May 2025 cut to 1.40%.",
+    historyNote: "The PBoC has no scheduled rate meetings. Squares are the published 7-day reverse-repo changes, plus the 24 September 2026 operation that restates 1.40%. The May 2025 cut was announced on 7 May and took effect on 8 May.",
     nextMeeting: null,
     nextMeetingNote: "No scheduled rate meetings",
     headline: { measure: "CPI", value: "0.8%", period: "Aug 2026", url: "https://www.stats.gov.cn/sj/zxfbhjd/202609/t20260909_1965263.html" },
